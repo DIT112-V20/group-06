@@ -32,7 +32,7 @@ Group-06
 * 2x ultrasonic sensors
 * 1x MicroUSB cable
 
-## Software
+### Software
 * Libraries
 * APIs
 * GitHub
