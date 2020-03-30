@@ -42,7 +42,7 @@ Group-06
 
 ## Developers
 * Fayona Cowperthwaite (guscowfa@student.gu.se)
-* Dominique Deramat ()
+* Dominique Deramat (gusderdo@student.gu.se)
 * Shonaigh Douglas (gusdoush@student.gu.se)
 * Negin Hashmati (gushashne@student.gu.se)
 * Jennifer Nord (gusnorjea@student.gu.se)
