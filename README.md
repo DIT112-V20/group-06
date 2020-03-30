@@ -33,13 +33,12 @@ Group-06
 * 1x MicroUSB cable
 
 ### Software
-* Libraries
-* APIs
-* GitHub
 * [Android Studio](https://developer.android.com/studio)
 * [Arduino IDE](https://www.arduino.cc/en/Main/Software)
 * [SmartCar Library](https://www.arduinolibraries.info/libraries/smartcar-shield)
-
+* Libraries
+* APIs
+* GitHub
 
 ## Developers
 * Fayona Cowperthwaite (guscowfa@student.gu.se)
