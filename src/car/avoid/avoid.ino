@@ -17,7 +17,7 @@ void setup() {
 
 void loop(){
     unsigned int distance = sensor.getDistance();
-    if (distance && distance < 20){
+    if (distance != 0 && distance < 20){
         car.setSpeed(0);
     } else {
         car.setSpeed(40);
