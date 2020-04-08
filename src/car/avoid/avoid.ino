@@ -3,7 +3,6 @@
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
 DifferentialControl control(leftMotor, rightMotor);
-HeadingCar car(control, gyro);
 
 const int TRIGGER_PIN = 5;
 const int ECHO_PIN = 18;
@@ -12,6 +11,7 @@ SR04 sensor(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 
 const int GYROSCOPE_OFFSET = 32;
 GY50 gyro(GYROSCOPE_OFFSET);
+HeadingCar car(control, gyro);
 
 void setup() {
 
@@ -32,4 +32,8 @@ void loop(){
 void spin(){
     car.setSpeed(20);
     car.rotate(360);
+}
+
+void rotate(int degrees){
+  car.setAngle(degrees);
 }
