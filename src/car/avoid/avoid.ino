@@ -22,18 +22,19 @@ void loop(){
     if (distance != 0 && distance < 20){
         car.setSpeed(0);
     } else {
-        /*car.setSpeed(40);*/
+        /* car.setSpeed(40); */
         spin();
     }
 }
-/*
- * Sets the speed to 75 and spins the car on the spot*/
+
+
+/* Sets the speed to 75 and spins the car on the spot */
 void spin(){
     car.setSpeed(75);
     control.overrideMotorSpeed(100, -100);    
 }
 
-/*This method rotates the car to the specified degree*/
+/* This method rotates the car to the specified degree */
 void rotate(int degrees){
-  car.setAngle(degrees);
+    car.setAngle(degrees);
 }
