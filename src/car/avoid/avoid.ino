@@ -30,8 +30,8 @@ void loop(){
  * Sets the speed to 20 and rotates the car 360 degrees
  */
 void spin(){
-    car.setSpeed(20);
-    car.rotate(360);
+    car.setSpeed(100);
+    rotate(360);
 }
 
 void rotate(int degrees){
