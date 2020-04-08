@@ -27,13 +27,13 @@ void loop(){
     }
 }
 /*
- * Sets the speed to 20 and rotates the car 360 degrees
- */
+ * Sets the speed to 75 and spins the car on the spot*/
 void spin(){
-    car.setSpeed(100);
-    rotate(360);
+    car.setSpeed(75);
+    control.overrideMotorSpeed(100, -100);    
 }
 
+/*This method rotates the car to the specified degree*/
 void rotate(int degrees){
   car.setAngle(degrees);
 }
