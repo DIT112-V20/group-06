@@ -72,13 +72,13 @@ void shuffle(int speed) {
   
   while(!danceIsFinished) {
     if ((steps == 1 || steps == 5) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
-      changeDirection(); /* backwards*/
+      changeDirection(speed); /* backwards*/
       steps++;
     } else if ((steps == 2 || steps == 4) && (leftOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
-      changeDirection(); /* forwards */
+      changeDirection(speed); /* forwards */
       steps++;
     } else if ((steps == 3) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
-      changeDirection(); /* backwards*/
+      changeDirection(speed); /* backwards*/
       steps++;
     } else if ((steps == 6) && ((car.getDistance() - startingPoint) == 0)) {
       danceIsFinished = true;
