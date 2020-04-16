@@ -35,7 +35,7 @@ void loop() {
     if (distance != 0 && distance < 20){
       car.setSpeed(0);
     } else {
-      int danceID = random(1, 3);
+      int danceID = random(1, 4);
       handleInput(danceID);
     }
 }
@@ -79,9 +79,9 @@ void rotate(int degrees) {
  * Car moves forwards and backwards (at set intervals) at the specified speed.
  */
 void shuffle(int speed) {
-  const int shortDistance = 10;
-  const int mediumDistance = 20;
-  const int longDistance = 30;
+  const int shortDistance = 5;
+  const int mediumDistance = 10;
+  const int longDistance = 20;
   
   const long startingPoint = leftOdometer.getDistance();
   bool danceIsFinished = false;
