@@ -9,7 +9,7 @@ const int ECHO_PIN = 18;
 const unsigned int MAX_DISTANCE = 100;
 SR04 sensor(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 
-const int GYROSCOPE_OFFSET = 32;
+const int GYROSCOPE_OFFSET = 12;
 GY50 gyro(GYROSCOPE_OFFSET);
 
 const unsigned long leftPulsesPerMeter = 943;
@@ -104,13 +104,15 @@ void changeDirection(int speed) {
 void shake(int speed) {
   const long startingPoint = leftOdometer.getDistance();
   bool danceIsFinished = false;
-  int steps = 2; 
- 
-  car.setAngle(-45);
-  car.setSpeed(speed * -1); /* going backwards, start of 'shake'*/
+  int steps = 1; 
+  int repeats = 0;
   
   while (!danceIsFinished){
-    if ((steps == 2 || steps == 5) && (car.getDistance() - startingPoint) == -30) {
+    if (steps == 1) {
+      car.setAngle(-45);
+      car.setSpeed(speed * -1); /* going backwards, start of 'shake'*/
+      steps++;
+    } else if ((steps == 2 || steps == 5) && (car.getDistance() - startingPoint) == -30) {
       changeDirection(speed); /* going forwards, left side of "V"*/
       steps++;
       steps++;
@@ -119,8 +121,13 @@ void shake(int speed) {
       changeDirection(speed); /* going backwards, right side of "v"*/
       steps++;
     } else if (steps == 7 && (car.getDistance() - startingPoint) == 0) {
-      car.setAngle(-45); 
-      car.setSpeed(0); 
+      steps = 1;
+      repeats++;
+      
+      if (repeats == 2) {
+        danceIsFinished = true;
+        car.setSpeed(0);
+      }
     } 
   } 
 }
