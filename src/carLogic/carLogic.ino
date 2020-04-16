@@ -33,12 +33,30 @@ void loop() {
     unsigned int distance = sensor.getDistance();
     
     if (distance != 0 && distance < 20){
-        car.setSpeed(0);
+      car.setSpeed(0);
     } else {
-        /* car.setSpeed(40); */
-        shake(40);
-        delay(3000);
+      int danceID = random(1, 3);
+      handleInput(danceID);
     }
+}
+
+/** 
+ *  Takes an integer and switch case determines which dance to perform
+ */
+void handleInput(int danceID) {
+  switch (danceID) {
+    case 1:
+      spin(50);
+      break;
+    case 2:
+      shuffle(50);
+      break;
+    case 3:
+      shake(50);
+      break;
+    default:
+      break;
+  }
 }
 
 /**
