@@ -36,7 +36,8 @@ void loop() {
         car.setSpeed(0);
     } else {
         /* car.setSpeed(40); */
-        shuffle(30);
+        shake(40);
+        delay(3000);
     }
 }
 
@@ -102,32 +103,28 @@ void changeDirection(int speed) {
  * Shake dance move
  */
 void shake(int speed) {
-  const long startingPoint = leftOdometer.getDistance();
-  bool danceIsFinished = false;
+  long startingPoint = 0;
   int steps = 1; 
   int repeats = 0;
   
-  while (!danceIsFinished){
+  while (repeats != 3){
     if (steps == 1) {
-      car.setAngle(-45);
+      startingPoint = leftOdometer.getDistance();
+      car.setAngle(-45);      
       car.setSpeed(speed * -1); /* going backwards, start of 'shake'*/
       steps++;
-    } else if ((steps == 2 || steps == 5) && (car.getDistance() - startingPoint) == -30) {
+    } else if ((steps == 2 || steps == 4) && (car.getDistance() - startingPoint) == -20) {
       changeDirection(speed); /* going forwards, left side of "V"*/
       steps++;
-      steps++;
-    } else if (steps == 4 && (car.getDistance() - startingPoint) == 0) {
+    } else if (steps == 3 && (car.getDistance() - startingPoint) == 0) {
       car.setAngle(45);
       changeDirection(speed); /* going backwards, right side of "v"*/
       steps++;
-    } else if (steps == 7 && (car.getDistance() - startingPoint) == 0) {
+    } else if (steps == 5 && (car.getDistance() - startingPoint) == 0) {
       steps = 1;
-      repeats++;
-      
-      if (repeats == 2) {
-        danceIsFinished = true;
-        car.setSpeed(0);
-      }
-    } 
+      repeats++; 
+    }
   } 
+  
+  car.setSpeed(0);
 }
