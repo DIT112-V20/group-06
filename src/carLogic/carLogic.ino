@@ -27,6 +27,7 @@ SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
 void setup() {
     Serial.begin(9600);
+    delay(5000);
 }
 
 void loop() {
@@ -37,6 +38,7 @@ void loop() {
     } else {
       int danceID = random(1, 4);
       handleInput(danceID);
+
     }
 }
 
@@ -63,7 +65,7 @@ void handleInput(int danceID) {
  * Spins the car on the spot
  */
 void spin() {
-    rotateOnSpot(360, 100);   
+    rotateOnSpot(325, 100);   
 }
 
 /**
@@ -168,7 +170,7 @@ void shake(int speed) {
   
   while (repeats != 3){
     if (steps == 1) {
-      startingPoint = leftOdometer.getDistance();
+      startingPoint = car.getDistance();
       car.setAngle(-45);      
       car.setSpeed(speed * -1); /* going backwards, start of 'shake'*/
       steps++;
@@ -183,6 +185,7 @@ void shake(int speed) {
       steps = 1;
       repeats++; 
       car.setAngle(0);
+      car.setSpeed(0);
     }
   } 
   
