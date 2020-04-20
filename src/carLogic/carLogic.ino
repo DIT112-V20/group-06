@@ -141,6 +141,7 @@ void shake(int speed) {
     } else if (steps == 5 && (car.getDistance() - startingPoint) == 0) {
       steps = 1;
       repeats++; 
+      car.setAngle(0);
     }
   } 
   
