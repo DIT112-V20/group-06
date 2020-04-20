@@ -124,7 +124,7 @@ void shuffle(int speed) {
   const int mediumDistance = 10;
   const int longDistance = 20;
   
-  const long startingPoint = leftOdometer.getDistance();
+  long startingPoint = leftOdometer.getDistance();
   bool danceIsFinished = false;
   int steps = 1;
   
