@@ -16,7 +16,6 @@ Group-06
 * DOIT ESP32 devkit v1
 * TTL level shifters
 * GY-50 Gyroscope
-* Micro-LIDAR sensors
 * Adjustable DC regulator
 * Power switch
 * Motor drive
@@ -28,7 +27,6 @@ Group-06
 * 8x AA recharageable batteries
 * 1x battery charger
 * Cables
-* 2x micro-LIDAR sensors
 * 2x ultrasonic sensors
 * 1x MicroUSB cable
 
@@ -36,9 +34,9 @@ Group-06
 * [Android Studio](https://developer.android.com/studio)
 * [Arduino IDE](https://www.arduino.cc/en/Main/Software)
 * [SmartCar Library](https://www.arduinolibraries.info/libraries/smartcar-shield)
-* Libraries
-* APIs
+* [Spotify API](https://developer.spotify.com/documentation/web-api/)
 * GitHub
+* Libraries
 
 ## Developers
 * Fayona Cowperthwaite (guscowfa@student.gu.se)
