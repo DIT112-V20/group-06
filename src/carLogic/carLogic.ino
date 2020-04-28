@@ -191,3 +191,35 @@ void shake(int speed) {
   
   car.setSpeed(0);
 }
+
+void macarena(int speed) {
+  long startingPoint = 0;
+  int steps = 1;
+  int repeats = 0;
+
+  while (repeats != 3) {
+    if (steps == 1) {
+      startingPoint = car.getDistance();
+      car.setSpeed(speed);
+      steps++;
+    } else if ((steps == 2 || steps == 4) && (car.getDistance() - startingPoint) == 10) {
+      changeDirection(speed);
+      steps++;
+    } else if ((steps == 3) && (car.getDistance() - startingPoint == 0)){
+      delay(3000);
+      changeDirection(speed);
+      steps++;
+    } else if ((steps == 5) && (car.getDistance() - startingPoint == 0)) {
+      delay(3000);
+      rotateOnSpot(90,100);
+      repeats++;
+      car.setSpeed(0);
+    }
+    car.setSpeed(0);
+  }
+  
+
+  
+
+  
+}
