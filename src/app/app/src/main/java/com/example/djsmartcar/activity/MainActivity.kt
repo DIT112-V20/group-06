@@ -6,7 +6,6 @@ import android.os.Looper
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
-import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 
@@ -24,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         run("https://google.com/")
     }
 
-
-    fun run(url: String) {
+    private fun run(url: String) {
         val request = Request.Builder()
             .url(url)
             .build()
@@ -38,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                    this@MainActivity.runOnUiThread(java.lang.Runnable { textview.text = response.code.toString() })
 
 //                    mHandler.post(Runnable() {
 //                        override fun run() {
