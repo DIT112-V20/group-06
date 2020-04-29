@@ -37,7 +37,7 @@ void loop() {
       car.setSpeed(0);
     } else {
       int danceID = random(1, 5);
-      handleInput(danceID);*/
+      handleInput(danceID);
     }
 }
 
@@ -215,21 +215,10 @@ void macarena(int speed) {
       car.setSpeed(speed);
       steps++;
     } else if ((steps == 5) && (car.getDistance() - startingPoint == 0)) {
-     car.setSpeed(0);
+      car.setSpeed(0);
       delay(1000);
       rotateOnSpot(90,100);
       repeats++;
-      
     }
-    /*car.setSpeed(0);
-     * 
-     */
-  }
-  /*car.setSpeed(0);
-   * 
-   */
-
-  
-
-  
+  } 
 }
