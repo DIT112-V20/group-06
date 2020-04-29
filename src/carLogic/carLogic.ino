@@ -36,11 +36,8 @@ void loop() {
     if (distance != 0 && distance < 20){
       car.setSpeed(0);
     } else {
-      /*t danceID = random(1, 4);
+      int danceID = random(1, 5);
       handleInput(danceID);*/
-
-      macarena(50);
-
     }
 }
 
@@ -57,6 +54,9 @@ void handleInput(int danceID) {
       break;
     case 3:
       shake(50);
+      break;
+    case 4:
+      macarena(50);
       break;
     default:
       break;
