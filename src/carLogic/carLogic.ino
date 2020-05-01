@@ -39,7 +39,10 @@ void loop() {
       int danceID = random(1, 5);
       handleInput(danceID);
     }
+
+    delay(1000);
 }
+
 
 /** 
  *  Takes an integer and switch case determines which dance to perform
@@ -67,7 +70,7 @@ void handleInput(int danceID) {
  * Spins the car on the spot
  */
 void spin() {
-    rotateOnSpot(325, 100);   
+    rotateOnSpot(360, 50);   
 }
 
 /**
@@ -136,13 +139,19 @@ void shuffle(int speed) {
   
   while(!danceIsFinished) {
     if ((steps == 1 || steps == 5) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
-      changeDirection(speed); /* backwards*/
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed *-1); /* backwards*/
       steps++;
     } else if ((steps == 2 || steps == 4) && (leftOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
-      changeDirection(speed); /* forwards */
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed); /* forwards */
       steps++;
     } else if ((steps == 3) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
-      changeDirection(speed); /* backwards*/
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed *-1);
       steps++;
     } else if ((steps == 6) && ((car.getDistance() - startingPoint) == 0)) {
       danceIsFinished = true;
@@ -188,6 +197,7 @@ void shake(int speed) {
       repeats++; 
       car.setAngle(0);
       car.setSpeed(0);
+      delay(1000);
     }
   } 
   
@@ -217,8 +227,9 @@ void macarena(int speed) {
     } else if ((steps == 5) && (car.getDistance() - startingPoint == 0)) {
       car.setSpeed(0);
       delay(1000);
-      rotateOnSpot(90,100);
+      rotateOnSpot(90,50);
       repeats++;
     }
-  } 
+  }
+  car.setSpeed(0); 
 }
