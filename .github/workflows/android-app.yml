@@ -14,5 +14,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Build app
         run: |
-          cd src/app
+          cd "src/app"
           ./gradlew build --stacktrace
