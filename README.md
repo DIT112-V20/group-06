@@ -1,4 +1,4 @@
-# DJ SmartCar
+# DJ SmartCar ![Android CI] ![Arduino CI]
 Group-06
 
 ## Contents
@@ -45,3 +45,6 @@ Group-06
 * Negin Hashmati (gushashne@student.gu.se)
 * Jennifer Nord (gusnorjea@student.gu.se)
 * Victoria Vu (gusvuvij@student.gu.se)
+
+[Android CI]: https://github.com/DIT112-V20/group-06/workflows/Android%20CI/badge.svg
+[Arduino CI]: https://github.com/DIT112-V20/group-06/workflows/Arduino%20CI/badge.svg
