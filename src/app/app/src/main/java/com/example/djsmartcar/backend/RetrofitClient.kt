@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 // Use object for singleton
 object RetrofitClient {
 
-    private const val BASE_URL = "https://google.com/"
+    private const val BASE_URL = "" // Add car URL
 
     // Making sure it's threadsafe for the singleton pattern
     // Configuration stuff from retrofit
