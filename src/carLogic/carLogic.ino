@@ -44,25 +44,11 @@ WiFiServer server(80);
 // Variable to store the HTTP request
 String header;
 
-// Auxiliar variables to store the current output state
-String output26State = "off";
-String output27State = "off";
-
-// Assign output variables to GPIO pins
-const int output26 = 26;
-const int output27 = 27;
-
 SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
 void setup() {
 
 Serial.begin(115200);
-  // Initialize the output variables as outputs
-  pinMode(output26, OUTPUT);
-  pinMode(output27, OUTPUT);
-  // Set outputs to LOW
-  digitalWrite(output26, LOW);
-  digitalWrite(output27, LOW);
 
   // Connect to Wi-Fi network with SSID and password
   Serial.print("Connecting to ");
@@ -109,22 +95,14 @@ void loop() {
             client.println();
             
             // turns the GPIOs on and off
-            if (header.indexOf("GET /26/on") >= 0) {
-              Serial.println("GPIO 26 on");
-              output26State = "on";
-              digitalWrite(output26, HIGH);
+            if (header.indexOf("GET /dance?id=1") >= 0) {
+              Serial.println("Start Spinning");
             } else if (header.indexOf("GET /26/off") >= 0) {
-              Serial.println("GPIO 26 off");
-              output26State = "off";
-              digitalWrite(output26, LOW);
+              Serial.println("Stop Spinning");
             } else if (header.indexOf("GET /27/on") >= 0) {
               Serial.println("GPIO 27 on");
-              output27State = "on";
-              digitalWrite(output27, HIGH);
             } else if (header.indexOf("GET /27/off") >= 0) {
               Serial.println("GPIO 27 off");
-              output27State = "off";
-              digitalWrite(output27, LOW);
             }
             
             // Display the HTML web page
@@ -140,24 +118,7 @@ void loop() {
             
             // Web Page Heading
             client.println("<body><h1>ESP32 Web Server</h1>");
-            
-            // Display current state, and ON/OFF buttons for GPIO 26  
-            client.println("<p>GPIO 26 - State " + output26State + "</p>");
-            // If the output26State is off, it displays the ON button       
-            if (output26State=="off") {
-              client.println("<p><a href=\"/26/on\"><button class=\"button\">ON</button></a></p>");
-            } else {
-              client.println("<p><a href=\"/26/off\"><button class=\"button button2\">OFF</button></a></p>");
-            } 
                
-            // Display current state, and ON/OFF buttons for GPIO 27  
-            client.println("<p>GPIO 27 - State " + output27State + "</p>");
-            // If the output27State is off, it displays the ON button       
-            if (output27State=="off") {
-              client.println("<p><a href=\"/27/on\"><button class=\"button\">ON</button></a></p>");
-            } else {
-              client.println("<p><a href=\"/27/off\"><button class=\"button button2\">OFF</button></a></p>");
-            }
             client.println("</body></html>");
             
             // The HTTP response ends with another blank line
@@ -209,13 +170,13 @@ void handleInput(int danceID) {
       spin();
       break;
     case 2:
-      shuffle(50);
+      shuffle(30);
       break;
     case 3:
-      shake(50);
+      shake(30);
       break;
     case 4:
-      macarena(50);
+      macarena(30);
       break;
     default:
       break;
