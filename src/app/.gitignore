@@ -1,4 +1,4 @@
-
+/app/.idea/*
 # Created by https://www.gitignore.io/api/java,macos,kotlin,android,intellij,androidstudio
 # Edit at https://www.gitignore.io/?templates=java,macos,kotlin,android,intellij,androidstudio
 
@@ -127,9 +127,9 @@ output.json
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
 # *.iml
 # *.ipr
 
