@@ -18,49 +18,76 @@
 
     <Button
         android:id="@+id/button_id"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="323dp"
+        android:layout_marginBottom="457dp"
         android:text="@string/random_button"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/start_button"
-            android:text="Start"
-            android:textColor="#000"
-            android:textSize="25sp"
-            android:textStyle="normal"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="472dp" />
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/start_button"
+        android:text="Start"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/stopButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/randomButton" />
 
-        <Button
-            android:layout_width="138dp"
-            android:layout_height="138dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/random_button"
-            android:text="Random"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="126dp"
-            tools:layout_editor_absoluteY="229dp" />
+    <Button
+        android:id="@+id/randomButton"
+        android:layout_width="138dp"
+        android:layout_height="138dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="229dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="95dp"
+        android:background="@drawable/random_button"
+        android:text="Random"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/stop_button"
-            android:text="Stop"
-            android:textColor="#000"
-            android:textSize="25sp"
-            android:textStyle="normal"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="549dp" />
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="134dp"
+        android:background="@drawable/stop_button"
+        android:text="Stop"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
