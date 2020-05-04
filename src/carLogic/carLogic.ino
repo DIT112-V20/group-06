@@ -141,7 +141,7 @@ void handleInput(int danceID) {
  * Spins the car on the spot
  */
 void spin() {
-    rotateOnSpot(360, 50);   
+    rotateOnSpot(350, 30);   
 }
 
 /**
@@ -202,24 +202,24 @@ void shuffle(int speed) {
   const int mediumDistance = 10;
   const int longDistance = 20;
   
-  long startingPoint = leftOdometer.getDistance();
+  long startingPoint = rightOdometer.getDistance();
   bool danceIsFinished = false;
   int steps = 1;
   
   car.setSpeed(speed);
   
   while(!danceIsFinished) {
-    if ((steps == 1 || steps == 5) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
+    if ((steps == 1 || steps == 5) && (rightOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed *-1); /* backwards*/
       steps++;
-    } else if ((steps == 2 || steps == 4) && (leftOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
+    } else if ((steps == 2 || steps == 4) && (rightOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed); /* forwards */
       steps++;
-    } else if ((steps == 3) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
+    } else if ((steps == 3) && (rightOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed *-1);
@@ -284,6 +284,12 @@ void macarena(int speed) {
   int repeats = 0;
 
   while (repeats != 3) {
+    Serial.print("startingPoint = ");
+    Serial.print(startingPoint);
+    Serial.print(", repeats = ");
+    Serial.print(repeats);
+    Serial.print(", steps = ");
+    Serial.println(steps);
     if (steps == 1) {
       startingPoint = car.getDistance();
       car.setSpeed(speed);
@@ -303,6 +309,7 @@ void macarena(int speed) {
       delay(1000);
       rotateOnSpot(90,50);
       repeats++;
+      steps = 1;
     }
   }
   car.setSpeed(0); 
