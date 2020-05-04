@@ -9,6 +9,6 @@ interface Endpoint {
     // @Headers
 
     @GET("dance")
-    fun getDance(@Query("id")danceId: String): Call<List<Dance>>
+    fun getDance(@Query("id")id: String): Call<List<Dance>>
 
 }

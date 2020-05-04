@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Dance(
     @SerializedName("id")
-    val danceId: String? = ""
+    val id: String? = ""
 ) : Parcelable
