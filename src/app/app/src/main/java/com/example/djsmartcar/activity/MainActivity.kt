@@ -1,6 +1,7 @@
 package com.example.djsmartcar.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
@@ -16,14 +17,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val button: Button = findViewById(R.id.button_id)
-        button.setOnClickListener {
-            textView.text = "HI"
-            getDance("1")
-        }
     }
 
-    private fun getDance(id: String) {
+     fun getDance(view: View) {
+
+         var id:String =  when (view.getId()) {
+             R.id.dance_one -> "1"
+             R.id.dance_two -> "2"
+             R.id.dance_three -> "3"
+             R.id.dance_four -> "4"
+             else -> "no"
+         }
+
         RetrofitClient
             .instance
             .getDance(id)

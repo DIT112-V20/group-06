@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">DJSmartCar</string>
     <string name="random_button">Random</string>
+    <string name="dance_one">Spin</string>
+    <string name="dance_two">Two-Step</string>
+    <string name="dance_three">Shake</string>
+    <string name="dance_four">Macarena</string>
     <string name="internal_server_error">Internal Server Error</string>
     <string name="unauthorized">Unauthorized</string>
     <string name="forbidden">Forbidden</string>
