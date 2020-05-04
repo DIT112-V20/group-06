@@ -6,39 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
     <!--android:text="Hello World!" -->
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="61dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/selectable_button_cropped" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="7dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/randomButton"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:srcCompat="@drawable/selectable_button_cropped" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="110dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:srcCompat="@drawable/selectable_button_cropped" />
+
     <Button
         android:id="@+id/button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="323dp"
-        android:layout_marginBottom="457dp"
         android:text="@string/random_button"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="54dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/start_button"
         android:text="Start"
         android:textColor="#000"
@@ -47,27 +82,23 @@
         app:layout_constraintBottom_toTopOf="@+id/stopButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/randomButton" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
     <Button
         android:id="@+id/randomButton"
-        android:layout_width="138dp"
+        android:layout_width="148dp"
         android:layout_height="138dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="229dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="95dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="152dp"
         android:background="@drawable/random_button"
         android:text="Random"
         android:textColor="#000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/stopButton"
@@ -76,9 +107,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="29dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="134dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/stop_button"
         android:text="Stop"
         android:textColor="#000"
@@ -86,8 +116,87 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:srcCompat="@drawable/selectable_button_cropped" />
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="85dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="57dp"
+        android:ems="10"
+        android:text="Two-step"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="@+id/imageButton4"
+        app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+
+    <TextView
+        android:id="@+id/editText3"
+        android:layout_width="50dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="67dp"
+        android:ems="10"
+        android:text="Spin"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3" />
+
+    <TextView
+        android:id="@+id/editText4"
+        android:layout_width="56dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="53dp"
+        android:ems="10"
+        android:text="Shake"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="@+id/imageButton5" />
+
+    <TextView
+        android:id="@+id/editText5"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:text="Macarena"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+
+    <TextView
+        android:id="@+id/editText6"
+        android:layout_width="271dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="61dp"
+        android:ems="10"
+        android:text="Choose A Dance Move"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startButton" />
+        app:layout_constraintTop_toBottomOf="@+id/button_id" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
