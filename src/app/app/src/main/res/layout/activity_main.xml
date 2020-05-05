@@ -21,25 +21,29 @@
         android:id="@+id/imageButton5"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginBottom="61dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="90"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toStartOf="@+id/randomButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
         android:id="@+id/imageButton4"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="145dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="180"
-        app:layout_constraintBottom_toTopOf="@+id/randomButton"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toStartOf="@+id/imageButton3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText6"
@@ -49,11 +53,15 @@
         android:id="@+id/imageButton3"
         android:layout_width="110dp"
         android:layout_height="117dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="138dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="270"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton4"
         app:layout_constraintTop_toBottomOf="@+id/editText6"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
@@ -61,8 +69,13 @@
         android:id="@+id/button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="323dp"
         android:text="@string/random_button"
-        tools:ignore="MissingConstraints" />
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/startButton"
@@ -71,18 +84,19 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/start_button"
         android:text="Start"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/stopButton"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/randomButton"
@@ -90,15 +104,19 @@
         android:layout_height="138dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginBottom="183dp"
         android:background="@drawable/random_button"
         android:text="Random"
         android:textColor="#000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintVertical_bias="0.212" />
 
     <Button
         android:id="@+id/stopButton"
@@ -106,27 +124,29 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="156dp"
         android:background="@drawable/stop_button"
         android:text="Stop"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="43dp"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/randomButton"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <TextView
@@ -186,17 +206,16 @@
         android:layout_width="271dp"
         android:layout_height="54dp"
         android:layout_marginStart="77dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="63dp"
-        android:layout_marginBottom="61dp"
         android:ems="10"
         android:text="Choose A Dance Move"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_id" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
