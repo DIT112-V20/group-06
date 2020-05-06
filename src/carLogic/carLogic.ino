@@ -1,5 +1,11 @@
+#include <ESPmDNS.h>
 #include <Smartcar.h>
+#include <WiFi.h>
+#include <WebServer.h>
 
+/**
+ * SMARTCAR VARIABLES
+ */
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
 DifferentialControl control(leftMotor, rightMotor);
@@ -16,29 +22,95 @@ const unsigned long leftPulsesPerMeter = 943;
 const unsigned long rightPulsesPerMeter = 981;
 DirectionalOdometer leftOdometer (smartcarlib::pins::v2::leftOdometerPins, [](){
     leftOdometer.update();
-  },
-  leftPulsesPerMeter);
+  }, leftPulsesPerMeter);
 DirectionalOdometer rightOdometer (smartcarlib::pins::v2::rightOdometerPins, [](){
     rightOdometer.update();
-  },
-  rightPulsesPerMeter);
+  }, rightPulsesPerMeter);
 
 SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
+/**
+ * NETWORK VARIABLES
+ */
+  
+// Replace with your network credentials
+const char* ssid     = "TheGaulle";
+const char* password = "canihaz#";
+
+WebServer server(80);
+String header; // Variable to store the HTTP request
+
 void setup() {
-    Serial.begin(9600);
-    delay(5000);
+  
+  Serial.begin(115200);
+  
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.println("");
+  
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  
+  if (MDNS.begin("djsmartcar")) {
+    Serial.println("MDNS responder started");
+  }
+  
+  server.on("/dance", []() {
+    const auto arguments = server.args();
+  
+    for (auto i = 0; i < arguments; i++) {
+      const auto command = server.argName(i);
+      
+      if (command == "id") {
+        handleInput(server.arg(i).toInt());
+      }
+    }
+  
+    server.send(200, "text/json", "[{'id':'1'}]"); //Not sure if this works
+  });
+
+  server.on("/random", []() {
+    const auto arguments = server.args();
+    randomDance();
+    
+    server.send(200, "text/json", "[{'id':'1'}]"); //Not sure if this works
+  });
+  
+  server.onNotFound(
+    []() { server.send(404, "text/plain", "Unknown command"); });
+  
+  server.begin();
+  Serial.println("HTTP server started");
 }
 
 void loop() {
-    unsigned int distance = sensor.getDistance();
-    
-    if (distance != 0 && distance < 20){
-      car.setSpeed(0);
-    } else {
-      int danceID = random(1, 5);
-      handleInput(danceID);
-    }
+  server.handleClient();
+  
+  /* unsigned int distance = sensor.getDistance();
+    if (distance != 0 && distance < 20){ 
+    car.setSpeed(0); 
+    } */
+}
+
+/**
+ * DANCE MOVE LOGIC
+ */
+
+/**
+ * Random dance, loops 5 times
+ */
+void randomDance() {
+  for (int i = 0; i < 5; i++) {
+    handleInput(random(1, 5));
+  }
 }
 
 /** 
@@ -50,24 +122,26 @@ void handleInput(int danceID) {
       spin();
       break;
     case 2:
-      shuffle(50);
+      shuffle(30);
       break;
     case 3:
-      shake(50);
+      shake(30);
       break;
     case 4:
-      macarena(50);
+      macarena(30);
       break;
     default:
       break;
   }
+
+  delay(1000);
 }
 
 /**
  * Spins the car on the spot
  */
 void spin() {
-    rotateOnSpot(325, 100);   
+    rotateOnSpot(360, 50);   
 }
 
 /**
@@ -136,13 +210,19 @@ void shuffle(int speed) {
   
   while(!danceIsFinished) {
     if ((steps == 1 || steps == 5) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
-      changeDirection(speed); /* backwards*/
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed *-1); /* backwards*/
       steps++;
     } else if ((steps == 2 || steps == 4) && (leftOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
-      changeDirection(speed); /* forwards */
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed); /* forwards */
       steps++;
     } else if ((steps == 3) && (leftOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
-      changeDirection(speed); /* backwards*/
+      car.setSpeed(0); 
+      delay(1000);
+      car.setSpeed(speed *-1);
       steps++;
     } else if ((steps == 6) && ((car.getDistance() - startingPoint) == 0)) {
       danceIsFinished = true;
@@ -188,12 +268,16 @@ void shake(int speed) {
       repeats++; 
       car.setAngle(0);
       car.setSpeed(0);
+      delay(1000);
     }
   } 
   
   car.setSpeed(0);
 }
 
+/**
+ * Macarena dance move
+ */
 void macarena(int speed) {
   long startingPoint = 0;
   int steps = 1;
@@ -217,8 +301,9 @@ void macarena(int speed) {
     } else if ((steps == 5) && (car.getDistance() - startingPoint == 0)) {
       car.setSpeed(0);
       delay(1000);
-      rotateOnSpot(90,100);
+      rotateOnSpot(90,50);
       repeats++;
     }
-  } 
+  }
+  car.setSpeed(0); 
 }

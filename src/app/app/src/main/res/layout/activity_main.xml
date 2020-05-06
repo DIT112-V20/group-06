@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,7 +27,8 @@
         android:rotation="90"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
     <ImageButton
         android:id="@+id/twoStepButton"
@@ -39,7 +40,8 @@
         android:rotation="180"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
     <ImageButton
         android:id="@+id/spinButton"
@@ -51,19 +53,8 @@
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped" />
-
-    <Button
-        android:id="@+id/button_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="323dp"
-        android:text="@string/random_button"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:visibility="gone" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
     <Button
         android:id="@+id/startButton"
@@ -127,7 +118,8 @@
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
     <TextView
         android:id="@+id/twoStepText"
@@ -197,5 +189,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
