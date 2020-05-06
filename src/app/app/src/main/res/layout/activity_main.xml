@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/shakeButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginStart="16dp"
@@ -31,11 +31,11 @@
         app:layout_constraintEnd_toStartOf="@+id/randomButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/twoStepButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginStart="16dp"
@@ -43,14 +43,14 @@
         android:layout_marginEnd="145dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="180"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintBottom_toTopOf="@+id/shakeButton"
+        app:layout_constraintEnd_toStartOf="@+id/spinButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/spinButton"
         android:layout_width="110dp"
         android:layout_height="117dp"
         android:layout_marginStart="10dp"
@@ -59,10 +59,10 @@
         android:layout_marginBottom="138dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="270"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/macarenaButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintStart_toEndOf="@+id/twoStepButton"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <Button
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        app:layout_constraintTop_toBottomOf="@+id/shakeButton"
         tools:visibility="visible" />
 
     <Button
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:layout_constraintVertical_bias="0.212" />
 
     <Button
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/macarenaButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginStart="146dp"
@@ -145,12 +145,12 @@
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toEndOf="@+id/shakeButton"
         app:layout_constraintTop_toBottomOf="@+id/randomButton"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/twoStepText"
         android:layout_width="85dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
@@ -160,13 +160,13 @@
         android:ems="10"
         android:text="Two-step"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+        app:layout_constraintBottom_toBottomOf="@+id/twoStepButton"
+        app:layout_constraintEnd_toEndOf="@+id/twoStepButton"
+        app:layout_constraintStart_toStartOf="@+id/twoStepButton"
+        app:layout_constraintTop_toTopOf="@+id/twoStepButton" />
 
     <TextView
-        android:id="@+id/editText3"
+        android:id="@+id/spinText"
         android:layout_width="50dp"
         android:layout_height="42dp"
         android:layout_marginEnd="18dp"
@@ -174,11 +174,11 @@
         android:ems="10"
         android:text="Spin"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton3" />
+        app:layout_constraintBottom_toBottomOf="@+id/spinButton"
+        app:layout_constraintEnd_toEndOf="@+id/spinButton" />
 
     <TextView
-        android:id="@+id/editText4"
+        android:id="@+id/shakeText"
         android:layout_width="56dp"
         android:layout_height="44dp"
         android:layout_marginTop="62dp"
@@ -186,11 +186,11 @@
         android:ems="10"
         android:text="Shake"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/imageButton5" />
+        app:layout_constraintEnd_toEndOf="@+id/shakeButton"
+        app:layout_constraintTop_toTopOf="@+id/shakeButton" />
 
     <TextView
-        android:id="@+id/editText5"
+        android:id="@+id/macarenaText"
         android:layout_width="91dp"
         android:layout_height="39dp"
         android:layout_marginStart="9dp"
@@ -198,11 +198,11 @@
         android:ems="10"
         android:text="Macarena"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+        app:layout_constraintStart_toStartOf="@+id/macarenaButton"
+        app:layout_constraintTop_toTopOf="@+id/macarenaButton" />
 
     <TextView
-        android:id="@+id/editText6"
+        android:id="@+id/chooseADanceText"
         android:layout_width="271dp"
         android:layout_height="54dp"
         android:layout_marginStart="77dp"
