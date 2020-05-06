@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun buttonColorChange(view: View){
-
+    private fun buttonColorChange(view: View) {
 
         var spinButton: ImageButton = findViewById(R.id.spinButton)
         spinButton.setImageResource(R.drawable.selectable_button_cropped)
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         selectedButton.setImageResource(R.drawable.selected_button)
     }
 
-     fun getDance(view: View) {
+    fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {
              R.id.spinButton -> "1"
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
          }
 
          buttonColorChange(view)
-
 
          RetrofitClient
             .instance
