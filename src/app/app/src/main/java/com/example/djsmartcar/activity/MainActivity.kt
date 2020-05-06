@@ -20,6 +20,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    fun buttonColorChange(view: View){
+
+
+        var spinButton: ImageButton = findViewById(R.id.spinButton)
+        spinButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var twoStepButton: ImageButton = findViewById(R.id.twoStepButton)
+        twoStepButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
+        macarenaButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var shakeButton: ImageButton = findViewById(R.id.shakeButton)
+        shakeButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var selectedButton: ImageButton = findViewById(view.getId())
+        selectedButton.setImageResource(R.drawable.selected_button)
+    }
+
      fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {
@@ -30,9 +49,7 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-         var button: ImageButton = findViewById(view.getId())
-
-         button.setImageResource(R.drawable.selected_button)
+         buttonColorChange(view)
 
 
          RetrofitClient
