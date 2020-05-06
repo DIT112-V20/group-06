@@ -1,59 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
     <!--android:text="Hello World!" -->
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_id"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/random_button"
-        android:onClick="getDance"
-        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/shakeButton"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="54dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="90"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
+
+    <ImageButton
+        android:id="@+id/twoStepButton"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="135dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="180"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
+
+    <ImageButton
+        android:id="@+id/spinButton"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="#FFFFFF"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
     <Button
-        android:id="@+id/dance_one"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/dance_one"
-        android:onClick="getDance"
-        tools:ignore="MissingConstraints" />
+        android:id="@+id/startButton"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/start_button"
+        android:text="Start"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <Button
-        android:id="@+id/dance_two"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/dance_two"
-        android:onClick="getDance"
-        tools:ignore="MissingConstraints" />
+        android:id="@+id/randomButton"
+        android:layout_width="148dp"
+        android:layout_height="138dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="192dp"
+        android:background="@drawable/random_button"
+        android:elevation="2dp"
+        android:text="Random"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText" />
 
     <Button
-        android:id="@+id/dance_three"
+        android:id="@+id/stopButton"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/dance_three"
-        android:onClick="getDance"
-        tools:ignore="MissingConstraints" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="156dp"
+        android:background="@drawable/stop_button"
+        android:text="Stop"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/dance_four"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/dance_four"
-        android:onClick="getDance"
-        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/macarenaButton"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="54dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinButton"
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:onClick="getDance" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/twoStepText"
+        android:layout_width="85dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="57dp"
+        android:ems="10"
+        android:text="Two-step"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/twoStepButton"
+        app:layout_constraintEnd_toEndOf="@+id/twoStepButton"
+        app:layout_constraintStart_toStartOf="@+id/twoStepButton"
+        app:layout_constraintTop_toTopOf="@+id/twoStepButton" />
+
+    <TextView
+        android:id="@+id/spinText"
+        android:layout_width="50dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="67dp"
+        android:ems="10"
+        android:text="Spin"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinButton"
+        app:layout_constraintEnd_toEndOf="@+id/spinButton" />
+
+    <TextView
+        android:id="@+id/shakeText"
+        android:layout_width="56dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="53dp"
+        android:ems="10"
+        android:text="Shake"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/shakeButton"
+        app:layout_constraintTop_toTopOf="@+id/shakeButton" />
+
+    <TextView
+        android:id="@+id/macarenaText"
+        android:layout_width="91dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:text="Macarena"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/macarenaButton"
+        app:layout_constraintTop_toTopOf="@+id/macarenaButton" />
+
+    <TextView
+        android:id="@+id/chooseADanceText"
+        android:layout_width="271dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+        android:ems="10"
+        android:text="Choose A Dance Move"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

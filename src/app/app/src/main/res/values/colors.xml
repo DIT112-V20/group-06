@@ -3,4 +3,11 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="startButtonColor">#39FD08</color>
+    <color name="strokeColor">#000000</color>
+    <color name="randomButtonColor">#B174FF</color>
+    <color name="nonSelectedButtonColor">#2ECBFD</color>
+    <color name="selectedButtonColor">#2B08E0FD</color>
+    <color name="stopButtonColor">#FD0834</color>
+
 </resources>

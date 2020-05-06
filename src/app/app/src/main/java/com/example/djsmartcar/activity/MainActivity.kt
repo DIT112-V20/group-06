@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
      fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {
-             R.id.dance_one -> "1"
-             R.id.dance_two -> "2"
-             R.id.dance_three -> "3"
-             R.id.dance_four -> "4"
+             R.id.spinButton -> "1"
+             R.id.twoStepButton -> "2"
+             R.id.shakeButton -> "3"
+             R.id.macarenaButton -> "4"
              else -> "no"
          }
 
