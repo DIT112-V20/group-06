@@ -3,6 +3,7 @@ package com.example.djsmartcar.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
@@ -19,7 +20,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-     fun getDance(view: View) {
+    private fun buttonColorChange(view: View) {
+
+        var spinButton: ImageButton = findViewById(R.id.spinButton)
+        spinButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var twoStepButton: ImageButton = findViewById(R.id.twoStepButton)
+        twoStepButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
+        macarenaButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var shakeButton: ImageButton = findViewById(R.id.shakeButton)
+        shakeButton.setImageResource(R.drawable.selectable_button_cropped)
+
+        var selectedButton: ImageButton = findViewById(view.getId())
+        selectedButton.setImageResource(R.drawable.selected_button)
+    }
+
+    fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {
              R.id.spinButton -> "1"
@@ -29,7 +48,9 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        RetrofitClient
+         buttonColorChange(view)
+
+         RetrofitClient
             .instance
             .getDance(id)
             .enqueue(object : Callback<List<Dance>> {
