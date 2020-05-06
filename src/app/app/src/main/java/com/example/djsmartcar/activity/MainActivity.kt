@@ -3,6 +3,7 @@ package com.example.djsmartcar.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
@@ -29,7 +30,12 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        RetrofitClient
+         var button: ImageButton = findViewById(view.getId())
+
+         button.setImageResource(R.drawable.selected_button)
+
+
+         RetrofitClient
             .instance
             .getDance(id)
             .enqueue(object : Callback<List<Dance>> {
