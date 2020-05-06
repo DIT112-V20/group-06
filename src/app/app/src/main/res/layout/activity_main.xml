@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,11 +22,13 @@
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginStart="70dp"
+        android:layout_marginTop="41dp"
         android:layout_marginBottom="54dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="90"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
         app:srcCompat="@drawable/selectable_button_cropped"
         android:onClick="getDance" />
 
@@ -63,17 +65,17 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="70dp"
+        android:layout_marginTop="550dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="137dp"
         android:background="@drawable/start_button"
         android:text="Start"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
     <Button
@@ -113,11 +115,13 @@
         android:id="@+id/macarenaButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
+        android:layout_marginTop="41dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="54dp"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinButton"
         app:srcCompat="@drawable/selectable_button_cropped"
         android:onClick="getDance" />
 
@@ -189,4 +193,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
