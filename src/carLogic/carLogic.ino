@@ -141,6 +141,7 @@ void handleInput(int danceID) {
  * Spins the car on the spot
  */
 void spin() {
+    car.update();
     rotateOnSpot(350, 30);   
 }
 
@@ -201,8 +202,6 @@ void shuffle(int speed) {
   const int shortDistance = 5;
   const int mediumDistance = 10;
   const int longDistance = 20;
-
-  car.update();
   
   long startingPoint = 0;//rightOdometer.getDistance();
   bool danceIsFinished = false;
@@ -219,22 +218,22 @@ void shuffle(int speed) {
     Serial.print(car.getDistance());
     Serial.print(", steps = ");
     Serial.println(steps);
-    if ((steps == 1 || steps == 5) && (rightOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == mediumDistance)) {
+    if ((steps == 1 || steps == 5) && (rightOdometer.getDirection() == 1) && (car.getDistance() == mediumDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed *-1); /* backwards*/
       steps++;
-    } else if ((steps == 2 || steps == 4) && (rightOdometer.getDirection() == -1) && ((car.getDistance() - startingPoint) == shortDistance)) {
+    } else if ((steps == 2 || steps == 4) && (rightOdometer.getDirection() == -1) && (car.getDistance() == shortDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed); /* forwards */
       steps++;
-    } else if ((steps == 3) && (rightOdometer.getDirection() == 1) && ((car.getDistance() - startingPoint) == longDistance)) {
+    } else if ((steps == 3) && (rightOdometer.getDirection() == 1) && (car.getDistance() == longDistance)) {
       car.setSpeed(0); 
       delay(1000);
       car.setSpeed(speed *-1);
       steps++;
-    } else if ((steps == 6) && ((car.getDistance() - startingPoint) == 0)) {
+    } else if ((steps == 6) && (car.getDistance() == 0)) {
       danceIsFinished = true;
       car.setSpeed(0);
     }
@@ -261,7 +260,7 @@ void shake(int speed) {
   int repeats = 0;
   
   while (repeats != 3){
-    car.update();
+
     Serial.print("repeats = ");
     Serial.print(repeats);
     Serial.print(", startingPoint = ");
