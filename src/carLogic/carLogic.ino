@@ -3,9 +3,7 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-/**
- * SMARTCAR VARIABLES
- */
+/* SMARTCAR VARIABLES */
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
 DifferentialControl control(leftMotor, rightMotor);
@@ -14,7 +12,6 @@ const int TRIGGER_PIN = 5;
 const int ECHO_PIN = 18;
 const unsigned int MAX_DISTANCE = 100;
 SR04 sensor(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
-
 const int GYROSCOPE_OFFSET = 12;
 GY50 gyro(GYROSCOPE_OFFSET);
 
@@ -29,19 +26,14 @@ DirectionalOdometer rightOdometer (smartcarlib::pins::v2::rightOdometerPins, [](
 
 SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
-/**
- * NETWORK VARIABLES
- */
-  
+/* NETWORK VARIABLES */
 // Replace with your network credentials
 const char* ssid     = "TheGaulle";
 const char* password = "canihaz#";
-
 WebServer server(80);
-String header; // Variable to store the HTTP request
+String header; // Not sure if this is ever used..?
 
 void setup() {
-  
   Serial.begin(115200);
   
   WiFi.mode(WIFI_STA);
@@ -65,14 +57,20 @@ void setup() {
   
   server.on("/dance", []() {
     const auto arguments = server.args();
+    int danceId = 0;
+    int speed = 30; // Base speed
   
     for (auto i = 0; i < arguments; i++) {
       const auto command = server.argName(i);
       
       if (command == "id") {
-        handleInput(server.arg(i).toInt());
+        danceId = server.arg(i).toInt(); //MAGIC NUMBER SPEED
+      } else if (command == "speed") {
+        speed = server.arg(i).toInt();
       }
     }
+
+    handleInput(danceId, speed);
   
     server.send(200, "text/json", "[{'id':'1'}]"); //Not sure if this works
   });
@@ -93,11 +91,20 @@ void setup() {
 
 void loop() {
   server.handleClient();
-  /* unsigned int distance = sensor.getDistance();
-    if (distance != 0 && distance < 20){ 
-    car.setSpeed(0); 
-    } */
   car.update();
+}
+
+/**
+ * OBSTACLE AVOIDANCE
+ * Stops the car, then rotates 180 degrees and continues with what it was doing before.
+ */
+void obstacleAvoidance() {
+  unsigned int distance = sensor.getDistance();
+  if (distance != 0 && distance < 20){ 
+    car.setSpeed(0);
+    rotateOnSpot(180, 30); //MAGIC NUMBER SPEED
+    //car.setSpeed(speed);
+  }
 }
 
 /**
@@ -109,26 +116,26 @@ void loop() {
  */
 void randomDance() {
   for (int i = 0; i < 5; i++) {
-    handleInput(random(1, 5));
+    handleInput(random(1, 5), 30); //MAGIC NUMBER SPEED
   }
 }
 
 /** 
  *  Takes an integer and switch case determines which dance to perform
  */
-void handleInput(int danceID) {
+void handleInput(int danceID, int speed) {
   switch (danceID) {
     case 1:
-      spin();
+      spin(speed);
       break;
     case 2:
-      shuffle(30);
+      shuffle(speed);
       break;
     case 3:
-      shake(30);
+      shake(speed);
       break;
     case 4:
-      macarena(30);
+      macarena(speed);
       break;
     default:
       break;
@@ -140,9 +147,9 @@ void handleInput(int danceID) {
 /**
  * Spins the car on the spot
  */
-void spin() {
+void spin(int speed) {
     car.update();
-    rotateOnSpot(350, 30);   
+    rotateOnSpot(350, speed);   
 }
 
 /**
@@ -202,22 +209,23 @@ void shuffle(int speed) {
   const int shortDistance = 5;
   const int mediumDistance = 10;
   const int longDistance = 20;
-  
-  long startingPoint = 0;//rightOdometer.getDistance();
   bool danceIsFinished = false;
   int steps = 1;
   
   car.setSpeed(speed);
   
   while(!danceIsFinished) {
-    Serial.print("mediumDistance = ");
+    obstacleAvoidance();
+    
+    /*Serial.print("mediumDistance = ");
     Serial.print(mediumDistance);
     Serial.print("startingPoint = ");
     Serial.print(startingPoint);
     Serial.print("distance = ");
     Serial.print(car.getDistance());
     Serial.print(", steps = ");
-    Serial.println(steps);
+    Serial.println(steps);*/
+    
     if ((steps == 1 || steps == 5) && (rightOdometer.getDirection() == 1) && (car.getDistance() == mediumDistance)) {
       car.setSpeed(0); 
       delay(1000);
@@ -260,15 +268,17 @@ void shake(int speed) {
   int repeats = 0;
   
   while (repeats != 3){
-
-    Serial.print("repeats = ");
+    obstacleAvoidance();
+    
+    /*Serial.print("repeats = ");
     Serial.print(repeats);
     Serial.print(", startingPoint = ");
     Serial.print(startingPoint);
     Serial.print(", distance = ");
     Serial.print(car.getDistance());
     Serial.print(", steps = ");
-    Serial.println(steps);
+    Serial.println(steps);*/
+    
     if (steps == 1) {
       startingPoint = car.getDistance();
       car.setAngle(-45);      
@@ -302,12 +312,15 @@ void macarena(int speed) {
   int repeats = 0;
 
   while (repeats != 3) {
-    Serial.print("startingPoint = ");
+    obstacleAvoidance();
+    
+    /*Serial.print("startingPoint = ");
     Serial.print(startingPoint);
     Serial.print(", repeats = ");
     Serial.print(repeats);
     Serial.print(", steps = ");
-    Serial.println(steps);
+    Serial.println(steps);*/
+    
     if (steps == 1) {
       startingPoint = car.getDistance();
       car.setSpeed(speed);
@@ -325,7 +338,7 @@ void macarena(int speed) {
     } else if ((steps == 5) && (car.getDistance() - startingPoint == 0)) {
       car.setSpeed(0);
       delay(1000);
-      rotateOnSpot(90, 30);
+      rotateOnSpot(90, speed);
       repeats++;
       steps = 1;
       delay(1000);
