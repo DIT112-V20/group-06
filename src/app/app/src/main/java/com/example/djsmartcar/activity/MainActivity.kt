@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.model.Dance
@@ -46,22 +47,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    fun startDancing(view: View) {
+        view.visibility = View.INVISIBLE
+        stopButton.visibility = View.VISIBLE
+    }
+
+    fun stopDancing(view: View) {
+        view.visibility = View.INVISIBLE
+        startButton.visibility = View.VISIBLE
+    }
+
     fun getRandom(view: View) {
         view.setBackgroundResource(R.drawable.selected_random_button)
+
+        startButton.visibility = View.VISIBLE
 
         RetrofitClient
             .instance
             .getRandom()
             .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-                    textView.text="Fail"
                 }
                 override fun onResponse(
                     call: Call<List<Dance>>,
                     response: Response<List<Dance>>
                 ) {
                     if (response.isSuccessful) {
-                        textView.text="Dancing!"
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -86,6 +97,7 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
+         startButton.visibility = View.VISIBLE
          buttonColorChange(view)
 
          RetrofitClient
@@ -93,14 +105,12 @@ class MainActivity : AppCompatActivity() {
             .getDance(id)
             .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-                    textView.text="Fail"
                 }
                 override fun onResponse(
                     call: Call<List<Dance>>,
                     response: Response<List<Dance>>
                 ) {
                     if (response.isSuccessful) {
-                        textView.text="Dancing!"
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
