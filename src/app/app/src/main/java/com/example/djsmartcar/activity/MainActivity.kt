@@ -38,6 +38,36 @@ class MainActivity : AppCompatActivity() {
         selectedButton.setImageResource(R.drawable.selected_button)
     }
 
+    fun getRandom(view: View) {
+        view.setBackgroundResource(R.drawable.selected_random_button)
+
+        RetrofitClient
+            .instance
+            .getRandom()
+            .enqueue(object : Callback<List<Dance>> {
+                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+                    textView.text="Fail"
+                }
+                override fun onResponse(
+                    call: Call<List<Dance>>,
+                    response: Response<List<Dance>>
+                ) {
+                    if (response.isSuccessful) {
+                        textView.text="Dancing!"
+                    } else {
+                        val message = when(response.code()) {
+                            500 -> R.string.internal_server_error
+                            401 -> R.string.unauthorized
+                            403 -> R.string.forbidden
+                            404 -> R.string.dance_not_found
+                            else -> R.string.try_another_dance
+                        }
+                    }
+                }
+            })
+
+    }
+
     fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {

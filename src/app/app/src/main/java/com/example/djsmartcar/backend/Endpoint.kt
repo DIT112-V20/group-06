@@ -11,4 +11,6 @@ interface Endpoint {
     @GET("dance")
     fun getDance(@Query("id")id: String): Call<List<Dance>>
 
+    @GET("random")
+    fun getRandom(): Call<List<Dance>>
 }
