@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.home_page)
     }
 
     private fun buttonColorChange(view: View) {
@@ -36,6 +36,14 @@ class MainActivity : AppCompatActivity() {
 
         var selectedButton: ImageButton = findViewById(view.getId())
         selectedButton.setImageResource(R.drawable.selected_button)
+    }
+
+    fun goHome(view: View) {
+        setContentView(R.layout.home_page)
+    }
+
+    fun goToDances(view: View) {
+        setContentView(R.layout.activity_main)
     }
 
     fun getRandom(view: View) {

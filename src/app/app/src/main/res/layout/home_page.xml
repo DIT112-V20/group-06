@@ -23,7 +23,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/danceWithMusicButton" />
+        app:layout_constraintTop_toBottomOf="@+id/danceWithMusicButton"
+        android:onClick="goToDances"/>
 
     <Button
         android:id="@+id/danceWithMusicButton"
