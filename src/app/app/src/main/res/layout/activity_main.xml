@@ -93,7 +93,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText" />
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
+        android:onClick="getRandom" />
 
     <Button
         android:id="@+id/stopButton"

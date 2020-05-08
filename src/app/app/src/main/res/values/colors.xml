@@ -9,5 +9,6 @@
     <color name="nonSelectedButtonColor">#2ECBFD</color>
     <color name="selectedButtonColor">#2B08E0FD</color>
     <color name="stopButtonColor">#FD0834</color>
+    <color name="selectedRandomColor">#D8BAFF</color>
 
 </resources>
