@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
-    <!--android:text="Hello World!" -->
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/shakeButton"
@@ -72,11 +61,11 @@
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        android:onClick="startDancing" />
 
     <Button
         android:id="@+id/randomButton"
@@ -102,7 +91,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="156dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/stop_button"
         android:text="Stop"
         android:textColor="#000"
@@ -110,7 +101,9 @@
         android:textStyle="normal"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="stopDancing" />
 
     <ImageButton
         android:id="@+id/macarenaButton"
@@ -200,6 +193,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="2dp"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_button"

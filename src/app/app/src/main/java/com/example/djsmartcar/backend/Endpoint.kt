@@ -8,9 +8,9 @@ interface Endpoint {
 
     // @Headers
 
-    @GET("dance")
+    @GET("/dance")
     fun getDance(@Query("id")id: String): Call<List<Dance>>
 
-    @GET("random")
+    @GET("/random")
     fun getRandom(): Call<List<Dance>>
 }
