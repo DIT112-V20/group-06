@@ -100,10 +100,12 @@ void loop() {
  */
 void obstacleAvoidance() {
   unsigned int distance = sensor.getDistance();
+  int speed = car.getSpeed();
+  
   if (distance != 0 && distance < 20){ 
     car.setSpeed(0);
     rotateOnSpot(180, 30); //MAGIC NUMBER SPEED
-    //car.setSpeed(speed);
+    car.setSpeed(speed);
   }
 }
 
