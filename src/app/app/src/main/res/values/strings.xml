@@ -10,4 +10,6 @@
     <string name="forbidden">Forbidden</string>
     <string name="dance_not_found">Dance not found</string>
     <string name="try_another_dance">Try another dance</string>
+    <string name="unable_to_perform_random_dances">Unable to perform random dances</string>
+    <string name="unable_to_dance">Unable to perform selected dance</string>
 </resources>

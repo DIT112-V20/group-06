@@ -1,9 +1,11 @@
 package com.example.djsmartcar.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.djsmartcar.R
@@ -67,7 +69,11 @@ class MainActivity : AppCompatActivity() {
             .getRandom()
             .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+
+                    Log.e(TAG, "Error: cannot perform random dances ${t.localizedMessage}")
+                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_perform_random_dances, Toast.LENGTH_LONG).show()
                 }
+
                 override fun onResponse(
                     call: Call<List<Dance>>,
                     response: Response<List<Dance>>
@@ -81,6 +87,8 @@ class MainActivity : AppCompatActivity() {
                             404 -> R.string.dance_not_found
                             else -> R.string.try_another_dance
                         }
+                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+
                     }
                 }
             })
@@ -105,7 +113,11 @@ class MainActivity : AppCompatActivity() {
             .getDance(id)
             .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+
+                    Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
+                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
                 }
+
                 override fun onResponse(
                     call: Call<List<Dance>>,
                     response: Response<List<Dance>>
@@ -119,9 +131,14 @@ class MainActivity : AppCompatActivity() {
                             404 -> R.string.dance_not_found
                             else -> R.string.try_another_dance
                         }
+                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                     }
                 }
             })
+    }
+
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
     }
 }
 
