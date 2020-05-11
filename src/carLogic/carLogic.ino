@@ -50,7 +50,7 @@ void setup() {
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  
+
   if (MDNS.begin("djsmartcar")) {
     Serial.println("MDNS responder started");
   }
@@ -100,12 +100,12 @@ void loop() {
  */
 void obstacleAvoidance() {
   unsigned int distance = sensor.getDistance();
-  int speed = car.getSpeed();
+  //int speed = car.getSpeed();
   
   if (distance != 0 && distance < 20){ 
     car.setSpeed(0);
     rotateOnSpot(180, 30); //MAGIC NUMBER SPEED
-    car.setSpeed(speed);
+    car.setSpeed(30); //MAGIC NUMBER SPEED
   }
 }
 
@@ -272,14 +272,14 @@ void shake(int speed) {
   while (repeats != 3){
     obstacleAvoidance();
     
-    /*Serial.print("repeats = ");
+    Serial.print("repeats = ");
     Serial.print(repeats);
     Serial.print(", startingPoint = ");
     Serial.print(startingPoint);
     Serial.print(", distance = ");
     Serial.print(car.getDistance());
     Serial.print(", steps = ");
-    Serial.println(steps);*/
+    Serial.println(steps);
     
     if (steps == 1) {
       startingPoint = car.getDistance();
