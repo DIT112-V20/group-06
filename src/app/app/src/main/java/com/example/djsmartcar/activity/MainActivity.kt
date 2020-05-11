@@ -14,11 +14,31 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+
+        fun onStart() {
+            super.onStart()
+            // We will start writing our code here.
+        }
+
+        fun connected() {
+            // Then we will write some more code here.
+        }
+
+        fun onStop() {
+            super.onStop()
+            // Aaand we will finish off here.
+        }
+
+
+
+
+
     }
 
     private fun buttonColorChange(view: View) {
