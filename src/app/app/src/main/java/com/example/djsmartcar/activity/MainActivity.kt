@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_page)
     }
 
-    var isClicked = true
-
     private fun buttonColorChange(view: View) {
 
         var spinButton: ImageButton = findViewById(R.id.spinButton)
@@ -72,8 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun activeRandomButton(view: View) {
-        isClicked = false
-        if (!isClicked) {
+        if (view.isClickable) {
             getRandom(view)
             spinButton.isClickable = false
             twoStepButton.isClickable = false
@@ -89,8 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun spinActiveDance(view: View) {
-        isClicked = false
-        if (!isClicked) {
+        if (view.isClickable) {
             getDance(view)
             twoStepButton.isClickable = false
             shakeButton.isClickable = false
@@ -106,8 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun twoStepActiveDance(view: View) {
-        isClicked = false
-        if (!isClicked) {
+        if (view.isClickable) {
             getDance(view)
             spinButton.isClickable = false
             shakeButton.isClickable = false
@@ -123,8 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun shakeActiveDance(view: View) {
-        isClicked = false
-        if (!isClicked) {
+        if (view.isClickable) {
             getDance(view)
             spinButton.isClickable = false
             twoStepButton.isClickable = false
@@ -140,8 +134,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun macarenaActiveDance(view: View) {
-        isClicked = false
-        if (!isClicked) {
+        if (view.isClickable) {
             getDance(view)
             spinButton.isClickable = false
             twoStepButton.isClickable = false

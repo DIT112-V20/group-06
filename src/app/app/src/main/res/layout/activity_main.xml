@@ -17,7 +17,8 @@
         android:rotation="90"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/twoStepButton"
@@ -30,7 +31,8 @@
         android:rotation="180"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/spinButton"
@@ -43,7 +45,8 @@
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/macarenaButton"
@@ -55,7 +58,8 @@
         android:onClick="macarenaActiveDance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinButton"
-        app:srcCompat="@drawable/selectable_button_cropped" />
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/startButton"
@@ -75,7 +79,8 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/randomButton"
@@ -93,7 +98,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText" />
+        app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/stopButton"
@@ -113,7 +119,8 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
 
 
 
@@ -195,7 +202,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_button"
-        android:onClick="goHome"/>
+        android:onClick="goHome"
+        android:clickable="true"/>
 
 
 
