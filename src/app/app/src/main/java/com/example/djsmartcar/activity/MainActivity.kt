@@ -54,13 +54,21 @@ class MainActivity : AppCompatActivity() {
     fun startDancing(view: View) {
         view.visibility = View.INVISIBLE
         stopButton.visibility = View.VISIBLE
-        view.isClickable = false
+        randomButton.isClickable = false
+        spinButton.isClickable = false
+        twoStepButton.isClickable = false
+        shakeButton.isClickable = false
+        macarenaButton.isClickable = false
     }
 
     fun stopDancing(view: View) {
         view.visibility = View.INVISIBLE
         startButton.visibility = View.VISIBLE
-        view.isClickable = true
+        randomButton.isClickable = true
+        spinButton.isClickable = true
+        twoStepButton.isClickable = true
+        shakeButton.isClickable = true
+        macarenaButton.isClickable = true
     }
 
     fun activeRandomButton(view: View) {
@@ -73,14 +81,17 @@ class MainActivity : AppCompatActivity() {
             macarenaButton.isClickable = false
         } else {
             randomButton.isClickable = true
+            spinButton.isClickable = true
+            twoStepButton.isClickable = true
+            shakeButton.isClickable = true
+            macarenaButton.isClickable = true
         }
     }
 
-    fun oneActiveDance(view: View) {
+    fun spinActiveDance(view: View) {
         isClicked = false
         if (!isClicked) {
             getDance(view)
-            spinButton.isClickable = false
             twoStepButton.isClickable = false
             shakeButton.isClickable = false
             macarenaButton.isClickable = false
@@ -94,9 +105,60 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getRandom(view: View) {
-        view.setBackgroundResource(R.drawable.selected_random_button)
+    fun twoStepActiveDance(view: View) {
+        isClicked = false
+        if (!isClicked) {
+            getDance(view)
+            spinButton.isClickable = false
+            shakeButton.isClickable = false
+            macarenaButton.isClickable = false
+            randomButton.isClickable = false
+        } else {
+            spinButton.isClickable = true
+            twoStepButton.isClickable = true
+            shakeButton.isClickable = true
+            macarenaButton.isClickable = true
+            randomButton.isClickable = true
+        }
+    }
 
+    fun shakeActiveDance(view: View) {
+        isClicked = false
+        if (!isClicked) {
+            getDance(view)
+            spinButton.isClickable = false
+            twoStepButton.isClickable = false
+            macarenaButton.isClickable = false
+            randomButton.isClickable = false
+        } else {
+            spinButton.isClickable = true
+            twoStepButton.isClickable = true
+            shakeButton.isClickable = true
+            macarenaButton.isClickable = true
+            randomButton.isClickable = true
+        }
+    }
+
+    fun macarenaActiveDance(view: View) {
+        isClicked = false
+        if (!isClicked) {
+            getDance(view)
+            spinButton.isClickable = false
+            twoStepButton.isClickable = false
+            shakeButton.isClickable = false
+            randomButton.isClickable = false
+        } else {
+            spinButton.isClickable = true
+            twoStepButton.isClickable = true
+            shakeButton.isClickable = true
+            macarenaButton.isClickable = true
+            randomButton.isClickable = true
+        }
+    }
+
+    fun getRandom(view: View) {
+
+        view.setBackgroundResource(R.drawable.selected_random_button)
         startButton.visibility = View.VISIBLE
 
         RetrofitClient
