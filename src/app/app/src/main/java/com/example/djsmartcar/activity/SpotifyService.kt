@@ -14,7 +14,7 @@ enum class PlayingState {
 }
 
 object SpotifyService {
-    private const val CLIENT_ID = "897293e98b5b481990f286289f9b385e"
+    private const val CLIENT_ID = "" //add id here
     private const val REDIRECT_URI = "https://djsmartcar.com/callback/"
 
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
@@ -31,8 +31,7 @@ object SpotifyService {
         }
 
         val connectionListener = object : Connector.ConnectionListener {
-            override fun onConnected(spotifyAppRemote: SpotifyAppRemote) {
-                mSpotifyAppRemote = spotifyAppRemote
+            override fun onConnected(spotifyAppRemote: SpotifyAppRemote) { mSpotifyAppRemote = spotifyAppRemote
                 handler(true)
             }
 
@@ -75,7 +74,7 @@ object SpotifyService {
     }
 
     fun suscribeToChanges(handler: (Track) -> Unit) {
-        mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()?.setEventCallback {
+       mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()?.setEventCallback {
             handler(it.track)
         }
     }
