@@ -78,6 +78,8 @@ class MainActivity : AppCompatActivity() {
         twoStepButton.isClickable = true
         shakeButton.isClickable = true
         macarenaButton.isClickable = true
+
+        stop()
     }
 
     fun activeButton(view: View) {
@@ -154,6 +156,38 @@ class MainActivity : AppCompatActivity() {
                             else -> R.string.try_another_dance
                         }
                         val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+    }
+
+    private fun stop() {
+        RetrofitClient
+            .instance
+            .getStop()
+            .enqueue(object : Callback<List<Dance>> {
+                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+
+                    Log.e(TAG, "Error: cannot stop ${t.localizedMessage}")
+                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_perform_random_dances, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<List<Dance>>,
+                    response: Response<List<Dance>>
+                ) {
+                    if (response.isSuccessful) {
+                        println("stopped dancing")
+                    } else {
+                        val message = when(response.code()) {
+                            500 -> R.string.internal_server_error
+                            401 -> R.string.unauthorized
+                            403 -> R.string.forbidden
+                            404 -> R.string.dance_not_found
+                            else -> R.string.try_another_dance
+                        }
+                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+
                     }
                 }
             })

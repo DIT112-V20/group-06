@@ -13,4 +13,7 @@ interface Endpoint {
 
     @GET("/random")
     fun getRandom(): Call<List<Dance>>
+
+    @GET("/stop")
+    fun getStop(): Call<List<Dance>>
 }
