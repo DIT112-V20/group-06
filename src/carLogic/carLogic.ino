@@ -4,26 +4,24 @@
 #include <WebServer.h>
 
 /* SMARTCAR VARIABLES */
-BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
-BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
-DifferentialControl control(leftMotor, rightMotor);
-
 const int TRIGGER_PIN = 5;
 const int ECHO_PIN = 18;
 const unsigned int MAX_DISTANCE = 100;
-SR04 sensor(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 const int GYROSCOPE_OFFSET = 12;
-GY50 gyro(GYROSCOPE_OFFSET);
+const unsigned long LEFT_PULSES_PER_METER = 943;
+const unsigned long RIGHT_PULSES_PER_METER = 981;
 
-const unsigned long leftPulsesPerMeter = 943;
-const unsigned long rightPulsesPerMeter = 981;
+BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
+BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
+DifferentialControl control(leftMotor, rightMotor);
+SR04 sensor(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+GY50 gyro(GYROSCOPE_OFFSET);
 DirectionalOdometer leftOdometer (smartcarlib::pins::v2::leftOdometerPins, [](){
     leftOdometer.update();
-  }, leftPulsesPerMeter);
+  }, LEFT_PULSES_PER_METER);
 DirectionalOdometer rightOdometer (smartcarlib::pins::v2::rightOdometerPins, [](){
     rightOdometer.update();
-  }, rightPulsesPerMeter);
-
+  }, RIGHT_PULSES_PER_METER);
 SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
 /* NETWORK VARIABLES */
@@ -31,7 +29,6 @@ SmartCar car(control, gyro, leftOdometer, rightOdometer);
 const char* ssid     = "TheGaulle";
 const char* password = "canihaz#";
 WebServer server(80);
-String header; // Not sure if this is ever used..?
 
 void setup() {
   Serial.begin(115200);
@@ -72,14 +69,14 @@ void setup() {
 
     handleInput(danceId, speed);
   
-    server.send(200, "text/json", "[{'id':'1'}]"); //Not sure if this works
+    server.send(200, "text/json", "[{'id':'1'}]");
   });
 
   server.on("/random", []() {
     const auto arguments = server.args();
     randomDance();
     
-    server.send(200, "text/json", "[{'id':'1'}]"); //Not sure if this works
+    server.send(200, "text/json", "[{'id':'1'}]");
   });
   
   server.onNotFound(
@@ -102,9 +99,10 @@ void obstacleAvoidance() {
   unsigned int distance = sensor.getDistance();
   //int speed = car.getSpeed();
   
-  if (distance != 0 && distance < 20){ 
+  if (distance > 0 && distance <= 20){ 
     car.setSpeed(0);
     rotateOnSpot(180, 30); //MAGIC NUMBER SPEED
+    delay(1000);
     car.setSpeed(30); //MAGIC NUMBER SPEED
   }
 }
@@ -272,14 +270,14 @@ void shake(int speed) {
   while (repeats != 3){
     obstacleAvoidance();
     
-    Serial.print("repeats = ");
+    /*Serial.print("repeats = ");
     Serial.print(repeats);
     Serial.print(", startingPoint = ");
     Serial.print(startingPoint);
     Serial.print(", distance = ");
     Serial.print(car.getDistance());
     Serial.print(", steps = ");
-    Serial.println(steps);
+    Serial.println(steps);*/
     
     if (steps == 1) {
       startingPoint = car.getDistance();
