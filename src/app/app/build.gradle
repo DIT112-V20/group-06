@@ -46,7 +46,7 @@ dependencies {
 
     //Spotify
     dependencies {
-        implementation project(':app-spotify-app-remote-release-0.7.0')
-        implementation "com.google.code.gson:gson:2.6.1"
+        implementation project(':spotify-app-remote')
+        implementation "com.google.code.gson:gson:2.8.5"
     }
 }

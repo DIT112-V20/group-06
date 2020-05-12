@@ -2,19 +2,20 @@ package com.example.djsmartcar.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.djsmartcar.backend.PlayingState
+import com.example.djsmartcar.R
+//import com.example.djsmartcar.backend.PlayingState
 import com.example.djsmartcar.backend.SpotifyService
 
 class PlayerActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         setupViews()
         setupListeners()
-    }
+    }*/
 
-    private fun setupViews () {
+    /*private fun setupViews () {
         SpotifyService.playingState {
             when(it) {
                 PlayingState.PLAYING -> showPauseButton()
@@ -22,9 +23,9 @@ class PlayerActivity : AppCompatActivity() {
                 PlayingState.PAUSED -> showResumeButton()
             }
         }
-    }
+    }*/
 
-    private fun setupListeners() {
+    /*private fun setupListeners() {
         playButton.setOnClickListener {
             SpotifyService.play("spotify:album:5L8VJO457GXReKVVfRhzyM")
             showPauseButton()
@@ -39,5 +40,5 @@ class PlayerActivity : AppCompatActivity() {
             SpotifyService.resume()
             showPauseButton()
         }
-    }
+    }*/
 }

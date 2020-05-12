@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
 
-        connectButton.setOnClickListener {
+        val danceWithMusicButton =
+            findViewById<View>(R.id.danceWithMusicButton)
+
+        danceWithMusicButton.setOnClickListener {
             SpotifyService.connect(this) {
                 val intent = Intent(this, PlayerActivity::class.java)
                 startActivity(intent)

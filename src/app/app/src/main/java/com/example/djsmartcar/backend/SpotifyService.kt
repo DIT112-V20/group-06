@@ -7,13 +7,13 @@ import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
 
-enum class PlayingState {
+/*enum class PlayingState {
     PAUSED, PLAYING, STOPPED
-}
+}*/
 
 object SpotifyService {
     private const val CLIENT_ID = "8de0addceb924c72b0526155d973f953"
-    private const val  REDIRECT_URI = "com.group16.djsmartcar://callback "
+    private const val  REDIRECT_URI = "com.group16.djsmartcar://callback"
 
     private var spotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
@@ -39,7 +39,7 @@ object SpotifyService {
         SpotifyAppRemote.connect(context, connectionParams, connectionListener)
     }
 
-    fun play(uri: String) {
+/*    fun play(uri: String) {
         spotifyAppRemote?.playerApi?.play(uri)
     }
 
@@ -49,9 +49,9 @@ object SpotifyService {
 
     fun pause() {
         spotifyAppRemote?.playerApi?.pause()
-    }
+    }*/
 
-    fun playingState(handler: (PlayingState) -> Unit) {
+    /*fun playingState(handler: (PlayingState) -> Unit) {
         spotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
             if (result.track.uri == null) {
                 handler(PlayingState.STOPPED)
@@ -61,7 +61,7 @@ object SpotifyService {
                 handler(PlayingState.PLAYING)
             }
         }
-    }
+    }*/
 
 
 
