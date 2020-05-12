@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
     tools:context=".activity.MainActivity">
 
     <ImageButton
@@ -13,12 +14,12 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="41dp"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:onClick="activeButton"
         android:rotation="90"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
-        app:srcCompat="@drawable/selectable_button_cropped"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
         android:id="@+id/twoStepButton"
@@ -27,12 +28,12 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:onClick="activeButton"
         android:rotation="180"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
         android:id="@+id/spinButton"
@@ -41,12 +42,12 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:onClick="activeButton"
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        app:srcCompat="@drawable/selectable_button_cropped"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/selectable_button_cropped" />
 
     <ImageButton
         android:id="@+id/macarenaButton"
@@ -55,11 +56,11 @@
         android:layout_marginTop="41dp"
         android:layout_marginEnd="70dp"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:onClick="activeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinButton"
-        app:srcCompat="@drawable/selectable_button_cropped"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/selectable_button_cropped" />
 
     <Button
         android:id="@+id/startButton"
@@ -71,6 +72,7 @@
         android:layout_marginTop="500dp"
         android:layout_marginEnd="70dp"
         android:background="@drawable/start_button"
+        android:clickable="true"
         android:onClick="startDancing"
         android:text="Start"
         android:textColor="#000"
@@ -79,27 +81,24 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/randomButton"
-        android:layout_width="148dp"
-        android:layout_height="138dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="105dp"
-        android:background="@drawable/random_button"
+    <ImageButton
+        android:id="@+id/randomDanceButton"
+        android:layout_width="154dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#FFFFFF"
+        android:clickable="true"
         android:elevation="2dp"
+        android:fadingEdge="none"
+        android:foregroundTint="#FFFFFF"
         android:onClick="activeButton"
-        android:text="Random"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/selectable_random_button" />
+
 
     <Button
         android:id="@+id/stopButton"
@@ -111,6 +110,7 @@
         android:layout_marginTop="500dp"
         android:layout_marginEnd="70dp"
         android:background="@drawable/stop_button"
+        android:clickable="true"
         android:onClick="stopDancing"
         android:text="Stop"
         android:textColor="#000"
@@ -119,9 +119,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true"/>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -199,13 +197,29 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="2dp"
         android:backgroundTint="#FFFFFF"
+        android:clickable="true"
+        android:onClick="goHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/home_button"
-        android:onClick="goHome"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/home_button" />
 
-
+    <TextView
+        android:id="@+id/randomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="60dp"
+        android:elevation="3dp"
+        android:text="Random"
+        android:textColor="#000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/randomDanceButton"
+        app:layout_constraintEnd_toEndOf="@+id/randomDanceButton"
+        app:layout_constraintStart_toStartOf="@+id/randomDanceButton"
+        app:layout_constraintTop_toTopOf="@+id/randomDanceButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

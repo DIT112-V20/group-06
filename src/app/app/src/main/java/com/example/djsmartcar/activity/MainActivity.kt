@@ -1,5 +1,6 @@
 package com.example.djsmartcar.activity
 
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,11 +40,16 @@ class MainActivity : AppCompatActivity() {
         var shakeButton: ImageButton = findViewById(R.id.shakeButton)
         shakeButton.setImageResource(R.drawable.selectable_button_cropped)
 
-        // var randomButton: imageButton
+        var randomDanceButton: ImageButton = findViewById(R.id.randomDanceButton)
+        randomDanceButton.setImageResource(R.drawable.selectable_random_button)
 
         // if statement to check if the selected button is the random button or the dance buttons
-        var selectedButton: ImageButton = findViewById(view.getId())
-        selectedButton.setImageResource(R.drawable.selected_button)
+        if (view.getId() == R.id.randomDanceButton) { // if the view is a random button
+            randomDanceButton.setImageResource(R.drawable.selected_random_button)
+        } else {
+            var selectedButton: ImageButton = findViewById(view.getId())
+            selectedButton.setImageResource(R.drawable.selected_button)
+        }
     }
 
     fun goHome(view: View) {
@@ -57,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     fun startDancing(view: View) {
         view.visibility = View.INVISIBLE
         stopButton.visibility = View.VISIBLE
-        randomButton.isClickable = false
+        randomDanceButton.isClickable = false
         spinButton.isClickable = false
         twoStepButton.isClickable = false
         shakeButton.isClickable = false
@@ -73,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     fun stopDancing(view: View) {
         view.visibility = View.INVISIBLE
         startButton.visibility = View.VISIBLE
-        randomButton.isClickable = true
+        randomDanceButton.isClickable = true
         spinButton.isClickable = true
         twoStepButton.isClickable = true
         shakeButton.isClickable = true
