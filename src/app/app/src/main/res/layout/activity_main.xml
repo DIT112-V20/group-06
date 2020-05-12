@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:onClick="oneActiveDance" />
 
     <ImageButton
         android:id="@+id/twoStepButton"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:onClick="oneActiveDance" />
 
     <ImageButton
         android:id="@+id/spinButton"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:onClick="oneActiveDance" />
 
     <Button
         android:id="@+id/startButton"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        android:onClick="getRandom" />
+        android:onClick="activeRandomButton" />
 
     <Button
         android:id="@+id/stopButton"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinButton"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:onClick="oneActiveDance" />
 
     <TextView
         android:id="@+id/twoStepText"
