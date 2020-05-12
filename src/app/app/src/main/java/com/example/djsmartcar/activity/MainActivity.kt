@@ -18,6 +18,8 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    var activeDanceButton: View? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
@@ -60,6 +62,12 @@ class MainActivity : AppCompatActivity() {
         twoStepButton.isClickable = false
         shakeButton.isClickable = false
         macarenaButton.isClickable = false
+
+        if (activeDanceButton?.getId() == R.id.randomButton) {
+            getRandom()
+        } else {
+            getDance(view)
+        }
     }
 
     fun stopDancing(view: View) {
@@ -75,9 +83,10 @@ class MainActivity : AppCompatActivity() {
     fun activeButton(view: View) {
         startButton.visibility = View.VISIBLE
         buttonColorChange(view)
+        activeDanceButton = view
     }
 
-    fun getRandom(view: View) {
+    private fun getRandom() {
 
         RetrofitClient
             .instance
@@ -110,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getDance(view: View) {
+    private fun getDance(view: View) {
 
          var id:String =  when (view.getId()) {
              R.id.spinButton -> "1"
@@ -135,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                     response: Response<List<Dance>>
                 ) {
                     if (response.isSuccessful) {
+                        println("dancing!")
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
