@@ -1,5 +1,6 @@
 package com.example.djsmartcar.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
+import com.example.djsmartcar.backend.SpotifyService
 import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -20,6 +22,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+
+        connectButton.setOnClickListener {
+            SpotifyService.connect(this) {
+                val intent = Intent(this, PlayerActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+
 
         fun onStart() {
             super.onStart()
