@@ -43,7 +43,7 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
-    
+
     //Spotify
     dependencies {
         implementation project(':spotify-app-remote-release-0.7.0')
