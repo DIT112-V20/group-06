@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         var shakeButton: ImageButton = findViewById(R.id.shakeButton)
         shakeButton.setImageResource(R.drawable.selectable_button_cropped)
 
+        // var randomButton: imageButton
+
+        // if statement to check if the selected button is the random button or the dance buttons
         var selectedButton: ImageButton = findViewById(view.getId())
         selectedButton.setImageResource(R.drawable.selected_button)
     }
@@ -52,17 +55,29 @@ class MainActivity : AppCompatActivity() {
     fun startDancing(view: View) {
         view.visibility = View.INVISIBLE
         stopButton.visibility = View.VISIBLE
+        randomButton.isClickable = false
+        spinButton.isClickable = false
+        twoStepButton.isClickable = false
+        shakeButton.isClickable = false
+        macarenaButton.isClickable = false
     }
 
     fun stopDancing(view: View) {
         view.visibility = View.INVISIBLE
         startButton.visibility = View.VISIBLE
+        randomButton.isClickable = true
+        spinButton.isClickable = true
+        twoStepButton.isClickable = true
+        shakeButton.isClickable = true
+        macarenaButton.isClickable = true
+    }
+
+    fun activeButton(view: View) {
+        startButton.visibility = View.VISIBLE
+        buttonColorChange(view)
     }
 
     fun getRandom(view: View) {
-        view.setBackgroundResource(R.drawable.selected_random_button)
-
-        startButton.visibility = View.VISIBLE
 
         RetrofitClient
             .instance
@@ -104,9 +119,6 @@ class MainActivity : AppCompatActivity() {
              R.id.macarenaButton -> "4"
              else -> "no"
          }
-
-         startButton.visibility = View.VISIBLE
-         buttonColorChange(view)
 
          RetrofitClient
             .instance

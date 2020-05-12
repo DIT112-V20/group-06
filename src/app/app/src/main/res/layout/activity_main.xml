@@ -12,40 +12,54 @@
         android:layout_height="106dp"
         android:layout_marginStart="70dp"
         android:layout_marginTop="41dp"
-        android:layout_marginBottom="54dp"
         android:backgroundTint="#FFFFFF"
+        android:onClick="activeButton"
         android:rotation="90"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/twoStepButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#FFFFFF"
+        android:onClick="activeButton"
         android:rotation="180"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:clickable="true"/>
 
     <ImageButton
         android:id="@+id/spinButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
         android:backgroundTint="#FFFFFF"
+        android:onClick="activeButton"
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+        android:clickable="true"/>
+
+    <ImageButton
+        android:id="@+id/macarenaButton"
+        android:layout_width="117dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="activeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinButton"
+        app:srcCompat="@drawable/selectable_button_cropped"
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/startButton"
@@ -54,9 +68,10 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="500dp"
         android:layout_marginEnd="70dp"
         android:background="@drawable/start_button"
+        android:onClick="startDancing"
         android:text="Start"
         android:textColor="#000"
         android:textSize="25sp"
@@ -65,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="startDancing" />
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/randomButton"
@@ -73,9 +88,10 @@
         android:layout_height="138dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="105dp"
         android:background="@drawable/random_button"
         android:elevation="2dp"
+        android:onClick="activeButton"
         android:text="Random"
         android:textColor="#000"
         android:textSize="20sp"
@@ -83,7 +99,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
-        android:onClick="getRandom" />
+        android:clickable="true"/>
 
     <Button
         android:id="@+id/stopButton"
@@ -92,9 +108,10 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="500dp"
         android:layout_marginEnd="70dp"
         android:background="@drawable/stop_button"
+        android:onClick="stopDancing"
         android:text="Stop"
         android:textColor="#000"
         android:textSize="25sp"
@@ -103,21 +120,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="stopDancing" />
+        android:clickable="true"/>
 
-    <ImageButton
-        android:id="@+id/macarenaButton"
-        android:layout_width="117dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="54dp"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinButton"
-        app:srcCompat="@drawable/selectable_button_cropped"
-        android:onClick="getDance" />
+
 
     <TextView
         android:id="@+id/twoStepText"
@@ -173,17 +178,17 @@
 
     <TextView
         android:id="@+id/chooseADanceText"
-        android:layout_width="271dp"
-        android:layout_height="54dp"
+        android:layout_width="269dp"
+        android:layout_height="41dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
         android:text="Choose A Dance Move"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -197,7 +202,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_button"
-        android:onClick="goHome"/>
+        android:onClick="goHome"
+        android:clickable="true"/>
 
 
 
