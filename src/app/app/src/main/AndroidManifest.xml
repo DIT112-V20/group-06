@@ -15,8 +15,10 @@
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/ic_launcher_background" />
-
+        <activity android:name=".activity.PlayerActivity">
+        </activity>
         <activity android:name=".activity.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
