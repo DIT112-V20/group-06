@@ -3,13 +3,10 @@ package com.example.djsmartcar.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
-import com.example.djsmartcar.backend.SpotifyService
 import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -18,6 +15,10 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+    private fun showPlayer() {
+        val intent = Intent(this, PlayerActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,29 +29,15 @@ class MainActivity : AppCompatActivity() {
 
         danceWithMusicButton.setOnClickListener {
             SpotifyService.connect(this) {
-                val intent = Intent(this, PlayerActivity::class.java)
-                startActivity(intent)
+                showPlayer()
             }
+
+
         }
-
-
-
-        fun onStart() {
-            super.onStart()
-            // We will start writing our code here.
+        fun onDestroy() {
+            super.onDestroy()
+            SpotifyService.disconnect()
         }
-
-        fun connected() {
-            // Then we will write some more code here.
-        }
-
-        fun onStop() {
-            super.onStop()
-            // Aaand we will finish off here.
-        }
-
-
-
 
 
     }
