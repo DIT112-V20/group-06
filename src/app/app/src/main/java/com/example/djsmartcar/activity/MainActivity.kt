@@ -1,14 +1,11 @@
 package com.example.djsmartcar.activity
 
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.model.Dance
@@ -43,8 +40,7 @@ class MainActivity : AppCompatActivity() {
         var randomDanceButton: ImageButton = findViewById(R.id.randomDanceButton)
         randomDanceButton.setImageResource(R.drawable.selectable_random_button)
 
-        // if statement to check if the selected button is the random button or the dance buttons
-        if (view.getId() == R.id.randomDanceButton) { // if the view is a random button
+        if (view.getId() == R.id.randomDanceButton) {
             randomDanceButton.setImageResource(R.drawable.selected_random_button)
         } else {
             var selectedButton: ImageButton = findViewById(view.getId())
@@ -69,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         shakeButton.isClickable = false
         macarenaButton.isClickable = false
 
-        if (activeDanceButton?.getId() == R.id.randomButton) {
+        if (activeDanceButton?.getId() == R.id.randomDanceButton) {
             getRandom()
         } else {
             getDance(view)
