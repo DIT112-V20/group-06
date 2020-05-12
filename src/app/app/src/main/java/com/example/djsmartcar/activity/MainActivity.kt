@@ -3,6 +3,7 @@ package com.example.djsmartcar.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     var activeDanceButton: View? = null
+    var isDancing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goHome(view: View) {
+        if (isDancing) {
+            var stopButton: Button = findViewById(R.id.stopButton)
+            stopDancing(stopButton)
+        }
+
         setContentView(R.layout.home_page)
     }
 
@@ -58,11 +65,23 @@ class MainActivity : AppCompatActivity() {
 
     fun startDancing(view: View) {
         view.visibility = View.INVISIBLE
+
+        var stopButton: Button = findViewById(R.id.stopButton)
         stopButton.visibility = View.VISIBLE
+
+        var randomDanceButton: ImageButton = findViewById(R.id.randomDanceButton)
         randomDanceButton.isClickable = false
+
+        var spinButton: ImageButton = findViewById(R.id.spinButton)
         spinButton.isClickable = false
+
+        var twoStepButton: ImageButton = findViewById(R.id.twoStepButton)
         twoStepButton.isClickable = false
+
+        var shakeButton: ImageButton = findViewById(R.id.shakeButton)
         shakeButton.isClickable = false
+
+        var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
         macarenaButton.isClickable = false
 
         if (activeDanceButton?.getId() == R.id.randomDanceButton) {
@@ -74,17 +93,30 @@ class MainActivity : AppCompatActivity() {
 
     fun stopDancing(view: View) {
         view.visibility = View.INVISIBLE
+
+        var startButton: Button = findViewById(R.id.startButton)
         startButton.visibility = View.VISIBLE
+
+        var randomDanceButton: ImageButton = findViewById(R.id.randomDanceButton)
         randomDanceButton.isClickable = true
+
+        var spinButton: ImageButton = findViewById(R.id.spinButton)
         spinButton.isClickable = true
+
+        var twoStepButton: ImageButton = findViewById(R.id.twoStepButton)
         twoStepButton.isClickable = true
+
+        var shakeButton: ImageButton = findViewById(R.id.shakeButton)
         shakeButton.isClickable = true
+
+        var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
         macarenaButton.isClickable = true
 
         stop()
     }
 
     fun activeButton(view: View) {
+        var startButton: Button = findViewById(R.id.startButton)
         startButton.visibility = View.VISIBLE
         buttonColorChange(view)
         activeDanceButton = view
@@ -107,6 +139,7 @@ class MainActivity : AppCompatActivity() {
                     response: Response<List<Dance>>
                 ) {
                     if (response.isSuccessful) {
+                        isDancing = true
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -149,6 +182,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         println("dancing!")
+                        isDancing = true
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -180,6 +214,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         println("stopped dancing")
+                        isDancing = false
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
