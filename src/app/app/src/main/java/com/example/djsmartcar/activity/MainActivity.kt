@@ -10,12 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.model.Dance
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Button
-import androidx.core.view.isInvisible
+import com.spotify.protocol.types.Track
 
 class MainActivity : AppCompatActivity() {
     private fun showPlayer() {
@@ -172,15 +171,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDance(view: View) {
 
-         var id:String =  when (view.getId()) {
-             R.id.spinButton -> "1"
-             R.id.twoStepButton -> "2"
-             R.id.shakeButton -> "3"
-             R.id.macarenaButton -> "4"
-             else -> "no"
-         }
+        var id:String =  when (view.getId()) {
+            R.id.spinButton -> "1"
+            R.id.twoStepButton -> "2"
+            R.id.shakeButton -> "3"
+            R.id.macarenaButton -> "4"
+            else -> "no"
+        }
 
-         RetrofitClient
+        RetrofitClient
             .instance
             .getDance(id)
             .enqueue(object : Callback<List<Dance>> {
@@ -210,6 +209,12 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+//_____________________
+
+//_____________________
+
+
+
 
     private fun stop() {
         RetrofitClient

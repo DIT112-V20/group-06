@@ -3,11 +3,17 @@ package com.example.djsmartcar.activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import android.widget.Toast
+import com.example.djsmartcar.R
+import com.example.djsmartcar.backend.RetrofitClient
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
 import com.spotify.protocol.types.ImageUri
 import com.spotify.protocol.types.Track
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 enum class PlayingState {
     PAUSED, PLAYING, STOPPED
@@ -17,11 +23,13 @@ object SpotifyService {
     private const val CLIENT_ID = "" //add id here
     private const val REDIRECT_URI = "com.example.djsmartcar://callback"
 
+
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
         .setRedirectUri(REDIRECT_URI)
         .showAuthView(true)
         .build()
+
 
     fun connect(context: Context, handler: (connected: Boolean) -> Unit) {
 
@@ -100,5 +108,10 @@ object SpotifyService {
             }
         }
     }
+
+
+
+
+
 }
 
