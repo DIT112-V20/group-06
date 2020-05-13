@@ -15,7 +15,7 @@ enum class PlayingState {
 
 object SpotifyService {
     private const val CLIENT_ID = "" //add id here
-    private const val REDIRECT_URI = "https://djsmartcar.com/callback/"
+    private const val REDIRECT_URI = "com.example.djsmartcar://callback"
 
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
@@ -100,40 +100,5 @@ object SpotifyService {
             }
         }
     }
-
-
-
-
-
-/*    fun play(uri: String) {
-        spotifyAppRemote?.playerApi?.play(uri)
-    }
-
-    fun resume() {
-        spotifyAppRemote?.playerApi?.resume()
-    }
-
-    fun pause() {
-        spotifyAppRemote?.playerApi?.pause()
-    }*/
-
-    /*fun playingState(handler: (PlayingState) -> Unit) {
-        spotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
-            if (result.track.uri == null) {
-                handler(PlayingState.STOPPED)
-            } else if (result.isPaused) {
-                handler(PlayingState.PAUSED)
-            } else {
-                handler(PlayingState.PLAYING)
-            }
-        }
-    }*/
-
-
-
-
-
-
-
 }
 

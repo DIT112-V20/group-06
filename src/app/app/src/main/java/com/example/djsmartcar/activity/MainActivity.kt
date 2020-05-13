@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import android.widget.Button
+import androidx.core.view.isInvisible
 
 class MainActivity : AppCompatActivity() {
     private fun showPlayer() {
@@ -31,15 +32,7 @@ class MainActivity : AppCompatActivity() {
             SpotifyService.connect(this) {
                 showPlayer()
             }
-
-
         }
-        fun onDestroy() {
-            super.onDestroy()
-            SpotifyService.disconnect()
-        }
-
-
     }
 
     private fun buttonColorChange(view: View) {
@@ -105,7 +98,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
-
     }
 
     fun getDance(view: View) {
