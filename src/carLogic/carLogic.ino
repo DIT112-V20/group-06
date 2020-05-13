@@ -10,6 +10,13 @@ const unsigned int MAX_DISTANCE = 100;
 const int GYROSCOPE_OFFSET = 12;
 const unsigned long LEFT_PULSES_PER_METER = 943;
 const unsigned long RIGHT_PULSES_PER_METER = 981;
+const int STOP_ID = 0;
+const int SPIN_ID = 1;
+const int TWO_STEP_ID = 2;
+const int SHAKE_ID = 3;
+const int MACARENA_ID = 4;
+const int RANDOM_ID = 5;
+int activeDanceId = 0;
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
@@ -32,7 +39,23 @@ WebServer server(80);
 
 void setup() {
   Serial.begin(115200);
-  
+  serverSetup();
+}
+
+void loop() {
+  server.handleClient();
+  if (activeDanceId == RANDOM_ID) {
+    handleInput(random(1, 5), 30); //MAGIC NUMBER SPEED
+  } else {
+    handleInput(activeDanceId, 30); //MAGIC NUMBER SPEED
+  }
+  car.update();
+}
+
+/**
+ * SERVER SETUP
+ */
+void serverSetup() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
@@ -61,20 +84,25 @@ void setup() {
       const auto command = server.argName(i);
       
       if (command == "id") {
-        danceId = server.arg(i).toInt(); //MAGIC NUMBER SPEED
+        activeDanceId = server.arg(i).toInt(); //MAGIC NUMBER SPEED
       } else if (command == "speed") {
         speed = server.arg(i).toInt();
       }
     }
-
-    handleInput(danceId, speed);
   
     server.send(200, "text/json", "[{'id':'1'}]");
   });
 
   server.on("/random", []() {
     const auto arguments = server.args();
-    randomDance();
+    activeDanceId = RANDOM_ID;
+    
+    server.send(200, "text/json", "[{'id':'1'}]");
+  });
+
+  server.on("/stop", []() {
+    const auto arguments = server.args();
+    activeDanceId = STOP_ID;
     
     server.send(200, "text/json", "[{'id':'1'}]");
   });
@@ -84,11 +112,6 @@ void setup() {
   
   server.begin();
   Serial.println("HTTP server started");
-}
-
-void loop() {
-  server.handleClient();
-  car.update();
 }
 
 /**
@@ -111,30 +134,25 @@ void obstacleAvoidance() {
  * DANCE MOVE LOGIC
  */
 
-/**
- * Random dance, loops 5 times
- */
-void randomDance() {
-  for (int i = 0; i < 5; i++) {
-    handleInput(random(1, 5), 30); //MAGIC NUMBER SPEED
-  }
-}
-
 /** 
  *  Takes an integer and switch case determines which dance to perform
  */
 void handleInput(int danceID, int speed) {
   switch (danceID) {
-    case 1:
+    case STOP_ID: // Stop
+      car.setAngle(0);
+      car.setSpeed(0);
+      break;
+    case SPIN_ID:
       spin(speed);
       break;
-    case 2:
+    case TWO_STEP_ID:
       twoStep(speed);
       break;
-    case 3:
+    case SHAKE_ID:
       shake(speed);
       break;
-    case 4:
+    case MACARENA_ID:
       macarena(speed);
       break;
     default:
