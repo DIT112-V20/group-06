@@ -1,2 +1,2 @@
 rootProject.name='DJSmartCar'
-include ':app'
+include ':app', ':spotify-app-remote'
