@@ -16,6 +16,11 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    fun goHome(view: View) {
+        SpotifyService.pause()
+        setContentView(R.layout.home_page)
+    }
+
 
     override fun onStop() {
         super.onStop()
@@ -38,7 +43,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         pauseSnippet.setOnClickListener {
-            SpotifyService.play("spotify:playlist:37i9dQZF1DWYMvTygsLWlG")
+            SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
             showPauseButton()
         }
 
