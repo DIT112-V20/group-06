@@ -32,6 +32,8 @@ object SpotifyService {
 
         val connectionListener = object : Connector.ConnectionListener {
             override fun onConnected(spotifyAppRemote: SpotifyAppRemote) { mSpotifyAppRemote = spotifyAppRemote
+                mSpotifyAppRemote = spotifyAppRemote
+                Log.d("MainActivity", "Connected! Yay!")
                 handler(true)
             }
 

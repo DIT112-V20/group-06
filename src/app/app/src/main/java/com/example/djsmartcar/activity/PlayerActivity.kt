@@ -16,6 +16,7 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+
     override fun onStop() {
         super.onStop()
         SpotifyService.disconnect()
@@ -37,7 +38,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         playButton.setOnClickListener {
-            SpotifyService.play("spotify:track:1di1BEgJYzPvXUuinsYJGP")
+            SpotifyService.play("spotify:playlist:37i9dQZF1DWYMvTygsLWlG")
             showPauseButton()
         }
 
