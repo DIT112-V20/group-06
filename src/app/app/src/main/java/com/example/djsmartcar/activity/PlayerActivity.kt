@@ -16,6 +16,11 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    fun goHome(view: View) {
+        SpotifyService.pause()
+        setContentView(R.layout.home_page)
+    }
+
 
     override fun onStop() {
         super.onStop()
@@ -37,12 +42,12 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        playButton.setOnClickListener {
-            SpotifyService.play("spotify:playlist:37i9dQZF1DWYMvTygsLWlG")
+        pauseSnippet.setOnClickListener {
+            SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
             showPauseButton()
         }
 
-        pauseButton.setOnClickListener {
+        pauseSnippet.setOnClickListener {
             SpotifyService.pause()
             showResumeButton()
         }
@@ -60,54 +65,20 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun showPlayButton() {
-        playButton.visibility = View.VISIBLE
-        pauseButton.visibility = View.GONE
+        playSnippet.visibility = View.VISIBLE
+        pauseSnippet.visibility = View.GONE
         resumeButton.visibility = View.GONE
     }
 
     private fun showPauseButton() {
-        playButton.visibility = View.GONE
-        pauseButton.visibility = View.VISIBLE
+        playSnippet.visibility = View.GONE
+        pauseSnippet.visibility = View.VISIBLE
         resumeButton.visibility = View.GONE
     }
 
     private fun showResumeButton() {
-        playButton.visibility = View.GONE
-        pauseButton.visibility = View.GONE
+        playSnippet.visibility = View.GONE
+        pauseSnippet.visibility = View.GONE
         resumeButton.visibility = View.VISIBLE
     }
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_player)
-        setupViews()
-        setupListeners()
-    }*/
-
-    /*private fun setupViews () {
-        SpotifyService.playingState {
-            when(it) {
-                PlayingState.PLAYING -> showPauseButton()
-                PlayingState.STOPPED -> showPlayButton()
-                PlayingState.PAUSED -> showResumeButton()
-            }
-        }
-    }*/
-
-    /*private fun setupListeners() {
-        playButton.setOnClickListener {
-            SpotifyService.play("spotify:album:5L8VJO457GXReKVVfRhzyM")
-            showPauseButton()
-        }
-
-        pauseButton.setOnClickListener {
-            SpotifyService.pause()
-            showResumeButton()
-        }
-
-        resumeButton.setOnClickListener {
-            SpotifyService.resume()
-            showPauseButton()
-        }
-    }*/
 }
