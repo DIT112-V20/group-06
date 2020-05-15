@@ -103,7 +103,7 @@ class PlayerActivity : AppCompatActivity() {
 
         RetrofitClient
                 .instance
-                .getDance(id)
+                .getDance(id, null, null)
                 .enqueue(object : Callback<List<Dance>> {
                     override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
 
