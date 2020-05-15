@@ -24,20 +24,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
-
-        val danceWithMusicButton =
-            findViewById<View>(R.id.danceWithMusicButton)
-
-        danceWithMusicButton.setOnClickListener {
-            SpotifyService.connect(this) {
-                showPlayer()
-            }
-        }
     }
 
-    private fun showPlayer() {
-        val intent = Intent(this, PlayerActivity::class.java)
-        startActivity(intent)
+    fun connectShowPlayer() {
+        SpotifyService.connect(this) {
+            val intent = Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun buttonColorChange(view: View) {
