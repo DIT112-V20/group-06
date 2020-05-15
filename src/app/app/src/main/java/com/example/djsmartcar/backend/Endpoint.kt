@@ -16,4 +16,7 @@ interface Endpoint {
 
     @GET("/stop")
     fun getStop(): Call<List<Dance>>
+
+//    @GET("/v1/audio-analysis/{id} ")
+//    fun getTrackInfo(@Path("id")id: String): Call<List<Track>>
 }

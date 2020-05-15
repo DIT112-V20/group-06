@@ -3,6 +3,7 @@ package com.example.djsmartcar.backend
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
@@ -16,12 +17,23 @@ enum class PlayingState {
 object SpotifyService {
     private const val CLIENT_ID = "" //add id here
     private const val REDIRECT_URI = "com.example.djsmartcar://callback"
+    private const val CLIENT_SECRET = "" //add  secret here
+
 
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
         .setRedirectUri(REDIRECT_URI)
         .showAuthView(true)
         .build()
+
+    val api = System.getenv(CLIENT_ID)?.let {
+        System.getenv(CLIENT_SECRET)?.let { it1 ->
+            spotifyAppApi(
+                it,// client id
+                it1//client secret
+            ).build()
+        }
+    }
 
     fun connect(context: Context, handler: (connected: Boolean) -> Unit) {
 
