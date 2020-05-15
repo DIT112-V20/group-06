@@ -17,10 +17,6 @@ import android.widget.Button
 import com.example.djsmartcar.backend.SpotifyService
 
 class MainActivity : AppCompatActivity() {
-    private fun showPlayer() {
-        val intent = Intent(this, PlayerActivity::class.java)
-        startActivity(intent)
-    }
 
     var activeDanceButton: View? = null
     var isDancing: Boolean = false
@@ -37,6 +33,11 @@ class MainActivity : AppCompatActivity() {
                 showPlayer()
             }
         }
+    }
+
+    private fun showPlayer() {
+        val intent = Intent(this, PlayerActivity::class.java)
+        startActivity(intent)
     }
 
     private fun buttonColorChange(view: View) {

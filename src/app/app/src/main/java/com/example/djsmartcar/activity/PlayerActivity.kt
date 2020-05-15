@@ -1,5 +1,6 @@
 package com.example.djsmartcar.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +19,9 @@ class PlayerActivity : AppCompatActivity() {
 
     fun goHome(view: View) {
         SpotifyService.pause()
-        setContentView(R.layout.home_page)
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
-
 
     override fun onStop() {
         super.onStop()
