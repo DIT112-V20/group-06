@@ -16,10 +16,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Button
 import androidx.core.view.isInvisible
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private var activeDanceButton: View? = null
     private var isDancing: Boolean = false
+    private var random: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,8 +104,10 @@ class MainActivity : AppCompatActivity() {
         isDancing = true
 
         if (activeDanceButton?.getId() == R.id.randomDanceButton) {
+            random = true
             getRandom()
         } else {
+            random = false
             getDance(activeDanceButton)
         }
     }
@@ -130,6 +134,7 @@ class MainActivity : AppCompatActivity() {
         macarenaButton.isClickable = true
 
         isDancing = false
+        println("stopped dancing")
     }
 
     fun activeButton(view: View) {
@@ -140,8 +145,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRandom() {
-        Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-        stopDancing(findViewById(R.id.stopButton))
+
+        var danceId:String = Random.nextInt(0,5).toString()
+
+        var id:View? =  when(danceId) {
+            "1" -> findViewById(R.id.spinButton)
+            "2" -> findViewById(R.id.twoStepButton)
+            "3" -> findViewById(R.id.shakeButton)
+            "4" -> findViewById(R.id.macarenaButton)
+            else -> null
+        }
+
+        getDance(randomDanceId())
+    }
+
+    private fun randomDanceId(): View? {
+        var danceId:String = Random.nextInt(0,5).toString()
+
+        var id:View? =  when(danceId) {
+            "1" -> findViewById(R.id.spinButton)
+            "2" -> findViewById(R.id.twoStepButton)
+            "3" -> findViewById(R.id.shakeButton)
+            "4" -> findViewById(R.id.macarenaButton)
+            else -> null
+        }
+
+        return id
     }
 
     private fun getDance(view: View?) {
@@ -172,7 +201,11 @@ class MainActivity : AppCompatActivity() {
                         println("dancing!")
 
                         if (isDancing) {
-                            getDance(view) // Recursion
+                            if (random) {
+                                getDance(randomDanceId())
+                            } else {
+                                getDance(view) // Recursion
+                            }
                         }
                     } else {
                         val message = when(response.code()) {
