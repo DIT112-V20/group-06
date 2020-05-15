@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_page)
     }
 
-    fun connectShowPlayer() {
+    fun connectShowPlayer(view: View) {
         SpotifyService.connect(this) {
             val intent = Intent(this, PlayerActivity::class.java)
             startActivity(intent)
@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun stop() {
+    fun stop() {
         RetrofitClient
             .instance
             .getStop()
