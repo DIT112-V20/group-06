@@ -17,10 +17,6 @@ import android.widget.Button
 import com.example.djsmartcar.backend.SpotifyService
 
 class MainActivity : AppCompatActivity() {
-    private fun showPlayer() {
-        val intent = Intent(this, PlayerActivity::class.java)
-        startActivity(intent)
-    }
 
     var activeDanceButton: View? = null
     var isDancing: Boolean = false
@@ -28,14 +24,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+    }
 
-        val danceWithMusicButton =
-            findViewById<View>(R.id.danceWithMusicButton)
-
-        danceWithMusicButton.setOnClickListener {
-            SpotifyService.connect(this) {
-                showPlayer()
-            }
+    fun connectShowPlayer(view: View) {
+        SpotifyService.connect(this) {
+            val intent = Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -210,7 +204,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun stop() {
+    fun stop() {
         RetrofitClient
             .instance
             .getStop()
