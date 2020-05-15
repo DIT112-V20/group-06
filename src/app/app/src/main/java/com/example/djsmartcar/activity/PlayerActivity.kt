@@ -1,14 +1,25 @@
 package com.example.djsmartcar.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
+import com.example.djsmartcar.backend.PlayingState
+import com.example.djsmartcar.backend.RetrofitClient
+import com.example.djsmartcar.backend.SpotifyService
+import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
-
-//import com.example.djsmartcar.backend.PlayingState
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PlayerActivity : AppCompatActivity() {
+
+    var isDancing: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
@@ -16,6 +27,13 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    fun goHome(view: View) {
+        SpotifyService.pause()
+        isDancing = false
+        println("stopped dancing now")
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onStop() {
         super.onStop()
@@ -37,22 +55,26 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        playButton.setOnClickListener {
-            SpotifyService.play("spotify:playlist:37i9dQZF1DWYMvTygsLWlG")
+        playSnippet.setOnClickListener {
+            SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
             showPauseButton()
         }
 
-        pauseButton.setOnClickListener {
+        pauseSnippet.setOnClickListener {
+            isDancing = false
+            println("no dancing right now")
             SpotifyService.pause()
             showResumeButton()
         }
 
         resumeButton.setOnClickListener {
+            isDancing = true
+            danceToMusic("1")
             SpotifyService.resume()
             showPauseButton()
         }
 
-        SpotifyService.suscribeToChanges {
+        SpotifyService.subscribeToChanges {
             SpotifyService.getImage(it.imageUri){
                 trackImageView.setImageBitmap(it)
             }
@@ -60,54 +82,60 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun showPlayButton() {
-        playButton.visibility = View.VISIBLE
-        pauseButton.visibility = View.GONE
+        playSnippet.visibility = View.VISIBLE
+        pauseSnippet.visibility = View.GONE
         resumeButton.visibility = View.GONE
     }
 
     private fun showPauseButton() {
-        playButton.visibility = View.GONE
-        pauseButton.visibility = View.VISIBLE
+        playSnippet.visibility = View.GONE
+        pauseSnippet.visibility = View.VISIBLE
         resumeButton.visibility = View.GONE
     }
 
     private fun showResumeButton() {
-        playButton.visibility = View.GONE
-        pauseButton.visibility = View.GONE
+        playSnippet.visibility = View.GONE
+        pauseSnippet.visibility = View.GONE
         resumeButton.visibility = View.VISIBLE
     }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_player)
-        setupViews()
-        setupListeners()
-    }*/
+    private fun danceToMusic(id: String) {
 
-    /*private fun setupViews () {
-        SpotifyService.playingState {
-            when(it) {
-                PlayingState.PLAYING -> showPauseButton()
-                PlayingState.STOPPED -> showPlayButton()
-                PlayingState.PAUSED -> showResumeButton()
-            }
-        }
-    }*/
+        RetrofitClient
+                .instance
+                .getDance(id)
+                .enqueue(object : Callback<List<Dance>> {
+                    override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
 
-    /*private fun setupListeners() {
-        playButton.setOnClickListener {
-            SpotifyService.play("spotify:album:5L8VJO457GXReKVVfRhzyM")
-            showPauseButton()
-        }
+                        Log.e(PlayerActivity.TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
+                        val toast = Toast.makeText(this@PlayerActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+                    }
 
-        pauseButton.setOnClickListener {
-            SpotifyService.pause()
-            showResumeButton()
-        }
+                    override fun onResponse(
+                            call: Call<List<Dance>>,
+                            response: Response<List<Dance>>
+                    ) {
+                        if (response.isSuccessful) {
+                            println("dancing!")
 
-        resumeButton.setOnClickListener {
-            SpotifyService.resume()
-            showPauseButton()
-        }
-    }*/
+                            if (isDancing) {
+                               /* danceToMusic(id) // Recursion */
+                            }
+                        } else {
+                            val message = when(response.code()) {
+                                500 -> R.string.internal_server_error
+                                401 -> R.string.unauthorized
+                                403 -> R.string.forbidden
+                                404 -> R.string.dance_not_found
+                                else -> R.string.try_another_dance
+                            }
+                            val toast = Toast.makeText(this@PlayerActivity, message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                })
+    }
+
+    companion object {
+        private val TAG = PlayerActivity::class.java.simpleName
+    }
 }

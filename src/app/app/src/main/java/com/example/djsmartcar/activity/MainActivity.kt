@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.model.Dance
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Button
 import androidx.core.view.isInvisible
 import kotlin.random.Random
+import com.example.djsmartcar.backend.SpotifyService
 
 class MainActivity : AppCompatActivity() {
     private var activeDanceButton: View? = null
@@ -26,14 +26,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+    }
 
-        val danceWithMusicButton =
-            findViewById<View>(R.id.danceWithMusicButton)
-
-        danceWithMusicButton.setOnClickListener {
-            SpotifyService.connect(this) {
-                showPlayer()
-            }
+    fun connectShowPlayer(view: View) {
+        SpotifyService.connect(this) {
+            val intent = Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
         }
     }
 
