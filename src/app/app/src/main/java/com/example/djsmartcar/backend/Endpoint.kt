@@ -9,11 +9,7 @@ interface Endpoint {
     // @Headers
 
     @GET("/dance")
-    fun getDance(@Query("id")id: String): Call<List<Dance>>
-
-    @GET("/random")
-    fun getRandom(): Call<List<Dance>>
-
-    @GET("/stop")
-    fun getStop(): Call<List<Dance>>
+    fun getDance(@Query("id")id: String,
+                 @Query("speed") speed: Int?,
+                 @Query("delay") delay: Int?): Call<List<Dance>>
 }
