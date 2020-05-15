@@ -1,4 +1,4 @@
-package com.example.djsmartcar.activity
+package com.example.djsmartcar.backend
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -75,7 +75,7 @@ object SpotifyService {
         }
     }
 
-    fun suscribeToChanges(handler: (Track) -> Unit) {
+    fun subscribeToChanges(handler: (Track) -> Unit) {
        mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()?.setEventCallback {
             handler(it.track)
         }

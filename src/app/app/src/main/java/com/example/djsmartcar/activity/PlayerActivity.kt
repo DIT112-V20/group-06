@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
+import com.example.djsmartcar.backend.PlayingState
+import com.example.djsmartcar.backend.SpotifyService
 import kotlinx.android.synthetic.main.activity_player.*
-
-//import com.example.djsmartcar.backend.PlayingState
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        pauseSnippet.setOnClickListener {
+        playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
             showPauseButton()
         }
@@ -57,7 +57,7 @@ class PlayerActivity : AppCompatActivity() {
             showPauseButton()
         }
 
-        SpotifyService.suscribeToChanges {
+        SpotifyService.subscribeToChanges {
             SpotifyService.getImage(it.imageUri){
                 trackImageView.setImageBitmap(it)
             }
