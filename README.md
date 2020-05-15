@@ -1,5 +1,6 @@
-# DJ SmartCar ![Android CI] ![Arduino CI]
-Group-06
+# Group-06: DJ SmartCar ![Android CI] ![Arduino CI]
+
+![](https://i.imgur.com/K6XNvpd.png)
 
 ## Contents
 * [Description](#description)
