@@ -10,12 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.model.Dance
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Button
-import androidx.core.view.isInvisible
+import com.example.djsmartcar.backend.SpotifyService
 
 class MainActivity : AppCompatActivity() {
     private fun showPlayer() {
