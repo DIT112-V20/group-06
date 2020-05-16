@@ -186,9 +186,9 @@ class MainActivity : AppCompatActivity() {
             .getDance(id, null, null)
             .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-
                     Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
                     Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+                    isDancing = false
                 }
 
                 override fun onResponse(
@@ -197,14 +197,6 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         println("dancing!")
-
-                        if (isDancing) {
-                            if (random) {
-                                getDance(randomDanceId())
-                            } else {
-                                getDance(view) // Recursion
-                            }
-                        }
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -217,6 +209,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+
+        if (isDancing) {
+            if (random) {
+                getDance(randomDanceId()) // Recursion
+            } else {
+                getDance(view) // Recursion
+            }
+        }
     }
 
     companion object {
