@@ -87,7 +87,7 @@ void serverSetup() {
     }
     
     handleInput(danceId);
-    server.send(200, "text/json", "[{'id':'1'}]");
+    server.send(200, "text/json", ""); //{"id" : "1"}
   });
   
   server.onNotFound(
