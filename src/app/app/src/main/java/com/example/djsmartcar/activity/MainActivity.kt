@@ -175,6 +175,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDance(view: View?) {
 
+        if (!isDancing) {
+            return
+        }
+
          var id:String =  when (view?.getId()) {
              R.id.spinButton -> "1"
              R.id.twoStepButton -> "2"
@@ -183,23 +187,45 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        RetrofitClient
+        var response = RetrofitClient
             .instance
             .getDance(id, null, null)
-            .enqueue(object : Callback<List<Dance>> {
-                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-                    Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                    Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-                    isDancing = false
+            .execute()
+
+                if (response.code() == 200) {
+                    println("dancing!")
+
+                    if (isDancing) {
+                        if (random) {
+                            getDance(randomDanceId()) // Recursion
+                        } else {
+                            println("recursion!")
+                            getDance(view) // Recursion
+                        }
+                    }
                 }
 
+
+            /*.enqueue(object : Callback<List<Dance>> {
+                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+                    //Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
+                    //Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+                    //isDancing = false
+                }
                 override fun onResponse(
                     call: Call<List<Dance>>,
                     response: Response<List<Dance>>
                 ) {
                     if (response.isSuccessful) {
                         println("dancing!")
-
+                        if (isDancing) {
+                            if (random) {
+                                getDance(randomDanceId()) // Recursion
+                            } else {
+                                println("recursion!")
+                                getDance(view) // Recursion
+                            }
+                        }
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -211,16 +237,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                     }
                 }
-            })
-
-        if (isDancing) {
-            if (random) {
-                getDance(randomDanceId()) // Recursion
-            } else {
-                println("recursion!")
-                getDance(view) // Recursion
-            }
-        }
+            })*/
     }
 
     companion object {
