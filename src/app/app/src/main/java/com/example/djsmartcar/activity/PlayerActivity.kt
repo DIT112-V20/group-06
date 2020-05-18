@@ -10,11 +10,11 @@ import com.example.djsmartcar.backend.PlayingState
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.backend.SpotifyService
 import com.example.djsmartcar.model.AuthToken
-import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +49,7 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setupListeners() {
         playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
@@ -66,7 +67,7 @@ class PlayerActivity : AppCompatActivity() {
 
             RetrofitClient
                 .spotifyAuth
-                .getSpotifyAPIToken("client_credentials")
+                .getSpotifyAPIToken("client_credentials") //got from running curl command in command prompt
                 .enqueue(object : Callback<AuthToken> {
                     override fun onResponse(
                         call: Call<AuthToken>,
@@ -74,12 +75,30 @@ class PlayerActivity : AppCompatActivity() {
                     ) {
                         // Use the accessToken to talk to the Spotify API :)
                         // eg. a header with Bearer -INSERT ACCESS TOKEN HERE-
+                        if (response.isSuccessful) {
+                            println("CONNECTION MADE!!!!!!!!!!")
+                        } else {
+                            val message = when(response.code()) {
+                                500 -> R.string.internal_server_error
+                                401 -> R.string.unauthorized
+                                403 -> R.string.forbidden
+                                404 -> R.string.dance_not_found
+                                else -> R.string.try_another_dance
+                            }
+                        }
 
-                        Log.d("LALALA", response.body()?.accessToken)
+                        Log.d("Token", response.body()?.accessToken)
+
+                        RetrofitClient// to be continued?
+                            .spotifyAPI
+                            .getTrackAnalysis(id = "")
+
+
                     }
 
                     override fun onFailure(call: Call<AuthToken>, t: Throwable) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        println("FAILED!!!!!!!!!!!!")
                     }
                 })
 
