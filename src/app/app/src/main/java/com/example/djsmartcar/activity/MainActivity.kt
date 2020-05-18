@@ -32,9 +32,15 @@ class MainActivity : AppCompatActivity() {
     fun connectShowPlayer(view: View) {
         progressBar?.visibility = View.VISIBLE
 
-        SpotifyService.connect(this) {
-            val intent = Intent(this, PlayerActivity::class.java)
-            startActivity(intent)
+        SpotifyService.connect(this)  {
+            if (it==true) {
+                val intent = Intent(this, PlayerActivity::class.java)
+                startActivity(intent)
+            } else {
+                println("I'm not connected!!")
+                progressBar?.visibility = View.INVISIBLE
+                Toast.makeText(this@MainActivity, R.string.unable_to_connect, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
