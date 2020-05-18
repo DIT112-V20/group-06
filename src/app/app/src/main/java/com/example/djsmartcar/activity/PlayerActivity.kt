@@ -1,12 +1,20 @@
 package com.example.djsmartcar.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.PlayingState
+import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.backend.SpotifyService
+import com.example.djsmartcar.model.AuthToken
+import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +63,26 @@ class PlayerActivity : AppCompatActivity() {
 
         resumeButton.setOnClickListener {
             SpotifyService.resume()
+
+            RetrofitClient
+                .spotifyAuth
+                .getSpotifyAPIToken("client_credentials")
+                .enqueue(object : Callback<AuthToken> {
+                    override fun onResponse(
+                        call: Call<AuthToken>,
+                        response: Response<AuthToken>
+                    ) {
+                        // Use the accessToken to talk to the Spotify API :)
+                        // eg. a header with Bearer -INSERT ACCESS TOKEN HERE-
+
+                        Log.d("LALALA", response.body()?.accessToken)
+                    }
+
+                    override fun onFailure(call: Call<AuthToken>, t: Throwable) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
+
             showPauseButton()
         }
 

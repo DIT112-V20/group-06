@@ -35,6 +35,12 @@ object SpotifyService {
         }
     }
 
+    fun test() {
+        Log.d("LALALA", api?.token?.accessToken)
+        var track = api?.tracks?.getTrack("spotify:track:3fnUvzulzK4SZGl5o1hgqx")
+        Log.d("LALALA", track.toString())
+    }
+
     fun connect(context: Context, handler: (connected: Boolean) -> Unit) {
 
         if (mSpotifyAppRemote?.isConnected == true) {
