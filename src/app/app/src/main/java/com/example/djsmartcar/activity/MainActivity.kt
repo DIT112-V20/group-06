@@ -187,30 +187,14 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        var response = RetrofitClient
+        RetrofitClient
             .instance
             .getDance(id, null, null)
-            .execute()
-
-                if (response.code() == 200) {
-                    println("dancing!")
-
-                    if (isDancing) {
-                        if (random) {
-                            getDance(randomDanceId()) // Recursion
-                        } else {
-                            println("recursion!")
-                            getDance(view) // Recursion
-                        }
-                    }
-                }
-
-
-            /*.enqueue(object : Callback<List<Dance>> {
+            .enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-                    //Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                    //Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-                    //isDancing = false
+                    Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
+                    Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+                    isDancing = false
                 }
                 override fun onResponse(
                     call: Call<List<Dance>>,
@@ -218,14 +202,6 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         println("dancing!")
-                        if (isDancing) {
-                            if (random) {
-                                getDance(randomDanceId()) // Recursion
-                            } else {
-                                println("recursion!")
-                                getDance(view) // Recursion
-                            }
-                        }
                     } else {
                         val message = when(response.code()) {
                             500 -> R.string.internal_server_error
@@ -237,7 +213,18 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                     }
                 }
-            })*/
+            })
+
+        if (isDancing) {
+            if (random) {
+                getDance(randomDanceId())
+            } else {
+                println("sleep!")
+                Thread.sleep(5000)
+                println("Woke up")
+                getDance(view)
+            }
+        }
     }
 
     companion object {

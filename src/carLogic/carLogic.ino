@@ -87,11 +87,10 @@ void serverSetup() {
     }
     
     handleInput(danceId);
-    server.send(200, "text/json", ""); //{"id" : "1"}
+    server.send(200, "text/json", "");
   });
   
-  server.onNotFound(
-    []() { server.send(404, "text/plain", "Unknown command"); });
+  server.onNotFound([]() { server.send(404, "text/json", ""); });
   
   server.begin();
   Serial.println("HTTP server started");

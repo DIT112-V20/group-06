@@ -101,14 +101,14 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun danceToMusic(id: String) {
 
-        /*RetrofitClient
+        RetrofitClient
                 .instance
                 .getDance(id, null, null)
                 .enqueue(object : Callback<List<Dance>> {
                     override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
 
                         Log.e(PlayerActivity.TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                        val toast = Toast.makeText(this@PlayerActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@PlayerActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
                     }
 
                     override fun onResponse(
@@ -129,10 +129,10 @@ class PlayerActivity : AppCompatActivity() {
                                 404 -> R.string.dance_not_found
                                 else -> R.string.try_another_dance
                             }
-                            val toast = Toast.makeText(this@PlayerActivity, message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@PlayerActivity, message, Toast.LENGTH_LONG).show()
                         }
                     }
-                })*/
+                })
     }
 
     companion object {
