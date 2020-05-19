@@ -12,4 +12,5 @@
     <string name="try_another_dance">Try another dance</string>
     <string name="unable_to_perform_random_dances">Unable to perform random dances</string>
     <string name="unable_to_dance">Unable to perform selected dance</string>
+    <string name="track_not_found">Track not found</string>
 </resources>

@@ -19,6 +19,7 @@ object SpotifyService {
     private const val REDIRECT_URI = "com.example.djsmartcar://callback"
     private const val CLIENT_SECRET = "" //add  secret here
 
+    var tempo = 100.0;
 
     private var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
@@ -35,10 +36,27 @@ object SpotifyService {
         }
     }
 
-    fun test() {
-        Log.d("LALALA", api?.token?.accessToken)
-        var track = api?.tracks?.getTrack("spotify:track:3fnUvzulzK4SZGl5o1hgqx")
-        Log.d("LALALA", track.toString())
+    fun updateTempo(songID: String) {
+        // Fetch AuthToken from Auth API
+        var accessToken: String? = RetrofitClient
+            .spotifyAuth
+            .getSpotifyAPIToken("client_credentials")
+            .execute()
+            .body()?.accessToken
+            ?: return
+
+        Log.d("SpotifyAPI", "Got token!")
+
+        // Fetch TrackAnalysis from API
+        var bearerTokenString = "Bearer $accessToken"
+        var trackAnalysis = RetrofitClient
+            .spotifyAPI
+            .getTrackAnalysis(bearerTokenString, songID)
+            .execute()
+
+        this.tempo = trackAnalysis.body()?.track?.tempo!!
+
+        Log.d("SpotifyAPI", "Tempo=" + this.tempo.toString())
     }
 
     fun connect(context: Context, handler: (connected: Boolean) -> Unit) {

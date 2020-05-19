@@ -15,6 +15,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
+import com.example.djsmartcar.model.AudioAnalysis
+import com.example.djsmartcar.model.Meta
+import com.example.djsmartcar.model.Track
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,45 +69,12 @@ class PlayerActivity : AppCompatActivity() {
 
         resumeButton.setOnClickListener {
             SpotifyService.resume()
-
-            RetrofitClient
-                .spotifyAuth
-                .getSpotifyAPIToken("client_credentials") //got from running curl command in command prompt
-                .enqueue(object : Callback<AuthToken> {
-                    override fun onResponse(
-                        call: Call<AuthToken>,
-                        response: Response<AuthToken>
-                    ) {
-                        // Use the accessToken to talk to the Spotify API :)
-                        // eg. a header with Bearer -INSERT ACCESS TOKEN HERE-
-                        if (response.isSuccessful) {
-                            println("CONNECTION MADE!!!!!!!!!!")
-                        } else {
-                            val message = when(response.code()) {
-                                500 -> R.string.internal_server_error
-                                401 -> R.string.unauthorized
-                                403 -> R.string.forbidden
-                                404 -> R.string.dance_not_found
-                                else -> R.string.try_another_dance
-                            }
-                        }
-
-                        Log.d("Token", response.body()?.accessToken)
-
-                        RetrofitClient// to be continued?
-                            .spotifyAPI
-                            .getTrackAnalysis(id = "")
-
-
-                    }
-
-                    override fun onFailure(call: Call<AuthToken>, t: Throwable) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        println("FAILED!!!!!!!!!!!!")
-                    }
-                })
-
             showPauseButton()
+
+            // Run in another thread (e.g. the background)
+            GlobalScope.launch {
+                SpotifyService.updateTempo("7FoUzKTSQp25oe32pY9z5p")
+            }
         }
 
         SpotifyService.subscribeToChanges {

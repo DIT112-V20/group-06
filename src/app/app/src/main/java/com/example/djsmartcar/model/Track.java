@@ -3,9 +3,11 @@ package com.example.djsmartcar.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class Track {
 
+    @SerializedName("num_samples")
+    @Expose
+    private String numSamples;
     @SerializedName("duration")
     @Expose
     private Double duration;
@@ -20,13 +22,13 @@ public class Track {
     private Integer windowSeconds;
     @SerializedName("analysis_sample_rate")
     @Expose
-    private Integer analysisSampleRate;
+    private Double analysisSampleRate;
     @SerializedName("analysis_channels")
     @Expose
     private Integer analysisChannels;
     @SerializedName("end_of_fade_in")
     @Expose
-    private Integer endOfFadeIn;
+    private Double endOfFadeIn;
     @SerializedName("start_of_fade_out")
     @Expose
     private Double startOfFadeOut;
@@ -44,7 +46,7 @@ public class Track {
     private Integer timeSignature;
     @SerializedName("time_signature_confidence")
     @Expose
-    private Integer timeSignatureConfidence;
+    private Double timeSignatureConfidence;
     @SerializedName("key")
     @Expose
     private Integer key;
@@ -74,13 +76,21 @@ public class Track {
     private String synchstring;
     @SerializedName("synch_version")
     @Expose
-    private Integer synchVersion;
+    private Double synchVersion;
     @SerializedName("rhythmstring")
     @Expose
     private String rhythmstring;
     @SerializedName("rhythm_version")
     @Expose
-    private Integer rhythmVersion;
+    private Double rhythmVersion;
+
+    public String getNumSamples() {
+        return numSamples;
+    }
+
+    public void setNumSamples(String numSamples) {
+        this.numSamples = numSamples;
+    }
 
     public Double getDuration() {
         return duration;
@@ -114,11 +124,11 @@ public class Track {
         this.windowSeconds = windowSeconds;
     }
 
-    public Integer getAnalysisSampleRate() {
+    public Double getAnalysisSampleRate() {
         return analysisSampleRate;
     }
 
-    public void setAnalysisSampleRate(Integer analysisSampleRate) {
+    public void setAnalysisSampleRate(Double analysisSampleRate) {
         this.analysisSampleRate = analysisSampleRate;
     }
 
@@ -130,11 +140,11 @@ public class Track {
         this.analysisChannels = analysisChannels;
     }
 
-    public Integer getEndOfFadeIn() {
+    public Double getEndOfFadeIn() {
         return endOfFadeIn;
     }
 
-    public void setEndOfFadeIn(Integer endOfFadeIn) {
+    public void setEndOfFadeIn(Double endOfFadeIn) {
         this.endOfFadeIn = endOfFadeIn;
     }
 
@@ -178,11 +188,11 @@ public class Track {
         this.timeSignature = timeSignature;
     }
 
-    public Integer getTimeSignatureConfidence() {
+    public Double getTimeSignatureConfidence() {
         return timeSignatureConfidence;
     }
 
-    public void setTimeSignatureConfidence(Integer timeSignatureConfidence) {
+    public void setTimeSignatureConfidence(Double timeSignatureConfidence) {
         this.timeSignatureConfidence = timeSignatureConfidence;
     }
 
@@ -258,11 +268,11 @@ public class Track {
         this.synchstring = synchstring;
     }
 
-    public Integer getSynchVersion() {
+    public Double getSynchVersion() {
         return synchVersion;
     }
 
-    public void setSynchVersion(Integer synchVersion) {
+    public void setSynchVersion(Double synchVersion) {
         this.synchVersion = synchVersion;
     }
 
@@ -274,14 +284,12 @@ public class Track {
         this.rhythmstring = rhythmstring;
     }
 
-    public Integer getRhythmVersion() {
+    public Double getRhythmVersion() {
         return rhythmVersion;
     }
 
-    public void setRhythmVersion(Integer rhythmVersion) {
+    public void setRhythmVersion(Double rhythmVersion) {
         this.rhythmVersion = rhythmVersion;
     }
 
 }
-
-
