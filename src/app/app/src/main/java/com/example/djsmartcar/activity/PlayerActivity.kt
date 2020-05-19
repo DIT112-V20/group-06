@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
 
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
