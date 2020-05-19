@@ -58,5 +58,7 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.5"
 
     //Spotify API
-    implementation "com.adamratzman:spotify-api-kotlin:3.1.0-rc.1"
+    compile group: 'com.adamratzman', name: 'spotify-api-kotlin', version: '3.1.0-rc.1'
+
+
 }

@@ -21,6 +21,7 @@ import com.example.djsmartcar.model.Track
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
