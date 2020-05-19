@@ -57,8 +57,4 @@ dependencies {
     implementation project(':spotify-app-remote')
     implementation "com.google.code.gson:gson:2.8.5"
 
-    //Spotify API
-    compile group: 'com.adamratzman', name: 'spotify-api-kotlin', version: '3.1.0-rc.1'
-
-
 }

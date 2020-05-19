@@ -3,7 +3,6 @@ package com.example.djsmartcar.backend
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
-import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
@@ -26,15 +25,6 @@ object SpotifyService {
         .setRedirectUri(REDIRECT_URI)
         .showAuthView(true)
         .build()
-
-    val api = System.getenv(CLIENT_ID)?.let {
-        System.getenv(CLIENT_SECRET)?.let { it1 ->
-            spotifyAppApi(
-                it,// client id
-                it1//client secret
-            ).build()
-        }
-    }
 
     fun updateTempo(songID: String) {
         // Fetch AuthToken from Auth API

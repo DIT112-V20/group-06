@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.adamratzman.spotify.SpotifyApi.Companion.spotifyAppApi
 import com.example.djsmartcar.model.AudioAnalysis
 import com.example.djsmartcar.model.Meta
 import com.example.djsmartcar.model.Track
