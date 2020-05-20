@@ -10,11 +10,17 @@ import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.PlayingState
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.backend.SpotifyService
+import com.example.djsmartcar.model.AuthToken
 import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.djsmartcar.model.AudioAnalysis
+import com.example.djsmartcar.model.Meta
+import com.example.djsmartcar.model.Track
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -54,9 +60,11 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setupListeners() {
         playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
+
             showPauseButton()
         }
 
@@ -72,6 +80,11 @@ class PlayerActivity : AppCompatActivity() {
             danceToMusic("1")
             SpotifyService.resume()
             showPauseButton()
+
+            // Run in another thread (e.g. the background)
+            GlobalScope.launch {
+                SpotifyService.updateTempo("7FoUzKTSQp25oe32pY9z5p")
+            }
         }
 
         SpotifyService.subscribeToChanges {
