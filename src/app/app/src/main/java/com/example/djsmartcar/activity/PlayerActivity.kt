@@ -60,7 +60,6 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupListeners() {
         playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
@@ -81,9 +80,28 @@ class PlayerActivity : AppCompatActivity() {
             SpotifyService.resume()
             showPauseButton()
 
+            // Subscribe to PlayerState
+            SpotifyService.mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()
+                ?.setEventCallback {
+                    val track: com.spotify.protocol.types.Track = it.track
+                    val uri = track.uri
+
+                    Log.d("MainActivity", track.name + " by " + track.artist.name + "  " + uri)
+                }
+
             // Run in another thread (e.g. the background)
             GlobalScope.launch {
-                SpotifyService.updateTempo("7FoUzKTSQp25oe32pY9z5p")
+                SpotifyService.mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()
+                    ?.setEventCallback {
+
+                        val track: com.spotify.protocol.types.Track = it.track
+                        val uri = track.uri
+                        val id = uri.takeLast(22)
+
+                        Log.d("MainActivity", track.name + " by " + track.artist.name +  "  " + id)
+
+                        SpotifyService.updateTempo(id)
+                    }
             }
         }
 

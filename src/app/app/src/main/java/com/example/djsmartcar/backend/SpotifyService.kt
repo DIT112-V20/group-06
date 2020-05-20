@@ -20,7 +20,7 @@ object SpotifyService {
 
     var tempo = 100.0;
 
-    private var mSpotifyAppRemote: SpotifyAppRemote? = null
+    var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
         .setRedirectUri(REDIRECT_URI)
         .showAuthView(true)
