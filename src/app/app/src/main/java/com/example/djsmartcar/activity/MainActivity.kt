@@ -101,12 +101,19 @@ class MainActivity : AppCompatActivity() {
         isDancing = true
 
         val thread = Thread(Runnable {
-            if (activeDanceButton?.getId() == R.id.randomDanceButton) {
-                random = true
-                getRandom()
-            } else {
-                random = false
-                getDance(activeDanceButton)
+            println("Thread starts")
+            while (isDancing) {
+                if (activeDanceButton?.getId() == R.id.randomDanceButton) {
+                    random = true
+                    getRandom()
+                } else {
+                    random = false
+                    println("call getDance")
+                    getDance(activeDanceButton)
+                    println("going to sleep now")
+                    Thread.sleep(5000)
+                    println("hey i woke up!")
+                }
             }
         })
         thread.start()
@@ -175,10 +182,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDance(view: View?) {
 
-        if (!isDancing) {
-            return
-        }
-
          var id:String =  when (view?.getId()) {
              R.id.spinButton -> "1"
              R.id.twoStepButton -> "2"
@@ -214,17 +217,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
-
-        if (isDancing) {
-            if (random) {
-                getDance(randomDanceId())
-            } else {
-                println("sleep!")
-                Thread.sleep(5000)
-                println("Woke up")
-                getDance(view)
-            }
-        }
     }
 
     companion object {
