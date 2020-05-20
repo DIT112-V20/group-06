@@ -13,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="81dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/home_buttons"
@@ -24,8 +23,7 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/danceWithMusicButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/danceWithMusicButton"
@@ -34,18 +32,16 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/home_buttons"
         android:onClick="connectShowPlayer"
         android:text="Dance with music"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/danceWithoutMusicButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
