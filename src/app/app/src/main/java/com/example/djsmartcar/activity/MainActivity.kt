@@ -110,9 +110,9 @@ class MainActivity : AppCompatActivity() {
                     random = false
                     println("call getDance")
                     getDance(activeDanceButton)
-                    println("going to sleep now")
-                    Thread.sleep(5000)
-                    println("hey i woke up!")
+                    //println("going to sleep now")
+                    //Thread.sleep(5000)
+                    //println("hey i woke up!")
                 }
             }
         })
@@ -190,10 +190,19 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        RetrofitClient
+        var dance = RetrofitClient
             .instance
             .getDance(id, null, null)
-            .enqueue(object : Callback<List<Dance>> {
+            .execute()
+
+        if (dance.isSuccessful) {
+            println("dancing!")
+        } else {
+            print("could not dance...")
+            isDancing = false
+        }
+
+            /*.enqueue(object : Callback<List<Dance>> {
                 override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
                     Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
                     Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
@@ -216,7 +225,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
                     }
                 }
-            })
+            })*/
     }
 
     companion object {
