@@ -14,27 +14,32 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Button
+import android.widget.ProgressBar
 import com.example.djsmartcar.backend.SpotifyService
 
 class MainActivity : AppCompatActivity() {
-    private fun showPlayer() {
-        val intent = Intent(this, PlayerActivity::class.java)
-        startActivity(intent)
-    }
 
     var activeDanceButton: View? = null
     var isDancing: Boolean = false
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
+        progressBar = findViewById(R.id.progressBar)
+    }
 
-        val danceWithMusicButton =
-            findViewById<View>(R.id.danceWithMusicButton)
+    fun connectShowPlayer(view: View) {
+        progressBar?.visibility = View.VISIBLE
 
-        danceWithMusicButton.setOnClickListener {
-            SpotifyService.connect(this) {
-                showPlayer()
+        SpotifyService.connect(this)  {
+            if (it==true) {
+                val intent = Intent(this, PlayerActivity::class.java)
+                startActivity(intent)
+            } else {
+                println("I'm not connected!!")
+                progressBar?.visibility = View.INVISIBLE
+                Toast.makeText(this@MainActivity, R.string.unable_to_connect, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -211,7 +216,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun stop() {
+    fun stop() {
         RetrofitClient
             .instance
             .getStop()

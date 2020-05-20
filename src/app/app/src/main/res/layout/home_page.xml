@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <Button
         android:id="@+id/danceWithoutMusicButton"
@@ -12,10 +13,11 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/home_buttons"
+        android:onClick="goToDances"
         android:text="Dance without music"
         android:textColor="#000"
         android:textSize="25sp"
@@ -23,8 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/danceWithMusicButton"
-        android:onClick="goToDances"/>
+        app:layout_constraintTop_toBottomOf="@+id/danceWithMusicButton" />
 
     <Button
         android:id="@+id/danceWithMusicButton"
@@ -33,17 +34,48 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="277dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="81dp"
-        android:layout_marginBottom="98dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/home_buttons"
+        android:onClick="connectShowPlayer"
         android:text="Dance with music"
         android:textColor="#000"
         android:textSize="25sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/danceWithoutMusicButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="83dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="2dp"
+        android:indeterminateTint="@color/randomButtonColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/danceWithMusicButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="262dp"
+        android:layout_height="264dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginEnd="67dp"
+        android:background="@android:color/background_light"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:srcCompat="@drawable/logo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
