@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
@@ -108,6 +109,10 @@ class PlayerActivity : AppCompatActivity() {
         SpotifyService.subscribeToChanges {
             SpotifyService.getImage(it.imageUri){
                 trackImageView.setImageBitmap(it)
+            }
+            SpotifyService.getCurrentTrack {
+                var trackInfoView = findViewById<TextView>(R.id.trackInfoView)
+                trackInfoView?.text =  it.name + " - " + it.artist.name
             }
         }
     }

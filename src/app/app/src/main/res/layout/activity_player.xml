@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/trackImageView"
-        android:layout_width="210dp"
+        android:layout_width="250dp"
         android:layout_height="268dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
@@ -30,7 +30,7 @@
         android:layout_width="171dp"
         android:layout_height="163dp"
         android:layout_marginStart="123dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="117dp"
         android:background="@null"
         android:src="@drawable/play_snippet"
@@ -43,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="115dp"
         android:backgroundTint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="120dp"
         android:backgroundTint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,5 +74,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/home_button"
         android:onClick="goHome"/>
+
+    <TextView
+        android:id="@+id/trackInfoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="175dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
