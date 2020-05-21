@@ -11,5 +11,5 @@ interface Endpoint {
     @GET("/dance")
     fun getDance(@Query("id")id: String,
                  @Query("speed") speed: Int?,
-                 @Query("delay") delay: Int?): Call<List<Dance>>
+                 @Query("delay") delay: Int?): Call<Void>
 }

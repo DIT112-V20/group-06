@@ -195,6 +195,8 @@ class MainActivity : AppCompatActivity() {
             .getDance(id, null, null)
             .execute()
 
+        println(dance.body().toString())
+
         if (dance.isSuccessful) {
             println("dancing!")
         } else {

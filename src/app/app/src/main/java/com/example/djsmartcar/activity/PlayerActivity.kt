@@ -101,7 +101,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun danceToMusic(id: String) {
 
-        RetrofitClient
+        /*RetrofitClient
                 .instance
                 .getDance(id, null, null)
                 .enqueue(object : Callback<List<Dance>> {
@@ -132,7 +132,7 @@ class PlayerActivity : AppCompatActivity() {
                             Toast.makeText(this@PlayerActivity, message, Toast.LENGTH_LONG).show()
                         }
                     }
-                })
+                })*/
     }
 
     companion object {

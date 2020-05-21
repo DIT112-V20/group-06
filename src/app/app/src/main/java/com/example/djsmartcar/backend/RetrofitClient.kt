@@ -13,7 +13,7 @@ object RetrofitClient {
     // Lazy is a kotlin feature that ensures the instance is only executed once
     val instance: Endpoint by lazy {
         val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create()) // Parses the JSON
+            //.addConverterFactory(GsonConverterFactory.create()) // Parses the JSON
             .baseUrl(BASE_URL)
             .build()
 
