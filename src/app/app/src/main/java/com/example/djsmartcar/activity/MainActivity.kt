@@ -98,29 +98,23 @@ class MainActivity : AppCompatActivity() {
 
         isDancing = true
 
-        try {
-            val thread = Thread(Runnable {
-                println("Thread starts")
-                while (isDancing) {
-                    if (activeDanceButton?.getId() == R.id.randomDanceButton) {
-                        random = true
-                        println("random getDance")
-                        getDance(randomDanceId())
-                    } else {
-                        random = false
-                        println("call getDance")
-                        getDance(activeDanceButton)
-                    }
+        val thread = Thread(Runnable {
+            println("Thread starts")
+            while (isDancing) {
+                if (activeDanceButton?.getId() == R.id.randomDanceButton) {
+                    random = true
+                    println("random getDance")
+                    getDance(randomDanceId())
+                } else {
+                    random = false
+                    println("call getDance")
+                    getDance(activeDanceButton)
                 }
-            })
-            thread.start()
-        }  catch (e : Exception) {
-            Log.e(TAG, "Error: ${e.localizedMessage}")
-            //Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-            isDancing = false
+            }
 
             stopDancing(findViewById(R.id.stopButton))
-        }
+        })
+        thread.start()
     }
 
     fun stopDancing(view: View) {
@@ -179,13 +173,19 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        var dance = RetrofitClient
-            .instance
-            .getDance(id, null, null)
-            .execute()
+        try {
+            var dance = RetrofitClient
+                .instance
+                .getDance(id, null, null)
+                .execute()
 
-        if (dance.isSuccessful) {
-            println("dancing!")
+            if (dance.isSuccessful) {
+                println("dancing!")
+            }
+        } catch (e : Exception) {
+            Log.e(TAG, "Error: ${e.localizedMessage}")
+            //Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+            isDancing = false
         }
     }
 
