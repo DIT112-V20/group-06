@@ -21,23 +21,24 @@ We hope this product will bring you joy and entertainment for years to come. Bef
 1. Download and install the DJ SmartCar app.
 2. Download and install the Spotify app.
 3. Log in to the Spotify app on your phone. 
-4. Turn on the SmartCar.
+4. Click *Dance with Music* in the DJ SmartCar app and accept the Spotify terms and conditions.
+5. Turn on the SmartCar.
 
-![](https://i.imgur.com/LkRaysV.png)
+![](https://i.imgur.com/Ql6TQxW.jpg?1)
 
 Now that you have downloaded the DJ SmartCar and Spotify apps, you can start enjoying the DJ SmartCar system! 
 
 
-![](https://i.imgur.com/zVJ3pVA.png)
+![](https://i.imgur.com/bILHO3g.jpg?1)
 
-The *Dance with music* mode allows you to play music from Spotify right in the DJ SmartCar app. When pressing the *Play* button, the music will begin and your car will start dancing! When you press *Pause*, both the car and the music will stop. If you press the home button while the car is dancing, the music and car will automatically stop and you will go back to the home screen. Pressing it while the music and car are paused will just take you back to the home screen.
+The *Dance with Music* mode allows you to play music from Spotify right in the DJ SmartCar app. When pressing the *Play* button, the music will begin and your car will start dancing! When you press *Pause*, both the car and the music will stop. If you press the home button while the car is dancing, the music and car will automatically stop and you will go back to the home screen. Pressing it while the music and car are paused will just take you back to the home screen.
 
 
-![](https://i.imgur.com/CgGAdFp.png)
+![](https://i.imgur.com/WJRigre.jpg?1)
 
 *You will see this screen once you have selected a dance move.* 
 
-The *Dance without music* mode features four unique dance moves: *two-step, spin, shake, and macarena.* The *random* button will make the car do these dances in a randomized order. After you have selected a dance move, press the *Start* button to make it dance until you press the *Stop* button.  
+The *Dance without Music* mode features four unique dance moves: *two-step, spin, shake, and macarena.* The *random* button will make the car do these dances in a randomized order. After you have selected a dance move, press the *Start* button to make it dance until you press the *Stop* button.  
 
 To go back to the home screen, simply press the home button in the top right corner. 
 
