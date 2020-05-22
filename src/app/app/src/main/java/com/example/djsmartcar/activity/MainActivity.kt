@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            stopDancing(findViewById(R.id.stopButton))
+            //stopDancing(findViewById(R.id.stopButton))
         })
         thread.start()
     }
