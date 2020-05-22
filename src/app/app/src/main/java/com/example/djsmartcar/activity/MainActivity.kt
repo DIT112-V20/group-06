@@ -105,7 +105,8 @@ class MainActivity : AppCompatActivity() {
             while (isDancing) {
                 if (activeDanceButton?.getId() == R.id.randomDanceButton) {
                     random = true
-                    getRandom()
+                    println("random getDance")
+                    getDance(randomDanceId())
                 } else {
                     random = false
                     println("call getDance")
@@ -151,21 +152,6 @@ class MainActivity : AppCompatActivity() {
         activeDanceButton = view
     }
 
-    private fun getRandom() {
-
-        var danceId:String = Random.nextInt(0,5).toString()
-
-        var id:View? =  when(danceId) {
-            "1" -> findViewById(R.id.spinButton)
-            "2" -> findViewById(R.id.twoStepButton)
-            "3" -> findViewById(R.id.shakeButton)
-            "4" -> findViewById(R.id.macarenaButton)
-            else -> null
-        }
-
-        getDance(randomDanceId())
-    }
-
     private fun randomDanceId(): View? {
         var danceId:String = Random.nextInt(0,5).toString()
 
@@ -200,7 +186,7 @@ class MainActivity : AppCompatActivity() {
         if (dance.isSuccessful) {
             println("dancing!")
         } else {
-            print("could not dance...")
+            println("could not dance...")
             isDancing = false
         }
 
