@@ -139,8 +139,6 @@ void handleInput(int danceID) {
     default:
       break;
   }
-
-  delay(ms_delay);
 }
 
 /**
@@ -264,10 +262,10 @@ void changeDirection() {
  */
 void shake() {
   unsigned int lengthOfV = 20;
-  unsigned int steps = 1; 
-  int repeats = 0;
+  unsigned int steps = 1;
+  bool danceIsFinished = false;
   
-  while (repeats != 3){
+  while (!danceIsFinished){
     obstacleAvoidance();
     
     /*Serial.print("repeats = ");
@@ -291,14 +289,11 @@ void shake() {
       changeDirection(); /* going backwards, right side of "v"*/
       steps++;
     } else if (steps == 5 && car.getDistance() == 0) {
-      steps = 1;
-      repeats++; 
       car.setAngle(0);
       car.setSpeed(0);
-      delay(ms_delay);
+      danceIsFinished = true;
     }
-  } 
-  car.setSpeed(0);
+  }
 }
 
 /**
@@ -335,10 +330,14 @@ void macarena() {
     } else if ((steps == 5) && car.getDistance() == 0) {
       car.setSpeed(0);
       delay(ms_delay);
-      rotateOnSpot(90);
+      
+      if (repeats != 2) {
+        rotateOnSpot(90);
+        delay(ms_delay);
+      }
+      
       repeats++;
       steps = 1;
-      delay(ms_delay);
     }
   }
   car.setSpeed(0); 
