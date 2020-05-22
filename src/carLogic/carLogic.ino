@@ -16,7 +16,7 @@ const unsigned short SHAKE_ID = 3;
 const unsigned short MACARENA_ID = 4;
 const unsigned short RANDOM_ID = 5;
 int dance_speed = 30;
-unsigned int ms_delay = 1000;
+unsigned int ms_delay = 500;
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
@@ -99,6 +99,7 @@ void serverSetup() {
 /**
  * OBSTACLE AVOIDANCE
  * Stops the car, then rotates 180 degrees and continues with what it was doing before.
+ * Not used in dance moves, feel free to enable it by using it in the dance-loops.
  */
 void obstacleAvoidance() {
   unsigned int distance = sensor.getDistance();
@@ -213,17 +214,6 @@ void twoStep() {
   car.setSpeed(dance_speed);
   
   while(!danceIsFinished) {
-    obstacleAvoidance();
-    
-    Serial.print("direction = ");
-    Serial.print(rightOdometer.getDirection());
-    Serial.print(", mediumDistance = ");
-    Serial.print(mediumDistance);
-    Serial.print(", distance = ");
-    Serial.print(car.getDistance());
-    Serial.print(", step = ");
-    Serial.println(steps);
-    
     if ((steps == 1 || steps == 5) && (rightOdometer.getDirection() == forward) && (car.getDistance() == mediumDistance)) {
       car.setSpeed(0); 
       delay(ms_delay);
@@ -266,17 +256,6 @@ void shake() {
   bool danceIsFinished = false;
   
   while (!danceIsFinished){
-    obstacleAvoidance();
-    
-    /*Serial.print("repeats = ");
-    Serial.print(repeats);
-    Serial.print(", startingPoint = ");
-    Serial.print(startingPoint);
-    Serial.print(", distance = ");
-    Serial.print(car.getDistance());
-    Serial.print(", steps = ");
-    Serial.println(steps);*/
-    
     if (steps == 1) {
       car.setAngle(-45);      
       car.setSpeed(dance_speed * -1); /* going backwards, start of 'shake'*/
@@ -305,15 +284,6 @@ void macarena() {
   int repeats = 0;
 
   while (repeats != 3) {
-    obstacleAvoidance();
-    
-    /*Serial.print("startingPoint = ");
-    Serial.print(startingPoint);
-    Serial.print(", repeats = ");
-    Serial.print(repeats);
-    Serial.print(", steps = ");
-    Serial.println(steps);*/
-    
     if (steps == 1) {
       car.setSpeed(dance_speed);
       steps++;

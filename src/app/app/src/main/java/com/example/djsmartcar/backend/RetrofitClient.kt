@@ -13,7 +13,7 @@ object RetrofitClient {
     // Lazy is a kotlin feature that ensures the instance is only executed once
     val instance: Endpoint by lazy {
         val client = OkHttpClient.Builder()
-            .readTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
 
         val retrofit = Retrofit.Builder()
