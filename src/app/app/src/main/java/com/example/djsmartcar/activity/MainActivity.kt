@@ -111,9 +111,6 @@ class MainActivity : AppCompatActivity() {
                     random = false
                     println("call getDance")
                     getDance(activeDanceButton)
-                    //println("going to sleep now")
-                    //Thread.sleep(5000)
-                    //println("hey i woke up!")
                 }
             }
         })
@@ -176,44 +173,22 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-        var dance = RetrofitClient
-            .instance
-            .getDance(id, null, null)
-            .execute()
+        try {
+            var dance = RetrofitClient
+                .instance
+                .getDance(id, null, null)
+                .execute()
 
-        println(dance.body().toString())
-
-        if (dance.isSuccessful) {
-            println("dancing!")
-        } else {
-            println("could not dance...")
+            if (dance.isSuccessful) {
+                println("dancing!")
+            }
+        } catch (e : Exception) {
+            Log.e(TAG, "Error: ${e.localizedMessage}")
+            Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
             isDancing = false
-        }
 
-            /*.enqueue(object : Callback<List<Dance>> {
-                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-                    Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                    Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-                    isDancing = false
-                }
-                override fun onResponse(
-                    call: Call<List<Dance>>,
-                    response: Response<List<Dance>>
-                ) {
-                    if (response.isSuccessful) {
-                        println("dancing!")
-                    } else {
-                        val message = when(response.code()) {
-                            500 -> R.string.internal_server_error
-                            401 -> R.string.unauthorized
-                            403 -> R.string.forbidden
-                            404 -> R.string.dance_not_found
-                            else -> R.string.try_another_dance
-                        }
-                        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            })*/
+            stopDancing(findViewById(R.id.stopButton))
+        }
     }
 
     companion object {
