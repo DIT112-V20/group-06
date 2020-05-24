@@ -45,11 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPlayer() {
-        val intent = Intent(this, PlayerActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun buttonColorChange(view: View) {
 
         var spinButton: ImageButton = findViewById(R.id.spinButton)
