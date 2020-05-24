@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#FFFFFF"
+    android:background="#FFFFFF"
     tools:context=".activity.MainActivity">
 
     <ImageButton
         android:id="@+id/shakeButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="41dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:onClick="activeButton"
         android:rotation="90"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/twoStepButton"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
@@ -25,13 +25,13 @@
         android:id="@+id/twoStepButton"
         android:layout_width="117dp"
         android:layout_height="106dp"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:onClick="activeButton"
         android:rotation="180"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
@@ -40,12 +40,12 @@
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="30dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:onClick="activeButton"
         android:rotation="270"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
@@ -54,11 +54,13 @@
         android:layout_width="117dp"
         android:layout_height="106dp"
         android:layout_marginTop="41dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="72dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:onClick="activeButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/stopButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/spinButton"
         app:srcCompat="@drawable/selectable_button_cropped" />
 
@@ -68,9 +70,9 @@
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/start_button"
         android:clickable="true"
         android:onClick="startDancing"
@@ -79,23 +81,25 @@
         android:textSize="25sp"
         android:textStyle="normal"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageButton
         android:id="@+id/randomDanceButton"
         android:layout_width="154dp"
         android:layout_height="151dp"
+        android:layout_marginStart="115dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="115dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:elevation="2dp"
         android:fadingEdge="none"
         android:foregroundTint="#FFFFFF"
         android:onClick="activeButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/chooseADanceText"
         app:srcCompat="@drawable/selectable_random_button" />
 
@@ -106,9 +110,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/stop_button"
         android:clickable="true"
         android:onClick="stopDancing"
@@ -117,10 +121,9 @@
         android:textSize="25sp"
         android:textStyle="normal"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/twoStepText"
@@ -166,7 +169,7 @@
         android:id="@+id/macarenaText"
         android:layout_width="91dp"
         android:layout_height="39dp"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="64dp"
         android:ems="10"
         android:text="Macarena"
@@ -179,28 +182,29 @@
         android:layout_width="269dp"
         android:layout_height="41dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
         android:text="Choose A Dance Move"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageButton
         android:id="@+id/houseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:onClick="goHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
         app:srcCompat="@drawable/home_button" />
 
     <TextView
@@ -220,6 +224,34 @@
         app:layout_constraintEnd_toEndOf="@+id/randomDanceButton"
         app:layout_constraintStart_toStartOf="@+id/randomDanceButton"
         app:layout_constraintTop_toTopOf="@+id/randomDanceButton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04103967" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04136253" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96107054" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

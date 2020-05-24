@@ -23,4 +23,20 @@ object RetrofitClient {
 
         retrofit.create(Endpoint::class.java)
     }
+
+    val spotifyAPI: Endpoint by lazy {
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.spotify.com")
+            .build()
+        retrofit.create(Endpoint::class.java)
+    }
+
+    val spotifyAuth: Endpoint by lazy {
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://accounts.spotify.com")
+            .build()
+        retrofit.create(Endpoint::class.java)
+    }
 }
