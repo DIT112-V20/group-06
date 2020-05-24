@@ -6,16 +6,10 @@ import retrofit2.http.*
 
 interface Endpoint {
 
-    // @Headers
-
     @GET("/dance")
-    fun getDance(@Query("id")id: String): Call<List<Dance>>
-
-    @GET("/random")
-    fun getRandom(): Call<List<Dance>>
-
-    @GET("/stop")
-    fun getStop(): Call<List<Dance>>
+    fun getDance(@Query("id")id: String,
+                 @Query("speed") speed: Int?,
+                 @Query("delay") delay: Int?): Call<Void>
 
     // The stuff in basic is BASE64(client_id:client_secret)
     // Can be hardcoded, use https://www.base64encode.org/ or just generated on the fly by java :)

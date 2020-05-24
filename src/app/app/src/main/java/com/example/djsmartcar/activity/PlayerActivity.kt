@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.random.Random
 import com.example.djsmartcar.model.AudioAnalysis
 import com.example.djsmartcar.model.Meta
 import com.example.djsmartcar.model.Track
@@ -77,7 +78,7 @@ class PlayerActivity : AppCompatActivity() {
 
         resumeButton.setOnClickListener {
             isDancing = true
-            danceToMusic("1")
+            danceToMusic()
             SpotifyService.resume()
             showPauseButton()
 
@@ -135,42 +136,35 @@ class PlayerActivity : AppCompatActivity() {
         resumeButton.visibility = View.VISIBLE
     }
 
-    private fun danceToMusic(id: String) {
-
-        RetrofitClient
-                .instance
-                .getDance(id)
-                .enqueue(object : Callback<List<Dance>> {
-                    override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-
-                        Log.e(PlayerActivity.TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                        val toast = Toast.makeText(this@PlayerActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onResponse(
-                            call: Call<List<Dance>>,
-                            response: Response<List<Dance>>
-                    ) {
-                        if (response.isSuccessful) {
-                            println("dancing!")
-
-                            if (isDancing) {
-                               /* danceToMusic(id) // Recursion */
-                            }
-                        } else {
-                            val message = when(response.code()) {
-                                500 -> R.string.internal_server_error
-                                401 -> R.string.unauthorized
-                                403 -> R.string.forbidden
-                                404 -> R.string.dance_not_found
-                                else -> R.string.try_another_dance
-                            }
-                            val toast = Toast.makeText(this@PlayerActivity, message, Toast.LENGTH_LONG).show()
-                        }
-                    }
-                })
+    private fun danceToMusic() {
+        val thread = Thread(Runnable {
+            println("Thread starts")
+            while (isDancing) {
+                getDance(randomDanceId())
+            }
+        })
+        thread.start()
     }
 
+    private fun randomDanceId(): String {
+        return Random.nextInt(0,5).toString()
+    }
+
+    private fun getDance(id: String) {
+        try {
+            var dance = RetrofitClient
+                .instance
+                .getDance(id, null, null)
+                .execute()
+
+            if (dance.isSuccessful) {
+                println("dancing!")
+            }
+        } catch (e : Exception) {
+            Log.e(TAG, "Error: ${e.localizedMessage}")
+            isDancing = false
+        }
+    }
     companion object {
         private val TAG = PlayerActivity::class.java.simpleName
     }

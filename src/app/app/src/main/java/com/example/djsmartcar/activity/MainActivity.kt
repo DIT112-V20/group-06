@@ -2,25 +2,26 @@ package com.example.djsmartcar.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
-import com.example.djsmartcar.model.Dance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.widget.Button
 import android.widget.ProgressBar
 import com.example.djsmartcar.backend.SpotifyService
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
-
-    var activeDanceButton: View? = null
-    var isDancing: Boolean = false
+    private var activeDanceButton: View? = null
+    private var isDancing: Boolean = false
+    private var random: Boolean = false
     private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,11 +104,25 @@ class MainActivity : AppCompatActivity() {
         var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
         macarenaButton.isClickable = false
 
-        if (activeDanceButton?.getId() == R.id.randomDanceButton) {
-            getRandom()
-        } else {
-            getDance(view)
-        }
+        isDancing = true
+
+        val thread = Thread(Runnable {
+            println("Thread starts")
+            while (isDancing) {
+                if (activeDanceButton?.getId() == R.id.randomDanceButton) {
+                    random = true
+                    println("random getDance")
+                    getDance(randomDanceId())
+                } else {
+                    random = false
+                    println("call getDance")
+                    getDance(activeDanceButton)
+                }
+            }
+
+            //stopDancing(findViewById(R.id.stopButton))
+        })
+        thread.start()
     }
 
     fun stopDancing(view: View) {
@@ -131,7 +146,8 @@ class MainActivity : AppCompatActivity() {
         var macarenaButton: ImageButton = findViewById(R.id.macarenaButton)
         macarenaButton.isClickable = true
 
-        stop()
+        isDancing = false
+        println("stopped dancing")
     }
 
     fun activeButton(view: View) {
@@ -141,43 +157,23 @@ class MainActivity : AppCompatActivity() {
         activeDanceButton = view
     }
 
-    private fun getRandom() {
+    private fun randomDanceId(): View? {
+        var danceId:String = Random.nextInt(0,5).toString()
 
-        RetrofitClient
-            .instance
-            .getRandom()
-            .enqueue(object : Callback<List<Dance>> {
-                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+        var id:View? =  when(danceId) {
+            "1" -> findViewById(R.id.spinButton)
+            "2" -> findViewById(R.id.twoStepButton)
+            "3" -> findViewById(R.id.shakeButton)
+            "4" -> findViewById(R.id.macarenaButton)
+            else -> null
+        }
 
-                    Log.e(TAG, "Error: cannot perform random dances ${t.localizedMessage}")
-                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_perform_random_dances, Toast.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(
-                    call: Call<List<Dance>>,
-                    response: Response<List<Dance>>
-                ) {
-                    if (response.isSuccessful) {
-                        isDancing = true
-                    } else {
-                        val message = when(response.code()) {
-                            500 -> R.string.internal_server_error
-                            401 -> R.string.unauthorized
-                            403 -> R.string.forbidden
-                            404 -> R.string.dance_not_found
-                            else -> R.string.try_another_dance
-                        }
-                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-
-                    }
-                }
-            })
+        return id
     }
 
+    private fun getDance(view: View?) {
 
-    private fun getDance(view: View) {
-
-         var id:String =  when (view.getId()) {
+         var id:String =  when (view?.getId()) {
              R.id.spinButton -> "1"
              R.id.twoStepButton -> "2"
              R.id.shakeButton -> "3"
@@ -185,72 +181,23 @@ class MainActivity : AppCompatActivity() {
              else -> "no"
          }
 
-         RetrofitClient
-            .instance
-            .getDance(id)
-            .enqueue(object : Callback<List<Dance>> {
-                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
+        try {
+            var dance = RetrofitClient
+                .instance
+                .getDance(id, null, null)
+                .execute()
 
-                    Log.e(TAG, "Error: cannot perform selected dance ${t.localizedMessage}")
-                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(
-                    call: Call<List<Dance>>,
-                    response: Response<List<Dance>>
-                ) {
-                    if (response.isSuccessful) {
-                        println("dancing!")
-                        isDancing = true
-                    } else {
-                        val message = when(response.code()) {
-                            500 -> R.string.internal_server_error
-                            401 -> R.string.unauthorized
-                            403 -> R.string.forbidden
-                            404 -> R.string.dance_not_found
-                            else -> R.string.try_another_dance
-                        }
-                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            })
-    }
-
-    fun stop() {
-        RetrofitClient
-            .instance
-            .getStop()
-            .enqueue(object : Callback<List<Dance>> {
-                override fun onFailure(call: Call<List<Dance>>, t: Throwable) {
-
-                    Log.e(TAG, "Error: cannot stop ${t.localizedMessage}")
-                    val toast = Toast.makeText(this@MainActivity, R.string.unable_to_perform_random_dances, Toast.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(
-                    call: Call<List<Dance>>,
-                    response: Response<List<Dance>>
-                ) {
-                    if (response.isSuccessful) {
-                        println("stopped dancing")
-                        isDancing = false
-                    } else {
-                        val message = when(response.code()) {
-                            500 -> R.string.internal_server_error
-                            401 -> R.string.unauthorized
-                            403 -> R.string.forbidden
-                            404 -> R.string.dance_not_found
-                            else -> R.string.try_another_dance
-                        }
-                        val toast = Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
-
-                    }
-                }
-            })
+            if (dance.isSuccessful) {
+                println("dancing!")
+            }
+        } catch (e : Exception) {
+            Log.e(TAG, "Error: ${e.localizedMessage}")
+            //Toast.makeText(this@MainActivity, R.string.unable_to_dance, Toast.LENGTH_LONG).show()
+            isDancing = false
+        }
     }
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
     }
 }
-

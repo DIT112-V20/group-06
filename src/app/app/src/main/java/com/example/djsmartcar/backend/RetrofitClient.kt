@@ -1,7 +1,9 @@
 package com.example.djsmartcar.backend
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 // Use object for singleton
 object RetrofitClient {
@@ -9,12 +11,15 @@ object RetrofitClient {
     private const val BASE_URL = "" // Add car URL
 
     // Making sure it's threadsafe for the singleton pattern
-    // Configuration stuff from retrofit
     // Lazy is a kotlin feature that ensures the instance is only executed once
     val instance: Endpoint by lazy {
+        val client = OkHttpClient.Builder()
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+
         val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create()) // Parses the JSON
             .baseUrl(BASE_URL)
+            .client(client)
             .build()
 
         retrofit.create(Endpoint::class.java)
