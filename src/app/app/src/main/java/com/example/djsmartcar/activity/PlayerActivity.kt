@@ -140,7 +140,7 @@ class PlayerActivity : AppCompatActivity() {
         val thread = Thread(Runnable {
             println("Thread starts")
             while (isDancing) {
-                getDance(randomDanceId())
+                getDance(randomDanceId(), SpotifyService.tempo)
             }
         })
         thread.start()
@@ -150,11 +150,23 @@ class PlayerActivity : AppCompatActivity() {
         return Random.nextInt(0,5).toString()
     }
 
-    private fun getDance(id: String) {
+    private fun getDance(id: String, tempo: Double) {
         try {
+            var speed = 30
+
+            if (tempo > 0.0) {
+                speed = when (tempo){
+                    in 60.0..100.0 -> 10
+                    in 101.0..130.0 -> 20
+                    in 131.0..160.0 -> 30
+                    in 161.0..500.0 -> 40
+                    else -> 30
+                }
+            }
+
             var dance = RetrofitClient
                 .instance
-                .getDance(id, null, null)
+                .getDance(id, speed, null)
                 .execute()
 
             if (dance.isSuccessful) {

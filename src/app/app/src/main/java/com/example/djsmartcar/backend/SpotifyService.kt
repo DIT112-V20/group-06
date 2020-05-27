@@ -18,7 +18,7 @@ object SpotifyService {
     private const val REDIRECT_URI = "com.example.djsmartcar://callback"
     private const val CLIENT_SECRET = "" //add  secret here
 
-    var tempo = 100.0;
+    var tempo = 0.0;
 
     var mSpotifyAppRemote: SpotifyAppRemote? = null
     private var connectionParams: ConnectionParams = ConnectionParams.Builder(CLIENT_ID)
