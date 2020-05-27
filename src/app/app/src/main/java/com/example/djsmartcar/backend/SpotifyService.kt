@@ -28,6 +28,7 @@ object SpotifyService {
 
     fun updateTempo(songID: String) {
         // Fetch AuthToken from Auth API
+        println("in the tempo method")
         var accessToken: String? = RetrofitClient
             .spotifyAuth
             .getSpotifyAPIToken("client_credentials")

@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 class PlayerActivity : AppCompatActivity() {
 
     var isDancing: Boolean = false
+    var trackId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,24 +88,10 @@ class PlayerActivity : AppCompatActivity() {
                 ?.setEventCallback {
                     val track: com.spotify.protocol.types.Track = it.track
                     val uri = track.uri
+                    trackId = uri.takeLast(22)
 
                     Log.d("MainActivity", track.name + " by " + track.artist.name + "  " + uri)
                 }
-
-            // Run in another thread (e.g. the background)
-            GlobalScope.launch {
-                SpotifyService.mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()
-                    ?.setEventCallback {
-
-                        val track: com.spotify.protocol.types.Track = it.track
-                        val uri = track.uri
-                        val id = uri.takeLast(22)
-
-                        Log.d("MainActivity", track.name + " by " + track.artist.name +  "  " + id)
-
-                        SpotifyService.updateTempo(id)
-                    }
-            }
         }
 
         SpotifyService.subscribeToChanges {
@@ -152,8 +139,13 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun getDance(id: String, tempo: Double) {
         try {
+            println("going to get the tempo")
+            SpotifyService.updateTempo(trackId)
+            println("has the tempo")
+
             var speed = 30
 
+            println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
             if (tempo > 0.0) {
                 speed = when (tempo){
                     in 60.0..100.0 -> 10
@@ -163,6 +155,7 @@ class PlayerActivity : AppCompatActivity() {
                     else -> 30
                 }
             }
+            println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
 
             var dance = RetrofitClient
                 .instance
