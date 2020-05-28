@@ -101,6 +101,7 @@ class PlayerActivity : AppCompatActivity() {
             SpotifyService.getCurrentTrack {
                 var trackInfoView = findViewById<TextView>(R.id.trackInfoView)
                 trackInfoView?.text =  it.name + " - " + it.artist.name
+                trackId = it.uri.takeLast(22)
             }
         }
     }
@@ -125,9 +126,15 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun danceToMusic() {
         val thread = Thread(Runnable {
+            SpotifyService.subscribeToChanges {
+                println("going to get the tempo")
+                SpotifyService.updateTempo(trackId)
+                println("has the tempo")
+            }
             println("Thread starts")
+
             while (isDancing) {
-                getDance(randomDanceId(), SpotifyService.tempo)
+                getDance(randomDanceId())
             }
         })
         thread.start()
@@ -137,21 +144,17 @@ class PlayerActivity : AppCompatActivity() {
         return Random.nextInt(0,5).toString()
     }
 
-    private fun getDance(id: String, tempo: Double) {
+    private fun getDance(id: String) {
         try {
-            println("going to get the tempo")
-            SpotifyService.updateTempo(trackId)
-            println("has the tempo")
-
             var speed = 30
 
             println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
-            if (tempo > 0.0) {
-                speed = when (tempo){
-                    in 60.0..100.0 -> 10
-                    in 101.0..130.0 -> 20
-                    in 131.0..160.0 -> 30
-                    in 161.0..500.0 -> 40
+            if (SpotifyService.tempo > 0.0) {
+                speed = when (SpotifyService.tempo){
+                    in 60.0..100.0 -> 20
+                    in 101.0..130.0 -> 30
+                    in 131.0..160.0 -> 40
+                    in 161.0..500.0 -> 50
                     else -> 30
                 }
             }
