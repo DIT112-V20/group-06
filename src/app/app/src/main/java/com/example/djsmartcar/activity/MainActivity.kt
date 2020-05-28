@@ -2,7 +2,6 @@ package com.example.djsmartcar.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -11,9 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import android.widget.ProgressBar
 import com.example.djsmartcar.backend.SpotifyService
 import kotlin.random.Random
@@ -30,21 +26,28 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
     }
 
+    /**
+     * Connects to the Spotify SDK.
+     * Shows PlayerActivity and activity_player.xml if successful.
+     */
     fun connectShowPlayer(view: View) {
         progressBar?.visibility = View.VISIBLE
 
         SpotifyService.connect(this)  {
-            if (it==true) {
+            if (it) {
                 val intent = Intent(this, PlayerActivity::class.java)
                 startActivity(intent)
             } else {
-                println("I'm not connected!!")
+                Log.d("MainActivity", "Unable to connect to Spotify!")
                 progressBar?.visibility = View.INVISIBLE
                 Toast.makeText(this@MainActivity, R.string.unable_to_connect, Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    /**
+     * Changes the color of the dance buttons when a dance has been selected.
+     */
     private fun buttonColorChange(view: View) {
 
         var spinButton: ImageButton = findViewById(R.id.spinButton)
@@ -70,6 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Changes the view to home_page.xml and stops any dancing.
+     */
     fun goHome(view: View) {
         if (isDancing) {
             var stopButton: Button = findViewById(R.id.stopButton)
@@ -79,10 +85,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_page)
     }
 
+    /**
+     * Shows activity_main.xml.
+     */
     fun goToDances(view: View) {
         setContentView(R.layout.activity_main)
     }
 
+    /**
+     * Make dance buttons unclickable and stop button visible.
+     * Starts the dancing sequence in a new thread.
+     */
     fun startDancing(view: View) {
         view.visibility = View.INVISIBLE
 
@@ -107,24 +120,25 @@ class MainActivity : AppCompatActivity() {
         isDancing = true
 
         val thread = Thread(Runnable {
-            println("Thread starts")
             while (isDancing) {
                 if (activeDanceButton?.getId() == R.id.randomDanceButton) {
                     random = true
-                    println("random getDance")
+                    Log.d("MainActivity", "Random getDance called.")
                     getDance(randomDanceId())
                 } else {
                     random = false
-                    println("call getDance")
+                    Log.d("MainActivity", "getDance called.")
                     getDance(activeDanceButton)
                 }
             }
-
-            //stopDancing(findViewById(R.id.stopButton))
         })
         thread.start()
     }
 
+    /**
+     * Make dance buttons clickable and start button visible.
+     * Stops the dancing loop by setting isDancing to false.
+     */
     fun stopDancing(view: View) {
         view.visibility = View.INVISIBLE
 
@@ -147,9 +161,13 @@ class MainActivity : AppCompatActivity() {
         macarenaButton.isClickable = true
 
         isDancing = false
-        println("stopped dancing")
+        Log.d("MainActivity", "Stopped dancing.")
     }
 
+    /**
+     * Sets the activeDanceButton which is used when changing the button color.
+     * Makes the start button visible.
+     */
     fun activeButton(view: View) {
         var startButton: Button = findViewById(R.id.startButton)
         startButton.visibility = View.VISIBLE
@@ -157,6 +175,10 @@ class MainActivity : AppCompatActivity() {
         activeDanceButton = view
     }
 
+    /**
+     * Randomizes a dance move and returns the button which corresponds to the dance move.
+     * @return id : View?
+     */
     private fun randomDanceId(): View? {
         var danceId:String = Random.nextInt(0,5).toString()
 
@@ -171,15 +193,18 @@ class MainActivity : AppCompatActivity() {
         return id
     }
 
+    /**
+     * Requests the dance corresponding to the button/view passed to the method.
+     */
     private fun getDance(view: View?) {
 
-         var id:String =  when (view?.getId()) {
+        var id:String =  when (view?.getId()) {
              R.id.spinButton -> "1"
              R.id.twoStepButton -> "2"
              R.id.shakeButton -> "3"
              R.id.macarenaButton -> "4"
              else -> "no"
-         }
+        }
 
         try {
             var dance = RetrofitClient
@@ -188,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                 .execute()
 
             if (dance.isSuccessful) {
-                println("dancing!")
+                Log.d("MainActivity", "Dancing!")
             }
         } catch (e : Exception) {
             Log.e(TAG, "Error: ${e.localizedMessage}")

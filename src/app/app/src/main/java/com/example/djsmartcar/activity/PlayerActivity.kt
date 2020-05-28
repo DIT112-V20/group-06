@@ -36,7 +36,7 @@ class PlayerActivity : AppCompatActivity() {
     fun goHome(view: View) {
         SpotifyService.pause()
         isDancing = false
-        println("stopped dancing now")
+        Log.d("PlayerActivity", "Stopped dancing now.")
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -71,8 +71,8 @@ class PlayerActivity : AppCompatActivity() {
 
         pauseSnippet.setOnClickListener {
             isDancing = false
-            println("no dancing right now")
             SpotifyService.pause()
+            Log.d("PlayerActivity", "Dancing and music paused.")
             showResumeButton()
         }
 
@@ -129,9 +129,7 @@ class PlayerActivity : AppCompatActivity() {
      */
     private fun danceToMusic() {
         val thread = Thread(Runnable {
-            println("going to get the tempo")
             SpotifyService.updateTempo(trackId)
-            println("has the tempo")
 
             while (isDancing) {
                 getDance(randomDanceId())
@@ -164,7 +162,8 @@ class PlayerActivity : AppCompatActivity() {
                     else -> 30
                 }
             }
-            println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
+
+            Log.d("PlayerActivity", "Speed: " + speed + ", Tempo: " + SpotifyService.tempo)
 
             var delay = when(speed) {
                 20 -> 0
@@ -180,7 +179,7 @@ class PlayerActivity : AppCompatActivity() {
                 .execute()
 
             if (dance.isSuccessful) {
-                println("dancing!")
+                Log.d("PlayerActivity", "Dancing!")
             }
         } catch (e : Exception) {
             Log.e(TAG, "Error: ${e.localizedMessage}")

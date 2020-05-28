@@ -2,6 +2,9 @@ package com.example.djsmartcar.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents the AuthToken given by the Spotify Web API after authorization.
+ */
 public class AuthToken {
 
     @SerializedName("access_token")
@@ -48,5 +51,4 @@ public class AuthToken {
     public void setScope(String scope) {
         this.scope = scope;
     }
-
 }
