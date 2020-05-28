@@ -9,9 +9,9 @@
 * [Developers](#developers)
 
 ## Description 
-* The purpose of DJ SmartCar is to bring joy! Not only will it help enhance group parties, but it also provides individuals with entertainment during this time of mass isolation.
-* The car “dances”/moves to the music being played from the phone app. 
-* The car and music are controlled via an Android phone. 
+DJ SmartCar is a dancing SmartCar controlled by an app that can also play music via Spotify. During these “unprecedented times” we wanted to develop a product that is fun and entertaining, while also showing off the capabilities of the SmartCar. When using our product, the user can choose between two modes: *Dance without Music* or *Dance with Music*. In *Dance without Music*, the user can make the car dance by choosing from four pre-programmed dance moves or a randomized sequence of these moves. In *Dance with Music*, the user connects to Spotify and the car will dance in a randomized sequence to the average tempo of the currently playing track. The car’s speed will change based on the tempo of the current track.
+
+DJ SmartCar is a two-tier system that includes a SmartCar and an Android app. The app sends requests to the SmartCar server via WiFi. To play music and receive track tempo data, the app connects to the Spotify Web API. Please refer to [Resources](#resources) for a list of the hardware and software used during development and in the final product.To see the evolution of the DJ SmartCar software architecture, please refer to the [Class Diagram](https://github.com/DIT112-V20/group-06/wiki/Class-Diagram) Wiki page.
 
 ## User Manual
 
@@ -66,7 +66,7 @@ To go back to the home screen, simply press the home button in the top right cor
 * [SmartCar Library](https://www.arduinolibraries.info/libraries/smartcar-shield)
 * [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 * [Spotify Android SDK](https://developer.spotify.com/documentation/android/)
-* [Postman](https://postman.com)
+* [Postman](https://postman.com) (Only used during development)
 
 ## Developers
 * Fayona Cowperthwaite (guscowfa@student.gu.se)
