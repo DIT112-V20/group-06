@@ -3,6 +3,9 @@ package com.example.djsmartcar.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents a Track from the Spotify Web API.
+ */
 public class Track {
 
     @SerializedName("num_samples")
@@ -291,5 +294,4 @@ public class Track {
     public void setRhythmVersion(Double rhythmVersion) {
         this.rhythmVersion = rhythmVersion;
     }
-
 }

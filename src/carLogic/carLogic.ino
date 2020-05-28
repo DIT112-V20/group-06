@@ -16,7 +16,7 @@ const unsigned short SHAKE_ID = 3;
 const unsigned short MACARENA_ID = 4;
 const unsigned short RANDOM_ID = 5;
 int dance_speed = 30;
-unsigned int ms_delay = 500;
+unsigned int ms_delay = 0;
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);

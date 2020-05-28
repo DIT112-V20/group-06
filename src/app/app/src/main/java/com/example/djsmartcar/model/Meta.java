@@ -3,6 +3,9 @@ package com.example.djsmartcar.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents meta data from the Audio Analysis from the Spotify Web API.
+ */
 public class Meta {
 
     @SerializedName("analyzer_version")
@@ -82,5 +85,4 @@ public class Meta {
     public void setInputProcess(String inputProcess) {
         this.inputProcess = inputProcess;
     }
-
 }

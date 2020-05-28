@@ -14,9 +14,9 @@ enum class PlayingState {
 }
 
 object SpotifyService {
-    private const val CLIENT_ID = "" //add id here
+    private const val CLIENT_ID = "" // add client id here
     private const val REDIRECT_URI = "com.example.djsmartcar://callback"
-    private const val CLIENT_SECRET = "" //add  secret here
+    private const val CLIENT_SECRET = "" // add client secret here
 
     var tempo = 0.0;
 
@@ -26,9 +26,12 @@ object SpotifyService {
         .showAuthView(true)
         .build()
 
+    /**
+     * Updates the tempo
+     * @param songID : String
+     */
     fun updateTempo(songID: String) {
         // Fetch AuthToken from Auth API
-        println("in the tempo method")
         var accessToken: String? = RetrofitClient
             .spotifyAuth
             .getSpotifyAPIToken("client_credentials")
@@ -50,6 +53,9 @@ object SpotifyService {
         Log.d("SpotifyAPI", "Tempo=" + this.tempo.toString())
     }
 
+    /**
+     * Connects to the Spotify SDK
+     */
     fun connect(context: Context, handler: (connected: Boolean) -> Unit) {
 
         if (mSpotifyAppRemote?.isConnected == true) {
@@ -60,7 +66,7 @@ object SpotifyService {
         val connectionListener = object : Connector.ConnectionListener {
             override fun onConnected(spotifyAppRemote: SpotifyAppRemote) { mSpotifyAppRemote = spotifyAppRemote
                 mSpotifyAppRemote = spotifyAppRemote
-                Log.d("MainActivity", "Connected! Yay!")
+                Log.d("SpotifyService", "Connected! Yay!")
                 handler(true)
             }
 
@@ -78,6 +84,7 @@ object SpotifyService {
     fun disconnect() {
         SpotifyAppRemote.disconnect(mSpotifyAppRemote)
     }
+
     fun play(uri: String) {
         mSpotifyAppRemote?.playerApi?.play(uri)
     }
@@ -116,6 +123,9 @@ object SpotifyService {
         }
     }
 
+    /**
+     * Returns the Spotify player's state
+     */
     fun playingState(handler: (PlayingState) -> Unit) {
         mSpotifyAppRemote?.playerApi?.playerState?.setResultCallback { result ->
             if (result.track.uri == null) {
