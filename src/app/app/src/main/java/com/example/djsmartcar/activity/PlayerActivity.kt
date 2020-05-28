@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_player.*
 import kotlin.random.Random
 
 class PlayerActivity : AppCompatActivity() {
-
     var isDancing: Boolean = false
     var trackId: String = ""
 
@@ -25,6 +24,15 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    override fun onStop() {
+        super.onStop()
+        SpotifyService.disconnect()
+    }
+
+    /**
+     * Changes activity to MainActivity and home_page.xml will be displayed.
+     * Music pauses and dancing stops.
+     */
     fun goHome(view: View) {
         SpotifyService.pause()
         isDancing = false
@@ -33,12 +41,10 @@ class PlayerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onStop() {
-        super.onStop()
-        SpotifyService.disconnect()
-    }
-
-    private fun setupViews () {
+    /**
+     * Initially sets up the album artwork which is displayed in activity_player.xml.
+     */
+    private fun setupViews() {
         SpotifyService.getCurrentTrackImage {
             trackImageView.setImageBitmap(it)
         }
@@ -52,10 +58,14 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets the onClick methods to the buttons and their functionality.
+     * pauseSnippet will stop the dancing and pause the music.
+     * resumeButton will start the dancing and resume/play the music.
+     */
     private fun setupListeners() {
         playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
-
             showPauseButton()
         }
 
@@ -79,7 +89,7 @@ class PlayerActivity : AppCompatActivity() {
                     val uri = track.uri
                     trackId = uri.takeLast(22)
 
-                    Log.d("MainActivity", track.name + " by " + track.artist.name + "  " + uri)
+                    Log.d("PlayerActivity", track.name + " by " + track.artist.name + "  " + uri)
                 }
         }
 
@@ -113,13 +123,15 @@ class PlayerActivity : AppCompatActivity() {
         resumeButton.visibility = View.VISIBLE
     }
 
+    /**
+     * Handles the thread and loop of the dancing.
+     * Gets the track tempo before looping random dance moves.
+     */
     private fun danceToMusic() {
         val thread = Thread(Runnable {
             println("going to get the tempo")
             SpotifyService.updateTempo(trackId)
             println("has the tempo")
-
-            println("Thread starts")
 
             while (isDancing) {
                 getDance(randomDanceId())
@@ -128,17 +140,23 @@ class PlayerActivity : AppCompatActivity() {
         thread.start()
     }
 
+    /**
+     * Returns a random int as a string between 0 to 5.
+     */
     private fun randomDanceId(): String {
         return Random.nextInt(0,5).toString()
     }
 
+    /**
+     * Gets the speed and delay based on track average tempo.
+     * Requests the dance move from the car with the speed and delay determined by the tempo.
+     */
     private fun getDance(id: String) {
         try {
             var speed = 30
 
-            println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
             if (SpotifyService.tempo > 0.0) {
-                speed = when (SpotifyService.tempo){
+                speed = when(SpotifyService.tempo) {
                     in 60.0..100.0 -> 20
                     in 101.0..130.0 -> 30
                     in 131.0..160.0 -> 40
@@ -148,10 +166,10 @@ class PlayerActivity : AppCompatActivity() {
             }
             println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
 
-            var delay = when (speed){
+            var delay = when(speed) {
                 20 -> 0
                 30 -> 0
-                40 -> 500
+                40 -> 0
                 50 -> 500
                 else -> 500
             }
