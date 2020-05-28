@@ -5,24 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.PlayingState
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.backend.SpotifyService
-import com.example.djsmartcar.model.AuthToken
-import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.random.Random
-import com.example.djsmartcar.model.AudioAnalysis
-import com.example.djsmartcar.model.Meta
-import com.example.djsmartcar.model.Track
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -126,11 +115,10 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun danceToMusic() {
         val thread = Thread(Runnable {
-            SpotifyService.subscribeToChanges {
-                println("going to get the tempo")
-                SpotifyService.updateTempo(trackId)
-                println("has the tempo")
-            }
+            println("going to get the tempo")
+            SpotifyService.updateTempo(trackId)
+            println("has the tempo")
+
             println("Thread starts")
 
             while (isDancing) {
@@ -160,9 +148,17 @@ class PlayerActivity : AppCompatActivity() {
             }
             println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
 
+            var delay = when (speed){
+                20 -> 0
+                30 -> 0
+                40 -> 500
+                50 -> 500
+                else -> 500
+            }
+
             var dance = RetrofitClient
                 .instance
-                .getDance(id, speed, null)
+                .getDance(id, speed, delay)
                 .execute()
 
             if (dance.isSuccessful) {
