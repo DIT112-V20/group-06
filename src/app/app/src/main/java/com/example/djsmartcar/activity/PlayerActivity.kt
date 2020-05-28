@@ -5,28 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.djsmartcar.R
 import com.example.djsmartcar.backend.PlayingState
 import com.example.djsmartcar.backend.RetrofitClient
 import com.example.djsmartcar.backend.SpotifyService
-import com.example.djsmartcar.model.AuthToken
-import com.example.djsmartcar.model.Dance
 import kotlinx.android.synthetic.main.activity_player.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.random.Random
-import com.example.djsmartcar.model.AudioAnalysis
-import com.example.djsmartcar.model.Meta
-import com.example.djsmartcar.model.Track
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class PlayerActivity : AppCompatActivity() {
-
     var isDancing: Boolean = false
+    var trackId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +24,15 @@ class PlayerActivity : AppCompatActivity() {
         setupListeners()
     }
 
+    override fun onStop() {
+        super.onStop()
+        SpotifyService.disconnect()
+    }
+
+    /**
+     * Changes activity to MainActivity and home_page.xml will be displayed.
+     * Music pauses and dancing stops.
+     */
     fun goHome(view: View) {
         SpotifyService.pause()
         isDancing = false
@@ -43,12 +41,10 @@ class PlayerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onStop() {
-        super.onStop()
-        SpotifyService.disconnect()
-    }
-
-    private fun setupViews () {
+    /**
+     * Initially sets up the album artwork which is displayed in activity_player.xml.
+     */
+    private fun setupViews() {
         SpotifyService.getCurrentTrackImage {
             trackImageView.setImageBitmap(it)
         }
@@ -62,10 +58,14 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets the onClick methods to the buttons and their functionality.
+     * pauseSnippet will stop the dancing and pause the music.
+     * resumeButton will start the dancing and resume/play the music.
+     */
     private fun setupListeners() {
         playSnippet.setOnClickListener {
             SpotifyService.play("spotify:playlist:561iKHgr6DkaOppyTFCM9p")
-
             showPauseButton()
         }
 
@@ -87,24 +87,10 @@ class PlayerActivity : AppCompatActivity() {
                 ?.setEventCallback {
                     val track: com.spotify.protocol.types.Track = it.track
                     val uri = track.uri
+                    trackId = uri.takeLast(22)
 
-                    Log.d("MainActivity", track.name + " by " + track.artist.name + "  " + uri)
+                    Log.d("PlayerActivity", track.name + " by " + track.artist.name + "  " + uri)
                 }
-
-            // Run in another thread (e.g. the background)
-            GlobalScope.launch {
-                SpotifyService.mSpotifyAppRemote?.playerApi?.subscribeToPlayerState()
-                    ?.setEventCallback {
-
-                        val track: com.spotify.protocol.types.Track = it.track
-                        val uri = track.uri
-                        val id = uri.takeLast(22)
-
-                        Log.d("MainActivity", track.name + " by " + track.artist.name +  "  " + id)
-
-                        SpotifyService.updateTempo(id)
-                    }
-            }
         }
 
         SpotifyService.subscribeToChanges {
@@ -114,6 +100,7 @@ class PlayerActivity : AppCompatActivity() {
             SpotifyService.getCurrentTrack {
                 var trackInfoView = findViewById<TextView>(R.id.trackInfoView)
                 trackInfoView?.text =  it.name + " - " + it.artist.name
+                trackId = it.uri.takeLast(22)
             }
         }
     }
@@ -136,9 +123,16 @@ class PlayerActivity : AppCompatActivity() {
         resumeButton.visibility = View.VISIBLE
     }
 
+    /**
+     * Handles the thread and loop of the dancing.
+     * Gets the track tempo before looping random dance moves.
+     */
     private fun danceToMusic() {
         val thread = Thread(Runnable {
-            println("Thread starts")
+            println("going to get the tempo")
+            SpotifyService.updateTempo(trackId)
+            println("has the tempo")
+
             while (isDancing) {
                 getDance(randomDanceId())
             }
@@ -146,15 +140,43 @@ class PlayerActivity : AppCompatActivity() {
         thread.start()
     }
 
+    /**
+     * Returns a random int as a string between 0 to 5.
+     */
     private fun randomDanceId(): String {
         return Random.nextInt(0,5).toString()
     }
 
+    /**
+     * Gets the speed and delay based on track average tempo.
+     * Requests the dance move from the car with the speed and delay determined by the tempo.
+     */
     private fun getDance(id: String) {
         try {
+            var speed = 30
+
+            if (SpotifyService.tempo > 0.0) {
+                speed = when(SpotifyService.tempo) {
+                    in 60.0..100.0 -> 20
+                    in 101.0..130.0 -> 30
+                    in 131.0..160.0 -> 40
+                    in 161.0..500.0 -> 50
+                    else -> 30
+                }
+            }
+            println("speed: " + speed + ", tempo: " + SpotifyService.tempo)
+
+            var delay = when(speed) {
+                20 -> 0
+                30 -> 0
+                40 -> 0
+                50 -> 500
+                else -> 500
+            }
+
             var dance = RetrofitClient
                 .instance
-                .getDance(id, null, null)
+                .getDance(id, speed, delay)
                 .execute()
 
             if (dance.isSuccessful) {
