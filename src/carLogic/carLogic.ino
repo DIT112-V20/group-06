@@ -33,8 +33,8 @@ SmartCar car(control, gyro, leftOdometer, rightOdometer);
 
 /* NETWORK VARIABLES */
 // Replace with your network credentials
-const char* ssid     = "TheGaulle";
-const char* password = "canihaz#";
+const char* ssid     = "";
+const char* password = "";
 WebServer server(80);
 
 void setup() {
