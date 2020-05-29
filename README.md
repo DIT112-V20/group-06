@@ -4,6 +4,8 @@
 
 ## Contents
 * [Description](#description)
+   * [Demo Video](#demo-video)
+* [Installation Guide for Open Source Developers](#installation-guide-for-open-source-developers)
 * [User Manual](#user-manual)
 * [Resources](#resources)
 * [Developers](#developers)
@@ -13,26 +15,59 @@ DJ SmartCar is a dancing SmartCar controlled by an app that can also play music 
 
 DJ SmartCar is a two-tier system that includes a SmartCar and an Android app. The app sends requests to the SmartCar server via WiFi. To play music and receive track tempo data, the app connects to the Spotify Web API. Please refer to [Resources](#resources) for a list of the hardware and software used during development and in the final product.To see the evolution of the DJ SmartCar software architecture, please refer to the [Class Diagram](https://github.com/DIT112-V20/group-06/wiki/Class-Diagram) Wiki page.
 
-## User Manual
+### Demo Video
+LINK
 
+## Installation Guide for Open Source Developers
+There are a few things you need to do before getting started:
+* Download [Arduino IDE](https://www.arduino.cc/en/Main/Software)
+* Download [Android Studio](https://developer.android.com/studio)
+* Install Java SDK version >= 11 
+* Clone the repository: `https://github.com/DIT112-V20/group-06` 
+
+### SmartCar
+1. Open the Arduino IDE and navigate to File > Preferences and paste the following link in the Additional Boards Manager URL section: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`.
+2. Navigate to Sketch > Include Library > Manage Libraries, then search and install the *Smartcar shield* library.
+3. Go to Tools > Board and select `DOIT ESP32 DEVKIT V1`.
+4. Go to Tools > Port and select the port the car is connected to.
+5. Change the WiFi credentials on **lines 36** and **37** in `carLogic.ino`.
+6. Calibrate the sensors to get `GYROSCOPE_OFFSET` and `LEFT_PULSES_PER_METER` and `RIGHT_PULSES_PER_METER` for the odometers and add the number to the variables in the `carLogic.ino` sketch. In the Arduino IDE:
+    - File > Examples > Smartcar shield > Sensors > gyroscope > gyroscopeHeading
+    - File > Examples > Smartcar shield > Sensors > odometer > findPulsesPerMeter
+7. Open *carLogic.ino* and upload the sketch to the car.
+
+### Android App
+8. Open the `src/app` project in Android Studio.
+9. Sync the Project with the Gradle Files either by clicking the elephant button in the top right corner or by entering the following command: `./gradlew build --stacktrace`.
+10. Register the app on Spotify to get the Client ID and Client Secret. For assistance on finding the fingerprint, refer to the following link: 
+https://developer.spotify.com/documentation/android/quick-start/
+11. Input the IP address of the car in `BASE_URL` in `RetrofitClient.kt`. To get the IP address, follow the steps below:
+    - When the car is connected to the computer, open the serial monitor window. 
+    - Turn on the car.
+    - Press the EN button on the car.
+12. Input the Client ID in `CLIENT_ID` for Spotify in `SpotifyService.kt`.
+13. To find out how to acquire authorization for the Spotify Web API, go to: https://developer.spotify.com/documentation/general/guides/authorization-guide/
+    - In `Endpoint.kt`, input the authorization on **line 25**.   
+    - The `CLIENT_SECRET`variable is also available in `SpotifyService.kt` for those who want to implement the base 64 encoding of the Client ID and Client Secret programmatically.
+14. Run the app!
+
+## User Manual
 *Thank you for choosing the DJ SmartCar system!*
 
 We hope this product will bring you joy and entertainment for years to come. Before you can get started, there are a few things you need to do: 
 1. Download and install the DJ SmartCar app.
 2. Download and install the Spotify app.
-3. Log in to the Spotify app on your phone. 
-4. Click *Dance with Music* in the DJ SmartCar app and accept the Spotify terms and conditions.
+3. Log in to the Spotify app on your phone.
+4. Click *Dance with Music* in the DJ SmartCar app and accept the Spotify terms and conditions. 
 5. Turn on the SmartCar.
 
 ![](https://i.imgur.com/Ql6TQxW.jpg?1)
 
 Now that you have downloaded the DJ SmartCar and Spotify apps, you can start enjoying the DJ SmartCar system! 
 
-
 ![](https://i.imgur.com/bILHO3g.jpg?1)
 
-The *Dance with Music* mode allows you to play music from Spotify right in the DJ SmartCar app. When pressing the *Play* button, the music will begin and your car will start dancing! When you press *Pause*, both the car and the music will stop. If you press the home button while the car is dancing, the music and car will automatically stop and you will go back to the home screen. Pressing it while the music and car are paused will just take you back to the home screen.
-
+The *Dance with Music* mode allows you to play music from Spotify right in the DJ SmartCar app. When pressing the *Play* button, the music will begin and your car will start dancing! When you press *Pause*, both the car and the music will stop. If you want to change the track, press *Pause* then change it in the Spotify app and return to the DJ SmartCar app to start dancing. When the track automatically changes, press *Pause* and then *Play* again to get the new tempo for DJ SmartCar to dance along to. If you press the home button while the car is dancing, the music and car will automatically stop and you will go back to the home screen. Pressing it while the music and car are paused will just take you back to the home screen.
 
 ![](https://i.imgur.com/WJRigre.jpg?1)
 
