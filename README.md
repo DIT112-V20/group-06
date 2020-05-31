@@ -16,7 +16,9 @@ DJ SmartCar is a dancing SmartCar controlled by an app that can also play music 
 DJ SmartCar is a two-tier system that includes a SmartCar and an Android app. The app sends requests to the SmartCar server via WiFi. To play music and receive track tempo data, the app connects to the Spotify Web API. Please refer to [Resources](#resources) for a list of the hardware and software used during development and in the final product.To see the evolution of the DJ SmartCar software architecture, please refer to the [Class Diagram](https://github.com/DIT112-V20/group-06/wiki/Class-Diagram) Wiki page.
 
 ### Demo Video
-LINK
+[![Video thumbnail](http://i3.ytimg.com/vi/GGH_hdqZUTI/hqdefault.jpg)](https://youtu.be/GGH_hdqZUTI)
+
+We have created a "fun" infomercial-style demo video. Please enjoy!
 
 ## Installation Guide for Open Source Developers
 There are a few things you need to do before getting started:
